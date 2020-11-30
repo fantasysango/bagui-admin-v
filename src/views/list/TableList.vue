@@ -64,11 +64,11 @@
 
       <div class="table-operator">
         <a-button type="primary" icon="plus" @click="handleAdd">新建</a-button>
-        <a-dropdown v-action:edit v-if="selectedRowKeys.length > 0">
+         <!-- v-action:edit -->
+        <a-dropdown v-if="selectedRowKeys.length > 0">
           <a-menu slot="overlay">
-            <a-menu-item key="1"><a-icon type="delete" />删除</a-menu-item>
-            <!-- lock | unlock -->
-            <a-menu-item key="2"><a-icon type="lock" />锁定</a-menu-item>
+            <a-menu-item key="1" @click="handleDelete(selectedRowKeys)"><a-icon type="delete" />删除</a-menu-item>
+            <!-- <a-menu-item key="2"><a-icon type="lock" />锁定</a-menu-item> -->
           </a-menu>
           <a-button style="margin-left: 8px">
             批量操作 <a-icon type="down" />
@@ -99,8 +99,15 @@
         <span slot="action" slot-scope="text, record">
           <template>
             <a @click="handleEdit(record)">配置</a>
-            <a-divider type="vertical" />
-            <a @click="handleSub(record)">订阅报警</a>
+            <a-popconfirm
+              placement="topRight"
+              title="确定删除此项吗？"
+              ok-text="确定"
+              cancel-text="取消"
+              @confirm="handleDelete(record)"
+            >
+              <a href="#" style="margin-left: 1em;">删除</a>
+            </a-popconfirm>
           </template>
         </span>
       </s-table>
@@ -209,6 +216,7 @@ export default {
         console.log('loadData request parameters:', requestParameters)
         return getServiceList(requestParameters)
           .then(res => {
+            console.log('res =====>', res)
             return res.result
           })
       },
@@ -243,6 +251,9 @@ export default {
     handleEdit (record) {
       this.visible = true
       this.mdl = { ...record }
+    },
+    handleDelete (record) {
+      console.log('要删除的项', record)
     },
     handleOk () {
       const form = this.$refs.createModal.form

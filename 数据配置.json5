@@ -1,0 +1,14 @@
+{
+    leader: {
+        title: '企业负责人',
+        cols:  ["name", "isLeader", "deptId", "collectionNumber1", "collectionNumber2", "collectionNumber3", "collectionNumber4", "sort", "createById", "number"]
+    },
+    car: {
+        title: '车辆管理',
+        cols: ["id", "number", "deptId", "brand", "model", "carTypeCode", "purposeCode", "configModeCode", "useTypeCode", "fundsSourceCode", "displacementCode", "accountBooksCode", "isWithinBudget", "purchaseDate", "purchaseTotalPrice", "purchaseTax", "purchasePrice", "managingRelationshipsCode", "propertyUnit", "purchaseApplyDateAndDocumentNumber", "applicationReplyDateAndDocumentNumber", "driverId", "etcId", "leaderId", "gasolineCardId", "disposalTypeCode", "disposer", "disposalDate", "scrapApprovalInfomation", "updateById"],
+    },
+    driver: {
+        title: '驾驶员管理',
+        cols: ["id", "number", "deptId", "brand", "model", "carTypeCode", "purposeCode", "configModeCode", "useTypeCode", "fundsSourceCode", "displacementCode", "accountBooksCode", "isWithinBudget", "purchaseDate", "purchaseTotalPrice", "purchaseTax", "purchasePrice", "managingRelationshipsCode", "propertyUnit", "purchaseApplyDateAndDocumentNumber", "applicationReplyDateAndDocumentNumber", "driverId", "etcId", "leaderId", "gasolineCardId", "disposalTypeCode", "disposer", "disposalDate", "scrapApprovalInfomation", "updateById"],
+    },
+}

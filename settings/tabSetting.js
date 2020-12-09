@@ -1,4 +1,4 @@
-[
+export const tabSettins = [
     {
         code: '2.1',
         key: 'leader',

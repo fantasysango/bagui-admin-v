@@ -1,0 +1,1201 @@
+export const formSetting = [{
+	"key": "accompanyNumber",
+	"title": "陪同人数",
+	"formType": "input",
+	"dataType": "int",
+	"displayInTab": "n"
+}, {
+	"key": "account",
+	"title": "账号",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "30"
+}, {
+	"key": "accountBooksCode",
+	"title": "账簿",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "accountBooksValue",
+	"title": "账簿",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"key": "activityOrganizationUnit",
+	"title": "活动组织单位",
+	"formType": "input"
+}, {
+	"key": "actualExpenses",
+	"title": "实际花费",
+	"formType": "input",
+	"dataType": "float"
+}, {
+	"key": "alcoholAmount",
+	"title": "酒水金额",
+	"formType": "input",
+	"dataType": "float",
+	"displayInTab": "n"
+}, {
+	"key": "amount",
+	"title": "金额",
+	"formType": "input",
+	"dataType": "float"
+}, {
+	"key": "amountWithoutTax",
+	"title": "不含税金额",
+	"formType": "input",
+	"dataType": "float"
+}, {
+	"key": "applicationReplyDateAndDocumentNumber",
+	"title": "批复日期及文号",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "50"
+}, {
+	"key": "applyDept",
+	"title": "申请部门",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "32"
+}, {
+	"key": "applyDeptId",
+	"title": "申请部门Id",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "applyDeptName",
+	"title": "申请部门",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"key": "applyEmp",
+	"title": "申请人",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "32"
+}, {
+	"key": "applyEmpId",
+	"title": "申请人ID",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "applyEmpName",
+	"title": "申请人",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"key": "applyTime",
+	"title": "申请时间",
+	"formType": "timepicker",
+	"displayInTab": "n",
+	"format": "YYYY-MM-DD HH:mm:ss"
+}, {
+	"key": "approvalBasis",
+	"title": "审批依据",
+	"formType": "input",
+	"max": "100"
+}, {
+	"key": "average",
+	"title": "人均",
+	"formType": "input",
+	"dataType": "float"
+}, {
+	"key": "birthday",
+	"title": "出生日期",
+	"formType": "datepicker",
+	"displayInTab": "n",
+	"format": "YYYY-MM-DD"
+}, {
+	"group": "alcohol",
+	"groupName": "酒水",
+	"key": "brand",
+	"title": "品牌",
+	"formType": "input"
+}, {
+	"key": "brand",
+	"title": "品牌",
+	"formType": "input"
+}, {
+	"key": "buyCardDate",
+	"title": "办卡日期",
+	"formType": "datepicker"
+}, {
+	"key": "carConfigType",
+	"title": "用车类型",
+	"formType": "input",
+	"options": "dynamic"
+}, {
+	"key": "carId",
+	"title": "车辆ID",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n",
+	"displayInAdd": "n"
+}, {
+	"key": "carNumber",
+	"title": "车牌号",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"key": "carTypeCode",
+	"title": "车辆类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "carTypeCode",
+	"title": "车辆类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "code",
+	"title": "编码",
+	"formType": "input",
+	"max": "30"
+}, {
+	"key": "collectionNumber1",
+	"title": "托收协议1",
+	"formType": "input",
+	"max": "36"
+}, {
+	"key": "collectionNumber2",
+	"title": "托收协议2",
+	"formType": "input",
+	"max": "36"
+}, {
+	"key": "collectionNumber3",
+	"title": "托收协议3",
+	"formType": "input",
+	"max": "36"
+}, {
+	"key": "collectionNumber4",
+	"title": "托收协议4",
+	"formType": "input",
+	"max": "36"
+}, {
+	"key": "communicationTypeCode",
+	"title": "通讯类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "communicationTypeValue",
+	"title": "通讯类型",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"key": "configModeCode",
+	"title": "配置类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "configModeValue",
+	"title": "配置类型",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"group": "log",
+	"groupName": "日志",
+	"key": "CONTENT",
+	"title": "接口参数",
+	"formType": "input",
+	"displayInAdd": "n"
+}, {
+	"key": "createById",
+	"title": "创建人ID",
+	"formType": "input",
+	"displayInTab": "n",
+	"displayInAdd": "n",
+	"max": "36"
+}, {
+	"key": "createById",
+	"title": "创建人ID",
+	"formType": "input",
+	"displayInTab": "n",
+	"displayInAdd": "n",
+	"max": "36"
+}, {
+	"key": "createByName",
+	"title": "创建人",
+	"formType": "input",
+	"displayInAdd": "n",
+	"max": "64"
+}, {
+	"key": "createDate",
+	"title": "创建时间",
+	"formType": "input",
+	"displayInTab": "n",
+	"displayInAdd": "n",
+	"format": "YYYY-MM-DD HH:mm:ss"
+}, {
+	"key": "creatorId",
+	"title": "创建者ID",
+	"formType": "input",
+	"displayInTab": "n",
+	"displayInAdd": "n"
+}, {
+	"key": "customerCode",
+	"title": "客户编号",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "36"
+}, {
+	"key": "customerName",
+	"title": "客户名称",
+	"formType": "input",
+	"max": "32"
+}, {
+	"group": "operation",
+	"groupName": "运行费",
+	"key": "date",
+	"title": "日期",
+	"formType": "datepicker"
+}, {
+	"group": "abroad",
+	"groupName": "因公临时出国",
+	"key": "date",
+	"title": "考察日期",
+	"formType": "datepicker",
+	"format": "YYYY-MM-DD"
+}, {
+	"group": "entertainment",
+	"groupName": "招待费",
+	"key": "date",
+	"title": "用餐日期",
+	"formType": "datepicker",
+	"format": "YYYY-MM-DD"
+}, {
+	"group": "communication",
+	"groupName": "通讯费",
+	"key": "date",
+	"title": "发生日期",
+	"formType": "datepicker",
+	"format": "YYYY-MM-DD"
+}, {
+	"group": "log",
+	"groupName": "日志",
+	"key": "date",
+	"title": "日期",
+	"formType": "datepicker",
+	"displayInQuery": "y",
+	"displayInAdd": "n",
+	"format": "YYYY-MM-DD"
+}, {
+	"key": "dateOfBirth",
+	"title": "出生日期",
+	"formType": "datepicker",
+	"displayInTab": "n",
+	"format": "YYYY-MM-DD"
+}, {
+	"key": "daysNumber",
+	"title": "天数",
+	"formType": "input"
+}, {
+	"key": "deptApproval",
+	"title": "部门审批人",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "32"
+}, {
+	"key": "deptApprovalComments",
+	"title": "部门审批意见",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "100"
+}, {
+	"key": "deptApprovalTime",
+	"title": "部门审批时间",
+	"formType": "timepicker",
+	"displayInTab": "n",
+	"format": "YYYY-MM-DD HH:mm:ss"
+}, {
+	"key": "deptId",
+	"title": "部门ID",
+	"formType": "input",
+	"options": "dynamic",
+	"displayInTab": "n",
+	"displayInQuery": "y",
+	"displayInAdd": "n"
+}, {
+	"key": "deptName",
+	"title": "部门名称",
+	"formType": "input",
+	"displayInTab": "n",
+	"displayInAdd": "n",
+	"max": "64"
+}, {
+	"key": "description",
+	"title": "备注",
+	"formType": "input",
+	"max": "100"
+}, {
+	"key": "destination",
+	"title": "考察目的地",
+	"formType": "input"
+}, {
+	"key": "destination",
+	"title": "目的地",
+	"formType": "input",
+	"max": "15"
+}, {
+	"key": "dispatchNumber",
+	"title": "派车单编号",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "64"
+}, {
+	"key": "dispatchTheme",
+	"title": "派车单主题",
+	"formType": "input",
+	"max": "100"
+}, {
+	"key": "dispatchTypeCode",
+	"title": "派车单类型",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"key": "dispatchTypeValue",
+	"title": "派车单类型",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"key": "displacementCode",
+	"title": "排量",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "displacementValue",
+	"title": "排量",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"key": "disposalDate",
+	"title": "处置日期",
+	"formType": "datepicker",
+	"displayInTab": "n",
+	"format": "YYYY-MM-DD"
+}, {
+	"key": "disposalTypeCode",
+	"title": "处置类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n",
+	"displayInAdd": "n"
+}, {
+	"key": "disposalTypeValue",
+	"title": "处置类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "disposer",
+	"title": "处置人",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "30"
+}, {
+	"key": "documentNumber",
+	"title": "凭证号",
+	"formType": "input",
+	"max": "30"
+}, {
+	"key": "driverId",
+	"title": "驾驶员id",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n",
+	"displayInAdd": "n"
+}, {
+	"key": "driverName",
+	"title": "驾驶员",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "educationDegree",
+	"title": "文化程度",
+	"formType": "input",
+	"max": "64"
+}, {
+	"key": "effectiveDate",
+	"title": "生效日期",
+	"formType": "datepicker",
+	"format": "YYYY-MM-DD"
+}, {
+	"key": "email",
+	"title": "邮箱",
+	"formType": "input",
+	"max": "100"
+}, {
+	"key": "end",
+	"title": "终点",
+	"formType": "input",
+	"max": "20"
+}, {
+	"key": "endTime",
+	"title": "结束时间",
+	"formType": "timepicker",
+	"format": "YYYY-MM-DD HH:mm:ss"
+}, {
+	"key": "entertainmentNatureCode",
+	"title": "招待性质",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "entertainmentNatureValue",
+	"title": "招待性质",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"key": "entertainmentTypeCode",
+	"title": "招待类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "entertainmentTypeValue",
+	"title": "招待类型",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"key": "entryDate",
+	"title": "入账日期",
+	"formType": "datepicker",
+	"displayInTab": "n",
+	"displayInQuery": "y",
+	"format": "YYYY-MM-DD"
+}, {
+	"key": "etcId",
+	"title": "ETCid",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n",
+	"displayInAdd": "n"
+}, {
+	"key": "etcNumber",
+	"title": "ETC卡号",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "fax",
+	"title": "传真",
+	"formType": "input",
+	"max": "100"
+}, {
+	"key": "financialSystemNumber",
+	"title": "财务系统/资金平台单号",
+	"formType": "input",
+	"displayInTab": "n"
+}, {
+	"key": "fundsSourceCode",
+	"title": "资金来源",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "fundsSourceValue",
+	"title": "资金来源",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "gasolineCardId",
+	"title": "油卡ID",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n",
+	"displayInAdd": "n"
+}, {
+	"key": "gasolineCardTypeCode",
+	"title": "油卡类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n",
+	"displayInAdd": "n"
+}, {
+	"key": "gasolineCardTypeValue",
+	"title": "油卡类型",
+	"formType": "select",
+	"options": "dynamic",
+	"format": "YYYY-MM-DD"
+}, {
+	"key": "gasolineNumber",
+	"title": "油卡卡号",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "gender",
+	"title": "性别",
+	"formType": "radio",
+	"dataType": "int",
+	"default": "0",
+	"options": [{
+		"label": "0",
+		"value": "保密"
+	}, {
+		"label": "1",
+		"value": "男"
+	}, {
+		"label": "2",
+		"value": "女"
+	}],
+	"displayInTab": "n"
+}, {
+	"key": "guestNumber",
+	"title": "来宾人数",
+	"formType": "input",
+	"dataType": "int",
+	"displayInTab": "n"
+}, {
+	"key": "id",
+	"title": "ID",
+	"formType": "input",
+	"displayInTab": "n"
+}, {
+	"key": "identityCardNumber",
+	"title": "身份证号",
+	"formType": "input",
+	"max": "20"
+}, {
+	"key": "idList",
+	"title": "角色id数组",
+	"formType": "input",
+	"dataType": "String[]"
+}, {
+	"key": "IsDeptManager",
+	"title": "是否是部门负责人",
+	"formType": "radio",
+	"dataType": "int",
+	"options": [{
+		"label": "0",
+		"value": "否"
+	}, {
+		"label": "1",
+		"value": "是"
+	}]
+}, {
+	"group": "abroad",
+	"groupName": "因公临时出国",
+	"key": "isInPlan",
+	"title": "是否计划内考察",
+	"formType": "radio",
+	"dataType": "int",
+	"options": [{
+		"label": "0",
+		"value": "否"
+	}, {
+		"label": "1",
+		"value": "是"
+	}]
+}, {
+	"key": "isInPlan",
+	"title": "是否计划内培训",
+	"formType": "radio",
+	"dataType": "int",
+	"options": [{
+		"label": "0",
+		"value": "否"
+	}, {
+		"label": "1",
+		"value": "是"
+	}]
+}, {
+	"key": "IsLeader",
+	"title": "是否是企业负责人",
+	"formType": "radio",
+	"dataType": "int",
+	"options": [{
+		"label": "0",
+		"value": "否"
+	}, {
+		"label": "1",
+		"value": "是"
+	}]
+}, {
+	"key": "isWithinBudget",
+	"title": "是否预算内购车",
+	"formType": "radio",
+	"dataType": "int",
+	"default": "0",
+	"options": [{
+		"label": "0",
+		"value": "否"
+	}, {
+		"label": "1",
+		"value": "是"
+	}]
+}, {
+	"key": "leaderId",
+	"title": "企业负责人ID",
+	"formType": "input",
+	"options": "dynamic",
+	"displayInTab": "n",
+	"displayInQuery": "y",
+	"max": "36"
+}, {
+	"key": "leaderName",
+	"title": "企业负责人",
+	"formType": "input",
+	"options": "dynamic",
+	"max": "64"
+}, {
+	"key": "leaveDate",
+	"title": "离职日期",
+	"formType": "datepicker",
+	"format": "YYYY-MM-DD"
+}, {
+	"key": "mainPassenger",
+	"title": "主要乘车人",
+	"formType": "input",
+	"max": "30"
+}, {
+	"key": "mainUnitName",
+	"title": "主体单位",
+	"formType": "input"
+}, {
+	"key": "managingRelationshipsCode",
+	"title": "管理关系",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "managingRelationshipsValue",
+	"title": "管理关系",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "mileage",
+	"title": "里程数",
+	"formType": "input",
+	"dataType": "float"
+}, {
+	"key": "model",
+	"title": "型号",
+	"formType": "input"
+}, {
+	"key": "module",
+	"title": "模块名称",
+	"formType": "input",
+	"displayInAdd": "n"
+}, {
+	"group": "alcohol",
+	"groupName": "酒水",
+	"key": "name",
+	"title": "名称",
+	"formType": "input"
+}, {
+	"group": "driver",
+	"groupName": "驾驶员",
+	"key": "name",
+	"title": "姓名",
+	"formType": "input",
+	"displayInQuery": "y",
+	"max": "64"
+}, {
+	"group": "leader",
+	"groupName": "企业负责人",
+	"key": "name",
+	"title": "姓名",
+	"formType": "input",
+	"displayInQuery": "y",
+	"max": "30"
+}, {
+	"group": "dept",
+	"groupName": "部门",
+	"key": "name",
+	"title": "名称",
+	"formType": "input",
+	"displayInQuery": "y",
+	"max": "30"
+}, {
+	"group": "role",
+	"groupName": "角色",
+	"key": "name",
+	"title": "名称",
+	"formType": "input",
+	"displayInQuery": "y",
+	"max": "30"
+}, {
+	"group": "emp",
+	"groupName": "用户",
+	"key": "name",
+	"title": "用户姓名",
+	"formType": "input",
+	"displayInQuery": "y",
+	"max": "30"
+}, {
+	"key": "nationality",
+	"title": "民族",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "36"
+}, {
+	"group": "entertainment",
+	"groupName": "招待费",
+	"key": "number",
+	"title": "编号",
+	"formType": "input",
+	"max": "36"
+}, {
+	"group": "gasolineCard",
+	"groupName": "油卡",
+	"key": "number",
+	"title": "卡号",
+	"formType": "input",
+	"max": "36"
+}, {
+	"group": "etc",
+	"groupName": "ETC",
+	"key": "number",
+	"title": "卡号",
+	"formType": "input",
+	"max": "36"
+}, {
+	"group": "car",
+	"groupName": "车辆",
+	"key": "number",
+	"title": "车牌号",
+	"formType": "input",
+	"max": "30"
+}, {
+	"group": "leader",
+	"groupName": "企业负责人",
+	"key": "number",
+	"title": "工号",
+	"formType": "input",
+	"max": "64"
+}, {
+	"key": "officeArea",
+	"title": "办公室面积",
+	"formType": "input",
+	"dataType": "float"
+}, {
+	"key": "officeImplementComments",
+	"title": "办公室落实意见",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "100"
+}, {
+	"key": "officeImplementer",
+	"title": "办公室落实人",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "32"
+}, {
+	"key": "officeImplementTime",
+	"title": "办公室落实时间",
+	"formType": "timepicker",
+	"displayInTab": "n",
+	"format": "YYYY-MM-DD HH:mm:ss"
+}, {
+	"group": "operation",
+	"groupName": "运行费",
+	"key": "operationPaymentTypeCode",
+	"title": "支付类型",
+	"formType": "select",
+	"displayInTab": "n",
+	"displayInAdd": "n"
+}, {
+	"group": "operation",
+	"groupName": "运行费",
+	"key": "operationPaymentTypeValue",
+	"title": "支付类型",
+	"formType": "select"
+}, {
+	"key": "operator",
+	"title": "操作人",
+	"formType": "input",
+	"max": "64"
+}, {
+	"key": "OPERATOR_NAME",
+	"title": "操作人",
+	"formType": "input",
+	"displayInQuery": "y",
+	"displayInAdd": "n",
+	"max": "30"
+}, {
+	"key": "pageNum",
+	"title": "页码",
+	"formType": "input",
+	"dataType": "int",
+	"default": "1",
+	"displayInAdd": "n"
+}, {
+	"key": "pageSize",
+	"title": "每页的数量",
+	"formType": "input",
+	"dataType": "int",
+	"default": "10",
+	"displayInAdd": "n"
+}, {
+	"key": "parentId",
+	"title": "上级部门ID",
+	"formType": "input",
+	"options": "dynamic",
+	"max": "36"
+}, {
+	"key": "passengersNumber",
+	"title": "乘客数量",
+	"formType": "input",
+	"dataType": "int",
+	"options": [""],
+	"displayInTab": "n",
+	"max": "99",
+	"min": "0"
+}, {
+	"key": "password",
+	"title": "密码",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "20"
+}, {
+	"key": "paymentTypeCode",
+	"title": "支付类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "paymentTypeValue",
+	"title": "支付类型",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"key": "permissionIds",
+	"title": "权限ID列表",
+	"formType": "input",
+	"dataType": "string[]",
+	"options": "dynamic"
+}, {
+	"key": "phone",
+	"title": "电话",
+	"formType": "input",
+	"max": "20"
+}, {
+	"key": "politicalOutlook",
+	"title": "政治面貌",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "36"
+}, {
+	"key": "position",
+	"title": "职务",
+	"formType": "input"
+}, {
+	"key": "price",
+	"title": "单价",
+	"formType": "input",
+	"dataType": "float"
+}, {
+	"key": "projectName",
+	"title": "考察项目名称",
+	"formType": "input"
+}, {
+	"key": "propertyUnit",
+	"title": "产权单位",
+	"formType": "input",
+	"max": "30"
+}, {
+	"key": "purchaseApplyDateAndDocumentNumber",
+	"title": "购置申请日期及文号",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "50"
+}, {
+	"key": "purchaseDate",
+	"title": "购置日期",
+	"formType": "datepicker",
+	"format": "YYYY-MM-DD"
+}, {
+	"key": "purchasePrice",
+	"title": "购置单价",
+	"formType": "input",
+	"dataType": "Float",
+	"displayInTab": "n"
+}, {
+	"key": "purchaseTax",
+	"title": "购置税",
+	"formType": "input",
+	"dataType": "Float",
+	"displayInTab": "n"
+}, {
+	"key": "purchaseTotalPrice",
+	"title": "购置总价",
+	"formType": "input",
+	"dataType": "Float",
+	"displayInTab": "n"
+}, {
+	"key": "purposeCode",
+	"title": "车辆用途",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "purposeValue",
+	"title": "车辆用途",
+	"formType": "select",
+	"options": "dynamic"
+}, {
+	"group": "entertainment",
+	"groupName": "招待费",
+	"key": "reason",
+	"title": "招待事由",
+	"formType": "input"
+}, {
+	"key": "reason",
+	"title": "事由",
+	"formType": "input",
+	"max": "100"
+}, {
+	"key": "reasonDescription",
+	"title": "事由简述",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "150"
+}, {
+	"key": "referenceInformation",
+	"title": "参考信息",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "100"
+}, {
+	"key": "reimbursementAmount",
+	"title": "报销金额",
+	"formType": "input",
+	"dataType": "float",
+	"displayInTab": "n"
+}, {
+	"key": "reimbursementDate",
+	"title": "报销日期",
+	"formType": "datepicker",
+	"displayInTab": "n"
+}, {
+	"key": "remarks",
+	"title": "备注",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "100"
+}, {
+	"key": "roleId",
+	"title": "角色ID",
+	"formType": "input",
+	"options": "dynamic",
+	"displayInTab": "n",
+	"displayInAdd": "n"
+}, {
+	"key": "route",
+	"title": "途经",
+	"formType": "input",
+	"max": "20"
+}, {
+	"key": "scrapApprovalInfomation",
+	"title": "报废审批信息",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "100"
+}, {
+	"key": "size",
+	"title": "本页数量",
+	"formType": "input",
+	"dataType": "int",
+	"displayInAdd": "n"
+}, {
+	"key": "sort",
+	"title": "排序",
+	"formType": "input",
+	"dataType": "int",
+	"default": "1",
+	"options": [{
+		"label": "1-99",
+		"value": ""
+	}],
+	"max": "99",
+	"min": "1"
+}, {
+	"key": "specialNeeds",
+	"title": "特殊需求",
+	"formType": "input",
+	"displayInTab": "n",
+	"max": "50"
+}, {
+	"key": "standard",
+	"title": "人均标准",
+	"formType": "input",
+	"dataType": "float",
+	"displayInTab": "n"
+}, {
+	"key": "start",
+	"title": "起点",
+	"formType": "input",
+	"max": "20"
+}, {
+	"key": "startTime",
+	"title": "开始时间",
+	"formType": "timepicker",
+	"format": "YYYY-MM-DD HH:mm:ss"
+}, {
+	"key": "status",
+	"title": "状态",
+	"formType": "switch",
+	"dataType": "int",
+	"default": "1",
+	"options": [{
+		"label": "0",
+		"value": "启用"
+	}, {
+		"label": "1",
+		"value": "禁用"
+	}]
+}, {
+	"key": "submitDate",
+	"title": "提交日期",
+	"formType": "datepicker",
+	"format": "YYYY-MM-DD"
+}, {
+	"key": "tax",
+	"title": "税额",
+	"formType": "input",
+	"dataType": "float"
+}, {
+	"key": "title",
+	"title": "摘要",
+	"formType": "input",
+	"max": "100"
+}, {
+	"key": "total",
+	"title": "总记录数",
+	"formType": "input",
+	"dataType": "int",
+	"displayInAdd": "n"
+}, {
+	"key": "totalNumber",
+	"title": "总人数",
+	"formType": "input",
+	"dataType": "int"
+}, {
+	"key": "trafficSubsidyPaymentStandard",
+	"title": "交通补贴发放标准",
+	"formType": "input",
+	"dataType": "float"
+}, {
+	"key": "trainingDays",
+	"title": "培训天数",
+	"formType": "input",
+	"dataType": "int"
+}, {
+	"key": "trainingEndDate",
+	"title": "培训结束日期",
+	"formType": "datepicker",
+	"format": "YYYY-MM-DD"
+}, {
+	"key": "trainingProgram",
+	"title": "培训项目",
+	"formType": "input",
+	"max": "50"
+}, {
+	"key": "trainingStartDate",
+	"title": "培训开始日期",
+	"formType": "datepicker",
+	"format": "YYYY-MM-DD"
+}, {
+	"key": "trainingTypeCode",
+	"title": "培训类型",
+	"formType": "select",
+	"displayInTab": "n",
+	"displayInAdd": "n"
+}, {
+	"key": "trainingTypeValue",
+	"title": "培训类型",
+	"formType": "select"
+}, {
+	"key": "trainingUnit",
+	"title": "培训单位",
+	"formType": "input",
+	"max": "32"
+}, {
+	"key": "travelDate",
+	"title": "出差日期",
+	"formType": "input",
+	"max": "30"
+}, {
+	"key": "type",
+	"title": "日志类型",
+	"formType": "input",
+	"options": [{
+		"label": "ADD",
+		"value": "新增"
+	}, {
+		"label": "DELETE",
+		"value": "删除"
+	}, {
+		"label": "MODIFY",
+		"value": "编辑"
+	}, {
+		"label": "DISABLE",
+		"value": "禁用"
+	}, {
+		"label": "ENABLE",
+		"value": "启用"
+	}],
+	"displayInQuery": "y",
+	"displayInAdd": "n"
+}, {
+	"key": "unitBelongs",
+	"title": "所属单位",
+	"formType": "input",
+	"max": "64"
+}, {
+	"key": "updateBy",
+	"title": "更新人ID",
+	"formType": "input",
+	"displayInTab": "n",
+	"displayInAdd": "n"
+}, {
+	"key": "updateById",
+	"title": "更新人ID",
+	"formType": "input",
+	"displayInTab": "n",
+	"displayInAdd": "n",
+	"max": "36"
+}, {
+	"key": "updateById",
+	"title": "更新人ID",
+	"formType": "input",
+	"displayInAdd": "n",
+	"max": "36"
+}, {
+	"key": "updateByName",
+	"title": "更新人",
+	"formType": "input",
+	"displayInTab": "n",
+	"displayInAdd": "n",
+	"max": "64"
+}, {
+	"key": "updateDate",
+	"title": "更新时间",
+	"formType": "input",
+	"displayInTab": "n",
+	"displayInAdd": "n",
+	"format": "YYYY-MM-DD HH:mm:ss"
+}, {
+	"key": "useTypeCode",
+	"title": "使用类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}, {
+	"key": "useTypeValue",
+	"title": "使用类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
+}]

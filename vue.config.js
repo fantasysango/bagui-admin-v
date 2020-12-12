@@ -102,7 +102,7 @@ const vueConfig = {
 
   devServer: {
     // development server port 8000
-    port: 8000
+    port: 8000,
     // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
     // proxy: {
     //   '/api': {
@@ -111,11 +111,19 @@ const vueConfig = {
     //     changeOrigin: true
     //   }
     // }
+    // proxy: {
+    //   '/epd': {
+    //     // target: 'http://hezhongsoft.com:8080/epd',
+    //     target: 'http://47.96.126.38:8080/epd',
+    //     ws: false,
+    //     changeOrigin: true
+    //   }
+    // }
   },
 
   // disable source map in production
   productionSourceMap: false,
-  lintOnSave: undefined,
+  lintOnSave: false,  // undefined,
   // babel-loader no-ignore node_modules/*
   transpileDependencies: []
 }

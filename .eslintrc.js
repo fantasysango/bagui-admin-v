@@ -49,14 +49,17 @@ module.exports = {
       }
     ],
     'no-delete-var': 2,
-    'prefer-const': [
-      2,
-      {
-        'ignoreReadBeforeAssign': false
-      }
-    ],
+    // 'prefer-const': [
+    //   2,
+    //   {
+    //     'ignoreReadBeforeAssign': false
+    //   }
+    // ],
+    'prefer-const': 0,
     'template-curly-spacing': 'off',
-    'indent': 'off'
+    'indent': 'off',
+    'comma-dangle': 'off',
+    'no-unused-vars': 0
   },
   parserOptions: {
     parser: 'babel-eslint'

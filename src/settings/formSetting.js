@@ -1,109 +1,109 @@
-export const formSetting = [{
-	"key": "accompanyNumber",
+export default [{
+	"dataIndex": "accompanyNumber",
 	"title": "陪同人数",
 	"formType": "input",
 	"dataType": "int",
 	"displayInTab": "n"
 }, {
-	"key": "account",
+	"dataIndex": "account",
 	"title": "账号",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "30"
 }, {
-	"key": "accountBooksCode",
+	"dataIndex": "accountBooksCode",
 	"title": "账簿",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "accountBooksValue",
+	"dataIndex": "accountBooksValue",
 	"title": "账簿",
 	"formType": "select",
 	"options": "dynamic"
 }, {
-	"key": "activityOrganizationUnit",
+	"dataIndex": "activityOrganizationUnit",
 	"title": "活动组织单位",
 	"formType": "input"
 }, {
-	"key": "actualExpenses",
+	"dataIndex": "actualExpenses",
 	"title": "实际花费",
 	"formType": "input",
 	"dataType": "float"
 }, {
-	"key": "alcoholAmount",
+	"dataIndex": "alcoholAmount",
 	"title": "酒水金额",
 	"formType": "input",
 	"dataType": "float",
 	"displayInTab": "n"
 }, {
-	"key": "amount",
+	"dataIndex": "amount",
 	"title": "金额",
 	"formType": "input",
 	"dataType": "float"
 }, {
-	"key": "amountWithoutTax",
+	"dataIndex": "amountWithoutTax",
 	"title": "不含税金额",
 	"formType": "input",
 	"dataType": "float"
 }, {
-	"key": "applicationReplyDateAndDocumentNumber",
+	"dataIndex": "applicationReplyDateAndDocumentNumber",
 	"title": "批复日期及文号",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "50"
 }, {
-	"key": "applyDept",
+	"dataIndex": "applyDept",
 	"title": "申请部门",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "32"
 }, {
-	"key": "applyDeptId",
+	"dataIndex": "applyDeptId",
 	"title": "申请部门Id",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "applyDeptName",
+	"dataIndex": "applyDeptName",
 	"title": "申请部门",
 	"formType": "select",
 	"options": "dynamic"
 }, {
-	"key": "applyEmp",
+	"dataIndex": "applyEmp",
 	"title": "申请人",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "32"
 }, {
-	"key": "applyEmpId",
+	"dataIndex": "applyEmpId",
 	"title": "申请人ID",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "applyEmpName",
+	"dataIndex": "applyEmpName",
 	"title": "申请人",
 	"formType": "select",
 	"options": "dynamic"
 }, {
-	"key": "applyTime",
+	"dataIndex": "applyTime",
 	"title": "申请时间",
 	"formType": "timepicker",
 	"displayInTab": "n",
 	"format": "YYYY-MM-DD HH:mm:ss"
 }, {
-	"key": "approvalBasis",
+	"dataIndex": "approvalBasis",
 	"title": "审批依据",
 	"formType": "input",
 	"max": "100"
 }, {
-	"key": "average",
+	"dataIndex": "average",
 	"title": "人均",
 	"formType": "input",
 	"dataType": "float"
 }, {
-	"key": "birthday",
+	"dataIndex": "birthday",
 	"title": "出生日期",
 	"formType": "datepicker",
 	"displayInTab": "n",
@@ -111,210 +111,210 @@ export const formSetting = [{
 }, {
 	"group": "alcohol",
 	"groupName": "酒水",
-	"key": "brand",
+	"dataIndex": "brand",
 	"title": "品牌",
 	"formType": "input"
 }, {
-	"key": "brand",
+	"dataIndex": "brand",
 	"title": "品牌",
 	"formType": "input"
 }, {
-	"key": "buyCardDate",
+	"dataIndex": "buyCardDate",
 	"title": "办卡日期",
 	"formType": "datepicker"
 }, {
-	"key": "carConfigType",
+	"dataIndex": "carConfigType",
 	"title": "用车类型",
 	"formType": "input",
 	"options": "dynamic"
 }, {
-	"key": "carId",
+	"dataIndex": "carId",
 	"title": "车辆ID",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n",
 	"displayInAdd": "n"
 }, {
-	"key": "carNumber",
+	"dataIndex": "carNumber",
 	"title": "车牌号",
 	"formType": "select",
 	"options": "dynamic"
 }, {
-	"key": "carTypeCode",
+	"dataIndex": "carTypeCode",
 	"title": "车辆类型",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
+// }, {
+// 	"dataIndex": "carTypeCode",
+// 	"title": "车辆类型",
+// 	"formType": "select",
+// 	"options": "dynamic",
+// 	"displayInTab": "n"
 }, {
-	"key": "carTypeCode",
-	"title": "车辆类型",
-	"formType": "select",
-	"options": "dynamic",
-	"displayInTab": "n"
-}, {
-	"key": "code",
+	"dataIndex": "code",
 	"title": "编码",
 	"formType": "input",
 	"max": "30"
 }, {
-	"key": "collectionNumber1",
+	"dataIndex": "collectionNumber1",
 	"title": "托收协议1",
 	"formType": "input",
 	"max": "36"
 }, {
-	"key": "collectionNumber2",
+	"dataIndex": "collectionNumber2",
 	"title": "托收协议2",
 	"formType": "input",
 	"max": "36"
 }, {
-	"key": "collectionNumber3",
+	"dataIndex": "collectionNumber3",
 	"title": "托收协议3",
 	"formType": "input",
 	"max": "36"
 }, {
-	"key": "collectionNumber4",
+	"dataIndex": "collectionNumber4",
 	"title": "托收协议4",
 	"formType": "input",
 	"max": "36"
 }, {
-	"key": "communicationTypeCode",
+	"dataIndex": "communicationTypeCode",
 	"title": "通讯类型",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "communicationTypeValue",
+	"dataIndex": "communicationTypeValue",
 	"title": "通讯类型",
 	"formType": "select",
 	"options": "dynamic"
 }, {
-	"key": "configModeCode",
+	"dataIndex": "configModeCode",
 	"title": "配置类型",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "configModeValue",
+	"dataIndex": "configModeValue",
 	"title": "配置类型",
 	"formType": "select",
 	"options": "dynamic"
 }, {
 	"group": "log",
 	"groupName": "日志",
-	"key": "CONTENT",
+	"dataIndex": "CONTENT",
 	"title": "接口参数",
 	"formType": "input",
 	"displayInAdd": "n"
 }, {
-	"key": "createById",
+	"dataIndex": "createById",
 	"title": "创建人ID",
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
 	"max": "36"
 }, {
-	"key": "createById",
+	"dataIndex": "createById",
 	"title": "创建人ID",
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
 	"max": "36"
 }, {
-	"key": "createByName",
+	"dataIndex": "createByName",
 	"title": "创建人",
 	"formType": "input",
 	"displayInAdd": "n",
 	"max": "64"
 }, {
-	"key": "createDate",
+	"dataIndex": "createDate",
 	"title": "创建时间",
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
 	"format": "YYYY-MM-DD HH:mm:ss"
 }, {
-	"key": "creatorId",
+	"dataIndex": "creatorId",
 	"title": "创建者ID",
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n"
 }, {
-	"key": "customerCode",
+	"dataIndex": "customerCode",
 	"title": "客户编号",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "36"
 }, {
-	"key": "customerName",
+	"dataIndex": "customerName",
 	"title": "客户名称",
 	"formType": "input",
 	"max": "32"
 }, {
 	"group": "operation",
 	"groupName": "运行费",
-	"key": "date",
+	"dataIndex": "date",
 	"title": "日期",
 	"formType": "datepicker"
 }, {
 	"group": "abroad",
 	"groupName": "因公临时出国",
-	"key": "date",
+	"dataIndex": "date",
 	"title": "考察日期",
 	"formType": "datepicker",
 	"format": "YYYY-MM-DD"
 }, {
 	"group": "entertainment",
 	"groupName": "招待费",
-	"key": "date",
+	"dataIndex": "date",
 	"title": "用餐日期",
 	"formType": "datepicker",
 	"format": "YYYY-MM-DD"
 }, {
 	"group": "communication",
 	"groupName": "通讯费",
-	"key": "date",
+	"dataIndex": "date",
 	"title": "发生日期",
 	"formType": "datepicker",
 	"format": "YYYY-MM-DD"
 }, {
 	"group": "log",
 	"groupName": "日志",
-	"key": "date",
+	"dataIndex": "date",
 	"title": "日期",
 	"formType": "datepicker",
 	"displayInQuery": "y",
 	"displayInAdd": "n",
 	"format": "YYYY-MM-DD"
 }, {
-	"key": "dateOfBirth",
+	"dataIndex": "dateOfBirth",
 	"title": "出生日期",
 	"formType": "datepicker",
 	"displayInTab": "n",
 	"format": "YYYY-MM-DD"
 }, {
-	"key": "daysNumber",
+	"dataIndex": "daysNumber",
 	"title": "天数",
 	"formType": "input"
 }, {
-	"key": "deptApproval",
+	"dataIndex": "deptApproval",
 	"title": "部门审批人",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "32"
 }, {
-	"key": "deptApprovalComments",
+	"dataIndex": "deptApprovalComments",
 	"title": "部门审批意见",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "100"
 }, {
-	"key": "deptApprovalTime",
+	"dataIndex": "deptApprovalTime",
 	"title": "部门审批时间",
 	"formType": "timepicker",
 	"displayInTab": "n",
 	"format": "YYYY-MM-DD HH:mm:ss"
 }, {
-	"key": "deptId",
+	"dataIndex": "deptId",
 	"title": "部门ID",
 	"formType": "input",
 	"options": "dynamic",
@@ -322,218 +322,218 @@ export const formSetting = [{
 	"displayInQuery": "y",
 	"displayInAdd": "n"
 }, {
-	"key": "deptName",
+	"dataIndex": "deptName",
 	"title": "部门名称",
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
 	"max": "64"
 }, {
-	"key": "description",
+	"dataIndex": "description",
 	"title": "备注",
 	"formType": "input",
 	"max": "100"
 }, {
-	"key": "destination",
+	"dataIndex": "destination",
 	"title": "考察目的地",
 	"formType": "input"
 }, {
-	"key": "destination",
+	"dataIndex": "destination",
 	"title": "目的地",
 	"formType": "input",
 	"max": "15"
 }, {
-	"key": "dispatchNumber",
+	"dataIndex": "dispatchNumber",
 	"title": "派车单编号",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "64"
 }, {
-	"key": "dispatchTheme",
+	"dataIndex": "dispatchTheme",
 	"title": "派车单主题",
 	"formType": "input",
 	"max": "100"
 }, {
-	"key": "dispatchTypeCode",
+	"dataIndex": "dispatchTypeCode",
 	"title": "派车单类型",
 	"formType": "select",
 	"options": "dynamic"
 }, {
-	"key": "dispatchTypeValue",
+	"dataIndex": "dispatchTypeValue",
 	"title": "派车单类型",
 	"formType": "select",
 	"options": "dynamic"
 }, {
-	"key": "displacementCode",
+	"dataIndex": "displacementCode",
 	"title": "排量",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "displacementValue",
+	"dataIndex": "displacementValue",
 	"title": "排量",
 	"formType": "select",
 	"options": "dynamic"
 }, {
-	"key": "disposalDate",
+	"dataIndex": "disposalDate",
 	"title": "处置日期",
 	"formType": "datepicker",
 	"displayInTab": "n",
 	"format": "YYYY-MM-DD"
 }, {
-	"key": "disposalTypeCode",
+	"dataIndex": "disposalTypeCode",
 	"title": "处置类型",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n",
 	"displayInAdd": "n"
 }, {
-	"key": "disposalTypeValue",
+	"dataIndex": "disposalTypeValue",
 	"title": "处置类型",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "disposer",
+	"dataIndex": "disposer",
 	"title": "处置人",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "30"
 }, {
-	"key": "documentNumber",
+	"dataIndex": "documentNumber",
 	"title": "凭证号",
 	"formType": "input",
 	"max": "30"
 }, {
-	"key": "driverId",
+	"dataIndex": "driverId",
 	"title": "驾驶员id",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n",
 	"displayInAdd": "n"
 }, {
-	"key": "driverName",
+	"dataIndex": "driverName",
 	"title": "驾驶员",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "educationDegree",
+	"dataIndex": "educationDegree",
 	"title": "文化程度",
 	"formType": "input",
 	"max": "64"
 }, {
-	"key": "effectiveDate",
+	"dataIndex": "effectiveDate",
 	"title": "生效日期",
 	"formType": "datepicker",
 	"format": "YYYY-MM-DD"
 }, {
-	"key": "email",
+	"dataIndex": "email",
 	"title": "邮箱",
 	"formType": "input",
 	"max": "100"
 }, {
-	"key": "end",
+	"dataIndex": "end",
 	"title": "终点",
 	"formType": "input",
 	"max": "20"
 }, {
-	"key": "endTime",
+	"dataIndex": "endTime",
 	"title": "结束时间",
 	"formType": "timepicker",
 	"format": "YYYY-MM-DD HH:mm:ss"
 }, {
-	"key": "entertainmentNatureCode",
+	"dataIndex": "entertainmentNatureCode",
 	"title": "招待性质",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "entertainmentNatureValue",
+	"dataIndex": "entertainmentNatureValue",
 	"title": "招待性质",
 	"formType": "select",
 	"options": "dynamic"
 }, {
-	"key": "entertainmentTypeCode",
+	"dataIndex": "entertainmentTypeCode",
 	"title": "招待类型",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "entertainmentTypeValue",
+	"dataIndex": "entertainmentTypeValue",
 	"title": "招待类型",
 	"formType": "select",
 	"options": "dynamic"
 }, {
-	"key": "entryDate",
+	"dataIndex": "entryDate",
 	"title": "入账日期",
 	"formType": "datepicker",
 	"displayInTab": "n",
 	"displayInQuery": "y",
 	"format": "YYYY-MM-DD"
 }, {
-	"key": "etcId",
+	"dataIndex": "etcId",
 	"title": "ETCid",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n",
 	"displayInAdd": "n"
 }, {
-	"key": "etcNumber",
+	"dataIndex": "etcNumber",
 	"title": "ETC卡号",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "fax",
+	"dataIndex": "fax",
 	"title": "传真",
 	"formType": "input",
 	"max": "100"
 }, {
-	"key": "financialSystemNumber",
+	"dataIndex": "financialSystemNumber",
 	"title": "财务系统/资金平台单号",
 	"formType": "input",
 	"displayInTab": "n"
 }, {
-	"key": "fundsSourceCode",
+	"dataIndex": "fundsSourceCode",
 	"title": "资金来源",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "fundsSourceValue",
+	"dataIndex": "fundsSourceValue",
 	"title": "资金来源",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "gasolineCardId",
+	"dataIndex": "gasolineCardId",
 	"title": "油卡ID",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n",
 	"displayInAdd": "n"
 }, {
-	"key": "gasolineCardTypeCode",
+	"dataIndex": "gasolineCardTypeCode",
 	"title": "油卡类型",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n",
 	"displayInAdd": "n"
 }, {
-	"key": "gasolineCardTypeValue",
+	"dataIndex": "gasolineCardTypeValue",
 	"title": "油卡类型",
 	"formType": "select",
 	"options": "dynamic",
 	"format": "YYYY-MM-DD"
 }, {
-	"key": "gasolineNumber",
+	"dataIndex": "gasolineNumber",
 	"title": "油卡卡号",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "gender",
+	"dataIndex": "gender",
 	"title": "性别",
 	"formType": "radio",
 	"dataType": "int",
@@ -550,28 +550,28 @@ export const formSetting = [{
 	}],
 	"displayInTab": "n"
 }, {
-	"key": "guestNumber",
+	"dataIndex": "guestNumber",
 	"title": "来宾人数",
 	"formType": "input",
 	"dataType": "int",
 	"displayInTab": "n"
 }, {
-	"key": "id",
+	"dataIndex": "id",
 	"title": "ID",
 	"formType": "input",
 	"displayInTab": "n"
 }, {
-	"key": "identityCardNumber",
+	"dataIndex": "identityCardNumber",
 	"title": "身份证号",
 	"formType": "input",
 	"max": "20"
 }, {
-	"key": "idList",
+	"dataIndex": "idList",
 	"title": "角色id数组",
 	"formType": "input",
 	"dataType": "String[]"
 }, {
-	"key": "IsDeptManager",
+	"dataIndex": "IsDeptManager",
 	"title": "是否是部门负责人",
 	"formType": "radio",
 	"dataType": "int",
@@ -585,7 +585,7 @@ export const formSetting = [{
 }, {
 	"group": "abroad",
 	"groupName": "因公临时出国",
-	"key": "isInPlan",
+	"dataIndex": "isInPlan",
 	"title": "是否计划内考察",
 	"formType": "radio",
 	"dataType": "int",
@@ -597,7 +597,7 @@ export const formSetting = [{
 		"value": "是"
 	}]
 }, {
-	"key": "isInPlan",
+	"dataIndex": "isInPlan",
 	"title": "是否计划内培训",
 	"formType": "radio",
 	"dataType": "int",
@@ -609,7 +609,7 @@ export const formSetting = [{
 		"value": "是"
 	}]
 }, {
-	"key": "IsLeader",
+	"dataIndex": "IsLeader",
 	"title": "是否是企业负责人",
 	"formType": "radio",
 	"dataType": "int",
@@ -621,7 +621,7 @@ export const formSetting = [{
 		"value": "是"
 	}]
 }, {
-	"key": "isWithinBudget",
+	"dataIndex": "isWithinBudget",
 	"title": "是否预算内购车",
 	"formType": "radio",
 	"dataType": "int",
@@ -634,7 +634,7 @@ export const formSetting = [{
 		"value": "是"
 	}]
 }, {
-	"key": "leaderId",
+	"dataIndex": "leaderId",
 	"title": "企业负责人ID",
 	"formType": "input",
 	"options": "dynamic",
@@ -642,61 +642,61 @@ export const formSetting = [{
 	"displayInQuery": "y",
 	"max": "36"
 }, {
-	"key": "leaderName",
+	"dataIndex": "leaderName",
 	"title": "企业负责人",
 	"formType": "input",
 	"options": "dynamic",
 	"max": "64"
 }, {
-	"key": "leaveDate",
+	"dataIndex": "leaveDate",
 	"title": "离职日期",
 	"formType": "datepicker",
 	"format": "YYYY-MM-DD"
 }, {
-	"key": "mainPassenger",
+	"dataIndex": "mainPassenger",
 	"title": "主要乘车人",
 	"formType": "input",
 	"max": "30"
 }, {
-	"key": "mainUnitName",
+	"dataIndex": "mainUnitName",
 	"title": "主体单位",
 	"formType": "input"
 }, {
-	"key": "managingRelationshipsCode",
+	"dataIndex": "managingRelationshipsCode",
 	"title": "管理关系",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "managingRelationshipsValue",
+	"dataIndex": "managingRelationshipsValue",
 	"title": "管理关系",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "mileage",
+	"dataIndex": "mileage",
 	"title": "里程数",
 	"formType": "input",
 	"dataType": "float"
 }, {
-	"key": "model",
+	"dataIndex": "model",
 	"title": "型号",
 	"formType": "input"
 }, {
-	"key": "module",
+	"dataIndex": "module",
 	"title": "模块名称",
 	"formType": "input",
 	"displayInAdd": "n"
 }, {
 	"group": "alcohol",
 	"groupName": "酒水",
-	"key": "name",
+	"dataIndex": "name",
 	"title": "名称",
 	"formType": "input"
 }, {
 	"group": "driver",
 	"groupName": "驾驶员",
-	"key": "name",
+	"dataIndex": "name",
 	"title": "姓名",
 	"formType": "input",
 	"displayInQuery": "y",
@@ -704,7 +704,7 @@ export const formSetting = [{
 }, {
 	"group": "leader",
 	"groupName": "企业负责人",
-	"key": "name",
+	"dataIndex": "name",
 	"title": "姓名",
 	"formType": "input",
 	"displayInQuery": "y",
@@ -712,7 +712,7 @@ export const formSetting = [{
 }, {
 	"group": "dept",
 	"groupName": "部门",
-	"key": "name",
+	"dataIndex": "name",
 	"title": "名称",
 	"formType": "input",
 	"displayInQuery": "y",
@@ -720,7 +720,7 @@ export const formSetting = [{
 }, {
 	"group": "role",
 	"groupName": "角色",
-	"key": "name",
+	"dataIndex": "name",
 	"title": "名称",
 	"formType": "input",
 	"displayInQuery": "y",
@@ -728,13 +728,13 @@ export const formSetting = [{
 }, {
 	"group": "emp",
 	"groupName": "用户",
-	"key": "name",
+	"dataIndex": "name",
 	"title": "用户姓名",
 	"formType": "input",
 	"displayInQuery": "y",
 	"max": "30"
 }, {
-	"key": "nationality",
+	"dataIndex": "nationality",
 	"title": "民族",
 	"formType": "input",
 	"displayInTab": "n",
@@ -742,57 +742,57 @@ export const formSetting = [{
 }, {
 	"group": "entertainment",
 	"groupName": "招待费",
-	"key": "number",
+	"dataIndex": "number",
 	"title": "编号",
 	"formType": "input",
 	"max": "36"
 }, {
 	"group": "gasolineCard",
 	"groupName": "油卡",
-	"key": "number",
+	"dataIndex": "number",
 	"title": "卡号",
 	"formType": "input",
 	"max": "36"
 }, {
 	"group": "etc",
 	"groupName": "ETC",
-	"key": "number",
+	"dataIndex": "number",
 	"title": "卡号",
 	"formType": "input",
 	"max": "36"
 }, {
 	"group": "car",
 	"groupName": "车辆",
-	"key": "number",
+	"dataIndex": "number",
 	"title": "车牌号",
 	"formType": "input",
 	"max": "30"
 }, {
 	"group": "leader",
 	"groupName": "企业负责人",
-	"key": "number",
+	"dataIndex": "number",
 	"title": "工号",
 	"formType": "input",
 	"max": "64"
 }, {
-	"key": "officeArea",
+	"dataIndex": "officeArea",
 	"title": "办公室面积",
 	"formType": "input",
 	"dataType": "float"
 }, {
-	"key": "officeImplementComments",
+	"dataIndex": "officeImplementComments",
 	"title": "办公室落实意见",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "100"
 }, {
-	"key": "officeImplementer",
+	"dataIndex": "officeImplementer",
 	"title": "办公室落实人",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "32"
 }, {
-	"key": "officeImplementTime",
+	"dataIndex": "officeImplementTime",
 	"title": "办公室落实时间",
 	"formType": "timepicker",
 	"displayInTab": "n",
@@ -800,7 +800,7 @@ export const formSetting = [{
 }, {
 	"group": "operation",
 	"groupName": "运行费",
-	"key": "operationPaymentTypeCode",
+	"dataIndex": "operationPaymentTypeCode",
 	"title": "支付类型",
 	"formType": "select",
 	"displayInTab": "n",
@@ -808,43 +808,43 @@ export const formSetting = [{
 }, {
 	"group": "operation",
 	"groupName": "运行费",
-	"key": "operationPaymentTypeValue",
+	"dataIndex": "operationPaymentTypeValue",
 	"title": "支付类型",
 	"formType": "select"
 }, {
-	"key": "operator",
+	"dataIndex": "operator",
 	"title": "操作人",
 	"formType": "input",
 	"max": "64"
 }, {
-	"key": "OPERATOR_NAME",
+	"dataIndex": "OPERATOR_NAME",
 	"title": "操作人",
 	"formType": "input",
 	"displayInQuery": "y",
 	"displayInAdd": "n",
 	"max": "30"
 }, {
-	"key": "pageNum",
+	"dataIndex": "pageNum",
 	"title": "页码",
 	"formType": "input",
 	"dataType": "int",
 	"default": "1",
 	"displayInAdd": "n"
 }, {
-	"key": "pageSize",
+	"dataIndex": "pageSize",
 	"title": "每页的数量",
 	"formType": "input",
 	"dataType": "int",
 	"default": "10",
 	"displayInAdd": "n"
 }, {
-	"key": "parentId",
+	"dataIndex": "parentId",
 	"title": "上级部门ID",
 	"formType": "input",
 	"options": "dynamic",
 	"max": "36"
 }, {
-	"key": "passengersNumber",
+	"dataIndex": "passengersNumber",
 	"title": "乘客数量",
 	"formType": "input",
 	"dataType": "int",
@@ -853,163 +853,163 @@ export const formSetting = [{
 	"max": "99",
 	"min": "0"
 }, {
-	"key": "password",
+	"dataIndex": "password",
 	"title": "密码",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "20"
 }, {
-	"key": "paymentTypeCode",
+	"dataIndex": "paymentTypeCode",
 	"title": "支付类型",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "paymentTypeValue",
+	"dataIndex": "paymentTypeValue",
 	"title": "支付类型",
 	"formType": "select",
 	"options": "dynamic"
 }, {
-	"key": "permissionIds",
+	"dataIndex": "permissionIds",
 	"title": "权限ID列表",
 	"formType": "input",
 	"dataType": "string[]",
 	"options": "dynamic"
 }, {
-	"key": "phone",
+	"dataIndex": "phone",
 	"title": "电话",
 	"formType": "input",
 	"max": "20"
 }, {
-	"key": "politicalOutlook",
+	"dataIndex": "politicalOutlook",
 	"title": "政治面貌",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "36"
 }, {
-	"key": "position",
+	"dataIndex": "position",
 	"title": "职务",
 	"formType": "input"
 }, {
-	"key": "price",
+	"dataIndex": "price",
 	"title": "单价",
 	"formType": "input",
 	"dataType": "float"
 }, {
-	"key": "projectName",
+	"dataIndex": "projectName",
 	"title": "考察项目名称",
 	"formType": "input"
 }, {
-	"key": "propertyUnit",
+	"dataIndex": "propertyUnit",
 	"title": "产权单位",
 	"formType": "input",
 	"max": "30"
 }, {
-	"key": "purchaseApplyDateAndDocumentNumber",
+	"dataIndex": "purchaseApplyDateAndDocumentNumber",
 	"title": "购置申请日期及文号",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "50"
 }, {
-	"key": "purchaseDate",
+	"dataIndex": "purchaseDate",
 	"title": "购置日期",
 	"formType": "datepicker",
 	"format": "YYYY-MM-DD"
 }, {
-	"key": "purchasePrice",
+	"dataIndex": "purchasePrice",
 	"title": "购置单价",
 	"formType": "input",
 	"dataType": "Float",
 	"displayInTab": "n"
 }, {
-	"key": "purchaseTax",
+	"dataIndex": "purchaseTax",
 	"title": "购置税",
 	"formType": "input",
 	"dataType": "Float",
 	"displayInTab": "n"
 }, {
-	"key": "purchaseTotalPrice",
+	"dataIndex": "purchaseTotalPrice",
 	"title": "购置总价",
 	"formType": "input",
 	"dataType": "Float",
 	"displayInTab": "n"
 }, {
-	"key": "purposeCode",
+	"dataIndex": "purposeCode",
 	"title": "车辆用途",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "purposeValue",
+	"dataIndex": "purposeValue",
 	"title": "车辆用途",
 	"formType": "select",
 	"options": "dynamic"
 }, {
 	"group": "entertainment",
 	"groupName": "招待费",
-	"key": "reason",
+	"dataIndex": "reason",
 	"title": "招待事由",
 	"formType": "input"
 }, {
-	"key": "reason",
+	"dataIndex": "reason",
 	"title": "事由",
 	"formType": "input",
 	"max": "100"
 }, {
-	"key": "reasonDescription",
+	"dataIndex": "reasonDescription",
 	"title": "事由简述",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "150"
 }, {
-	"key": "referenceInformation",
+	"dataIndex": "referenceInformation",
 	"title": "参考信息",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "100"
 }, {
-	"key": "reimbursementAmount",
+	"dataIndex": "reimbursementAmount",
 	"title": "报销金额",
 	"formType": "input",
 	"dataType": "float",
 	"displayInTab": "n"
 }, {
-	"key": "reimbursementDate",
+	"dataIndex": "reimbursementDate",
 	"title": "报销日期",
 	"formType": "datepicker",
 	"displayInTab": "n"
 }, {
-	"key": "remarks",
+	"dataIndex": "remarks",
 	"title": "备注",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "100"
 }, {
-	"key": "roleId",
+	"dataIndex": "roleId",
 	"title": "角色ID",
 	"formType": "input",
 	"options": "dynamic",
 	"displayInTab": "n",
 	"displayInAdd": "n"
 }, {
-	"key": "route",
+	"dataIndex": "route",
 	"title": "途经",
 	"formType": "input",
 	"max": "20"
 }, {
-	"key": "scrapApprovalInfomation",
+	"dataIndex": "scrapApprovalInfomation",
 	"title": "报废审批信息",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "100"
 }, {
-	"key": "size",
+	"dataIndex": "size",
 	"title": "本页数量",
 	"formType": "input",
 	"dataType": "int",
 	"displayInAdd": "n"
 }, {
-	"key": "sort",
+	"dataIndex": "sort",
 	"title": "排序",
 	"formType": "input",
 	"dataType": "int",
@@ -1021,29 +1021,29 @@ export const formSetting = [{
 	"max": "99",
 	"min": "1"
 }, {
-	"key": "specialNeeds",
+	"dataIndex": "specialNeeds",
 	"title": "特殊需求",
 	"formType": "input",
 	"displayInTab": "n",
 	"max": "50"
 }, {
-	"key": "standard",
+	"dataIndex": "standard",
 	"title": "人均标准",
 	"formType": "input",
 	"dataType": "float",
 	"displayInTab": "n"
 }, {
-	"key": "start",
+	"dataIndex": "start",
 	"title": "起点",
 	"formType": "input",
 	"max": "20"
 }, {
-	"key": "startTime",
+	"dataIndex": "startTime",
 	"title": "开始时间",
 	"formType": "timepicker",
 	"format": "YYYY-MM-DD HH:mm:ss"
 }, {
-	"key": "status",
+	"dataIndex": "status",
 	"title": "状态",
 	"formType": "switch",
 	"dataType": "int",
@@ -1056,78 +1056,78 @@ export const formSetting = [{
 		"value": "禁用"
 	}]
 }, {
-	"key": "submitDate",
+	"dataIndex": "submitDate",
 	"title": "提交日期",
 	"formType": "datepicker",
 	"format": "YYYY-MM-DD"
 }, {
-	"key": "tax",
+	"dataIndex": "tax",
 	"title": "税额",
 	"formType": "input",
 	"dataType": "float"
 }, {
-	"key": "title",
+	"dataIndex": "title",
 	"title": "摘要",
 	"formType": "input",
 	"max": "100"
 }, {
-	"key": "total",
+	"dataIndex": "total",
 	"title": "总记录数",
 	"formType": "input",
 	"dataType": "int",
 	"displayInAdd": "n"
 }, {
-	"key": "totalNumber",
+	"dataIndex": "totalNumber",
 	"title": "总人数",
 	"formType": "input",
 	"dataType": "int"
 }, {
-	"key": "trafficSubsidyPaymentStandard",
+	"dataIndex": "trafficSubsidyPaymentStandard",
 	"title": "交通补贴发放标准",
 	"formType": "input",
 	"dataType": "float"
 }, {
-	"key": "trainingDays",
+	"dataIndex": "trainingDays",
 	"title": "培训天数",
 	"formType": "input",
 	"dataType": "int"
 }, {
-	"key": "trainingEndDate",
+	"dataIndex": "trainingEndDate",
 	"title": "培训结束日期",
 	"formType": "datepicker",
 	"format": "YYYY-MM-DD"
 }, {
-	"key": "trainingProgram",
+	"dataIndex": "trainingProgram",
 	"title": "培训项目",
 	"formType": "input",
 	"max": "50"
 }, {
-	"key": "trainingStartDate",
+	"dataIndex": "trainingStartDate",
 	"title": "培训开始日期",
 	"formType": "datepicker",
 	"format": "YYYY-MM-DD"
 }, {
-	"key": "trainingTypeCode",
+	"dataIndex": "trainingTypeCode",
 	"title": "培训类型",
 	"formType": "select",
 	"displayInTab": "n",
 	"displayInAdd": "n"
 }, {
-	"key": "trainingTypeValue",
+	"dataIndex": "trainingTypeValue",
 	"title": "培训类型",
 	"formType": "select"
 }, {
-	"key": "trainingUnit",
+	"dataIndex": "trainingUnit",
 	"title": "培训单位",
 	"formType": "input",
 	"max": "32"
 }, {
-	"key": "travelDate",
+	"dataIndex": "travelDate",
 	"title": "出差日期",
 	"formType": "input",
 	"max": "30"
 }, {
-	"key": "type",
+	"dataIndex": "type",
 	"title": "日志类型",
 	"formType": "input",
 	"options": [{
@@ -1149,51 +1149,51 @@ export const formSetting = [{
 	"displayInQuery": "y",
 	"displayInAdd": "n"
 }, {
-	"key": "unitBelongs",
+	"dataIndex": "unitBelongs",
 	"title": "所属单位",
 	"formType": "input",
 	"max": "64"
 }, {
-	"key": "updateBy",
+	"dataIndex": "updateBy",
 	"title": "更新人ID",
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n"
 }, {
-	"key": "updateById",
+	"dataIndex": "updateById",
 	"title": "更新人ID",
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
 	"max": "36"
 }, {
-	"key": "updateById",
+	"dataIndex": "updateById",
 	"title": "更新人ID",
 	"formType": "input",
 	"displayInAdd": "n",
 	"max": "36"
 }, {
-	"key": "updateByName",
+	"dataIndex": "updateByName",
 	"title": "更新人",
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
 	"max": "64"
 }, {
-	"key": "updateDate",
+	"dataIndex": "updateDate",
 	"title": "更新时间",
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
 	"format": "YYYY-MM-DD HH:mm:ss"
 }, {
-	"key": "useTypeCode",
+	"dataIndex": "useTypeCode",
 	"title": "使用类型",
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
 }, {
-	"key": "useTypeValue",
+	"dataIndex": "useTypeValue",
 	"title": "使用类型",
 	"formType": "select",
 	"options": "dynamic",

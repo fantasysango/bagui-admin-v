@@ -1,4 +1,6 @@
-export const ACCESS_TOKEN = 'Access-Token'
+// export const ACCESS_TOKEN = 'Access-Token'
+export const ACCESS_TOKEN = 'token'
+export const ACCESS_EMPID = 'empId'
 
 export const SIDEBAR_TYPE = 'sidebar_type'
 export const TOGGLE_MOBILE_TYPE = 'is_mobile'

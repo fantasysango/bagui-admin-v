@@ -1,6 +1,6 @@
 import storage from 'store'
 import { login, getInfo, logout } from '@/api/login'
-import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { ACCESS_TOKEN, ACCESS_EMPID } from '@/store/mutation-types'
 import { welcome } from '@/utils/util'
 
 const user = {
@@ -10,10 +10,15 @@ const user = {
     welcome: '',
     avatar: '',
     roles: [],
+    permissions: [],
+    empId: '',
     info: {}
   },
 
   mutations: {
+    SET_DATA: (state, obj) => {
+      Object.assign(state, obj)
+    },
     SET_TOKEN: (state, token) => {
       state.token = token
     },
@@ -37,10 +42,24 @@ const user = {
     Login ({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
-          const result = response.result
-          storage.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-          commit('SET_TOKEN', result.token)
-          resolve()
+          // const result = response.result
+          const result = response
+          console.log('登录信息 =====>', result)
+          if (result.code > 0) {
+            let empId = result.emp.id
+            storage.set(ACCESS_EMPID, empId, 7 * 24 * 60 * 60 * 1000)
+            storage.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
+            commit('SET_TOKEN', result.token)
+            // commit('SET_ROLES', result.roleIds)
+            // commit('SET_INFO', result.emp)
+            commit('SET_DATA', {
+              empId,
+              permissions: result.permissions
+            })
+            resolve()
+          } else {
+            reject(result.msg)
+          }
         }).catch(error => {
           reject(error)
         })

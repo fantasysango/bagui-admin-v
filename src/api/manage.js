@@ -27,11 +27,12 @@ export function getRoleList (parameter) {
   })
 }
 
-export function getServiceList (parameter) {
+export function getServiceList (parameter, config = {}) {
   return request({
     url: api.service,
     method: 'get',
-    params: parameter
+    params: parameter,
+    ...config
   })
 }
 

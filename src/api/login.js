@@ -26,7 +26,10 @@ const userApi = {
  */
 export function login (parameter) {
   return request({
-    url: userApi.Login,
+    // url: userApi.Login,
+    // baseURL: 'http://hezhongsoft.com:8080',
+    baseURL: 'http://47.96.126.38:8080',
+    url: '/epd/emp/login',
     method: 'post',
     data: parameter
   })

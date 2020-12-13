@@ -21,7 +21,8 @@
     -->
     <template v-slot:menuHeaderRender>
       <div>
-        <logo-svg />
+        <!-- <logo-svg /> -->
+        <img src="~@/assets/logo.png" />
         <h1>{{ title }}</h1>
       </div>
     </template>
@@ -47,7 +48,7 @@ import defaultSettings from '@/config/defaultSettings'
 import RightContent from '@/components/GlobalHeader/RightContent'
 import GlobalFooter from '@/components/GlobalFooter'
 import Ads from '@/components/Other/CarbonAds'
-import LogoSvg from '../assets/logo.svg?inline'
+// import LogoSvg from '../assets/logo.svg?inline'
 
 export default {
   name: 'BasicLayout',
@@ -55,7 +56,7 @@ export default {
     SettingDrawer,
     RightContent,
     GlobalFooter,
-    LogoSvg,
+    // LogoSvg,
     Ads
   },
   data () {

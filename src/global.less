@@ -1,4 +1,5 @@
 @import '~ant-design-vue/es/style/themes/default.less';
+@import './variables.less';
 
 html,
 body,
@@ -90,5 +91,20 @@ ol {
         }
       }
     }
+  }
+}
+
+// 项目新增样式
+.ant-btn-success {
+    color: #fff;
+    background-color: #2e9f25;;
+    border-color: #2e9f25;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  &:hover, &:focus {
+      color: #fff;
+      background-color: rgba(#2e9f25, .7);
+      border-color: rgba(#2e9f25, .7);
   }
 }

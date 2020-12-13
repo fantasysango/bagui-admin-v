@@ -11,7 +11,7 @@ const user = {
     avatar: '',
     roles: [],
     permissions: [],
-    empId: '',
+    empInfo: {},
     info: {}
   },
 
@@ -53,7 +53,7 @@ const user = {
             // commit('SET_ROLES', result.roleIds)
             // commit('SET_INFO', result.emp)
             commit('SET_DATA', {
-              empId,
+              empInfo: result.emp,
               permissions: result.permissions
             })
             resolve()

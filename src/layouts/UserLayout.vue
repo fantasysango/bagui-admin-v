@@ -4,25 +4,25 @@
       <div class="top">
         <div class="header">
           <a href="/">
-            <img src="~@/assets/logo.svg" class="logo" alt="logo">
-            <span class="title">Ant Design</span>
+            <img src="~@/assets/logo.png" class="logo" alt="logo">
+            <span class="title">八规项目</span>
           </a>
         </div>
-        <div class="desc">
+        <!-- <div class="desc">
           Ant Design 是西湖区最具影响力的 Web 设计规范
-        </div>
+        </div> -->
       </div>
 
       <router-view />
 
       <div class="footer">
-        <div class="links">
+        <!-- <div class="links">
           <a href="_self">帮助</a>
           <a href="_self">隐私</a>
           <a href="_self">条款</a>
-        </div>
+        </div> -->
         <div class="copyright">
-          Copyright &copy; 2018 vueComponent
+          &copy;ICP备18002958号-1
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@ export default {
     .container {
       width: 100%;
       min-height: 100%;
-      background: #f0f2f5 url(~@/assets/background.svg) no-repeat 50%;
+      background: #f0f2f5 url(~@/assets/background.jpg) no-repeat 50%;
       background-size: 100%;
       padding: 110px 0 144px;
       position: relative;
@@ -128,7 +128,8 @@ export default {
           margin-bottom: 8px;
           font-size: 14px;
           a {
-            color: rgba(0, 0, 0, 0.45);
+            // color: rgba(0, 0, 0, 0.45);
+            color: rgba(#fff, 0.45);
             transition: all 0.3s;
             &:not(:last-child) {
               margin-right: 40px;
@@ -136,7 +137,8 @@ export default {
           }
         }
         .copyright {
-          color: rgba(0, 0, 0, 0.45);
+          // color: rgba(0, 0, 0, 0.45);
+          color: rgba(#fff, 0.45);
           font-size: 14px;
         }
       }

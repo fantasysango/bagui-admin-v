@@ -1,4 +1,4 @@
-export default [{
+[{
 	"dataIndex": "accompanyNumber",
 	"title": "陪同人数",
 	"formType": "input",
@@ -9,7 +9,7 @@ export default [{
 	"title": "账号",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "30"
+	"max": 30
 }, {
 	"dataIndex": "accountBooksCode",
 	"title": "账簿",
@@ -51,13 +51,13 @@ export default [{
 	"title": "批复日期及文号",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "50"
+	"max": 50
 }, {
 	"dataIndex": "applyDept",
 	"title": "申请部门",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "32"
+	"max": 32
 }, {
 	"dataIndex": "applyDeptId",
 	"title": "申请部门Id",
@@ -74,7 +74,7 @@ export default [{
 	"title": "申请人",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "32"
+	"max": 32
 }, {
 	"dataIndex": "applyEmpId",
 	"title": "申请人ID",
@@ -96,7 +96,7 @@ export default [{
 	"dataIndex": "approvalBasis",
 	"title": "审批依据",
 	"formType": "input",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "average",
 	"title": "人均",
@@ -145,37 +145,37 @@ export default [{
 	"formType": "select",
 	"options": "dynamic",
 	"displayInTab": "n"
-// }, {
-// 	"dataIndex": "carTypeCode",
-// 	"title": "车辆类型",
-// 	"formType": "select",
-// 	"options": "dynamic",
-// 	"displayInTab": "n"
+}, {
+	"dataIndex": "carTypeCode",
+	"title": "车辆类型",
+	"formType": "select",
+	"options": "dynamic",
+	"displayInTab": "n"
 }, {
 	"dataIndex": "code",
 	"title": "编码",
 	"formType": "input",
-	"max": "30"
+	"max": 30
 }, {
 	"dataIndex": "collectionNumber1",
 	"title": "托收协议1",
 	"formType": "input",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "collectionNumber2",
 	"title": "托收协议2",
 	"formType": "input",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "collectionNumber3",
 	"title": "托收协议3",
 	"formType": "input",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "collectionNumber4",
 	"title": "托收协议4",
 	"formType": "input",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "communicationTypeCode",
 	"title": "通讯类型",
@@ -211,20 +211,20 @@ export default [{
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "createById",
 	"title": "创建人ID",
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "createByName",
 	"title": "创建人",
 	"formType": "input",
 	"displayInAdd": "n",
-	"max": "64"
+	"max": 64
 }, {
 	"dataIndex": "createDate",
 	"title": "创建时间",
@@ -243,12 +243,12 @@ export default [{
 	"title": "客户编号",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "customerName",
 	"title": "客户名称",
 	"formType": "input",
-	"max": "32"
+	"max": 32
 }, {
 	"group": "operation",
 	"groupName": "运行费",
@@ -300,13 +300,13 @@ export default [{
 	"title": "部门审批人",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "32"
+	"max": 32
 }, {
 	"dataIndex": "deptApprovalComments",
 	"title": "部门审批意见",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "deptApprovalTime",
 	"title": "部门审批时间",
@@ -327,12 +327,12 @@ export default [{
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
-	"max": "64"
+	"max": 64
 }, {
 	"dataIndex": "description",
 	"title": "备注",
 	"formType": "input",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "destination",
 	"title": "考察目的地",
@@ -341,18 +341,18 @@ export default [{
 	"dataIndex": "destination",
 	"title": "目的地",
 	"formType": "input",
-	"max": "15"
+	"max": 15
 }, {
 	"dataIndex": "dispatchNumber",
 	"title": "派车单编号",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "64"
+	"max": 64
 }, {
 	"dataIndex": "dispatchTheme",
 	"title": "派车单主题",
 	"formType": "input",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "dispatchTypeCode",
 	"title": "派车单类型",
@@ -398,12 +398,12 @@ export default [{
 	"title": "处置人",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "30"
+	"max": 30
 }, {
 	"dataIndex": "documentNumber",
 	"title": "凭证号",
 	"formType": "input",
-	"max": "30"
+	"max": 30
 }, {
 	"dataIndex": "driverId",
 	"title": "驾驶员id",
@@ -421,7 +421,7 @@ export default [{
 	"dataIndex": "educationDegree",
 	"title": "文化程度",
 	"formType": "input",
-	"max": "64"
+	"max": 64
 }, {
 	"dataIndex": "effectiveDate",
 	"title": "生效日期",
@@ -431,12 +431,12 @@ export default [{
 	"dataIndex": "email",
 	"title": "邮箱",
 	"formType": "input",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "end",
 	"title": "终点",
 	"formType": "input",
-	"max": "20"
+	"max": 20
 }, {
 	"dataIndex": "endTime",
 	"title": "结束时间",
@@ -488,7 +488,7 @@ export default [{
 	"dataIndex": "fax",
 	"title": "传真",
 	"formType": "input",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "financialSystemNumber",
 	"title": "财务系统/资金平台单号",
@@ -537,16 +537,16 @@ export default [{
 	"title": "性别",
 	"formType": "radio",
 	"dataType": "int",
-	"default": "0",
+	"default": 0,
 	"options": [{
-		"label": "0",
-		"value": "保密"
+		"label": "保密",
+		"value": 0
 	}, {
-		"label": "1",
-		"value": "男"
+		"label": "男",
+		"value": 1
 	}, {
-		"label": "2",
-		"value": "女"
+		"label": "女",
+		"value": 2
 	}],
 	"displayInTab": "n"
 }, {
@@ -564,23 +564,23 @@ export default [{
 	"dataIndex": "identityCardNumber",
 	"title": "身份证号",
 	"formType": "input",
-	"max": "20"
+	"max": 20
 }, {
 	"dataIndex": "idList",
 	"title": "角色id数组",
 	"formType": "input",
 	"dataType": "String[]"
 }, {
-	"dataIndex": "IsDeptManager",
-	"title": "是否是部门负责人",
+	"dataIndex": "isDeptManager",
+	"title": "是否为部门负责人",
 	"formType": "radio",
 	"dataType": "int",
 	"options": [{
-		"label": "0",
-		"value": "否"
+		"label": "否",
+		"value": 0
 	}, {
-		"label": "1",
-		"value": "是"
+		"label": "是",
+		"value": 1
 	}]
 }, {
 	"group": "abroad",
@@ -590,11 +590,11 @@ export default [{
 	"formType": "radio",
 	"dataType": "int",
 	"options": [{
-		"label": "0",
-		"value": "否"
+		"label": "否",
+		"value": 0
 	}, {
-		"label": "1",
-		"value": "是"
+		"label": "是",
+		"value": 1
 	}]
 }, {
 	"dataIndex": "isInPlan",
@@ -602,36 +602,36 @@ export default [{
 	"formType": "radio",
 	"dataType": "int",
 	"options": [{
-		"label": "0",
-		"value": "否"
+		"label": "否",
+		"value": 0
 	}, {
-		"label": "1",
-		"value": "是"
+		"label": "是",
+		"value": 1
 	}]
 }, {
-	"dataIndex": "IsLeader",
-	"title": "是否是企业负责人",
+	"dataIndex": "isLeader",
+	"title": "是否为企业负责人",
 	"formType": "radio",
 	"dataType": "int",
 	"options": [{
-		"label": "0",
-		"value": "否"
+		"label": "否",
+		"value": 0
 	}, {
-		"label": "1",
-		"value": "是"
+		"label": "是",
+		"value": 1
 	}]
 }, {
 	"dataIndex": "isWithinBudget",
 	"title": "是否预算内购车",
 	"formType": "radio",
 	"dataType": "int",
-	"default": "0",
+	"default": 0,
 	"options": [{
-		"label": "0",
-		"value": "否"
+		"label": "否",
+		"value": 0
 	}, {
-		"label": "1",
-		"value": "是"
+		"label": "是",
+		"value": 1
 	}]
 }, {
 	"dataIndex": "leaderId",
@@ -640,13 +640,13 @@ export default [{
 	"options": "dynamic",
 	"displayInTab": "n",
 	"displayInQuery": "y",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "leaderName",
 	"title": "企业负责人",
 	"formType": "input",
 	"options": "dynamic",
-	"max": "64"
+	"max": 64
 }, {
 	"dataIndex": "leaveDate",
 	"title": "离职日期",
@@ -656,7 +656,7 @@ export default [{
 	"dataIndex": "mainPassenger",
 	"title": "主要乘车人",
 	"formType": "input",
-	"max": "30"
+	"max": 30
 }, {
 	"dataIndex": "mainUnitName",
 	"title": "主体单位",
@@ -700,7 +700,7 @@ export default [{
 	"title": "姓名",
 	"formType": "input",
 	"displayInQuery": "y",
-	"max": "64"
+	"max": 64
 }, {
 	"group": "leader",
 	"groupName": "企业负责人",
@@ -708,7 +708,7 @@ export default [{
 	"title": "姓名",
 	"formType": "input",
 	"displayInQuery": "y",
-	"max": "30"
+	"max": 30
 }, {
 	"group": "dept",
 	"groupName": "部门",
@@ -716,7 +716,7 @@ export default [{
 	"title": "名称",
 	"formType": "input",
 	"displayInQuery": "y",
-	"max": "30"
+	"max": 30
 }, {
 	"group": "role",
 	"groupName": "角色",
@@ -724,7 +724,7 @@ export default [{
 	"title": "名称",
 	"formType": "input",
 	"displayInQuery": "y",
-	"max": "30"
+	"max": 30
 }, {
 	"group": "emp",
 	"groupName": "用户",
@@ -732,48 +732,48 @@ export default [{
 	"title": "用户姓名",
 	"formType": "input",
 	"displayInQuery": "y",
-	"max": "30"
+	"max": 30
 }, {
 	"dataIndex": "nationality",
 	"title": "民族",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "36"
+	"max": 36
 }, {
 	"group": "entertainment",
 	"groupName": "招待费",
 	"dataIndex": "number",
 	"title": "编号",
 	"formType": "input",
-	"max": "36"
+	"max": 36
 }, {
 	"group": "gasolineCard",
 	"groupName": "油卡",
 	"dataIndex": "number",
 	"title": "卡号",
 	"formType": "input",
-	"max": "36"
+	"max": 36
 }, {
 	"group": "etc",
 	"groupName": "ETC",
 	"dataIndex": "number",
 	"title": "卡号",
 	"formType": "input",
-	"max": "36"
+	"max": 36
 }, {
 	"group": "car",
 	"groupName": "车辆",
 	"dataIndex": "number",
 	"title": "车牌号",
 	"formType": "input",
-	"max": "30"
+	"max": 30
 }, {
 	"group": "leader",
 	"groupName": "企业负责人",
 	"dataIndex": "number",
 	"title": "工号",
 	"formType": "input",
-	"max": "64"
+	"max": 64
 }, {
 	"dataIndex": "officeArea",
 	"title": "办公室面积",
@@ -784,13 +784,13 @@ export default [{
 	"title": "办公室落实意见",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "officeImplementer",
 	"title": "办公室落实人",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "32"
+	"max": 32
 }, {
 	"dataIndex": "officeImplementTime",
 	"title": "办公室落实时间",
@@ -815,49 +815,46 @@ export default [{
 	"dataIndex": "operator",
 	"title": "操作人",
 	"formType": "input",
-	"max": "64"
+	"max": 64
 }, {
 	"dataIndex": "OPERATOR_NAME",
 	"title": "操作人",
 	"formType": "input",
 	"displayInQuery": "y",
 	"displayInAdd": "n",
-	"max": "30"
+	"max": 30
 }, {
 	"dataIndex": "pageNum",
 	"title": "页码",
 	"formType": "input",
 	"dataType": "int",
-	"default": "1",
+	"default": 1,
 	"displayInAdd": "n"
 }, {
 	"dataIndex": "pageSize",
 	"title": "每页的数量",
 	"formType": "input",
 	"dataType": "int",
-	"default": "10",
+	"default": 10,
 	"displayInAdd": "n"
 }, {
 	"dataIndex": "parentId",
 	"title": "上级部门ID",
 	"formType": "input",
 	"options": "dynamic",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "passengersNumber",
 	"title": "乘客数量",
 	"formType": "input",
 	"dataType": "int",
-	"options": [""],
-	"displayInTab": "n",
-	"max": "99",
-	"min": "0"
+	"displayInTab": "n"
 }, {
 	"dataIndex": "password",
 	"title": "密码",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "20"
+	"max": 20
 }, {
 	"dataIndex": "paymentTypeCode",
 	"title": "支付类型",
@@ -879,13 +876,13 @@ export default [{
 	"dataIndex": "phone",
 	"title": "电话",
 	"formType": "input",
-	"max": "20"
+	"max": 20
 }, {
 	"dataIndex": "politicalOutlook",
 	"title": "政治面貌",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "position",
 	"title": "职务",
@@ -903,13 +900,13 @@ export default [{
 	"dataIndex": "propertyUnit",
 	"title": "产权单位",
 	"formType": "input",
-	"max": "30"
+	"max": 30
 }, {
 	"dataIndex": "purchaseApplyDateAndDocumentNumber",
 	"title": "购置申请日期及文号",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "50"
+	"max": 50
 }, {
 	"dataIndex": "purchaseDate",
 	"title": "购置日期",
@@ -954,19 +951,19 @@ export default [{
 	"dataIndex": "reason",
 	"title": "事由",
 	"formType": "input",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "reasonDescription",
 	"title": "事由简述",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "150"
+	"max": 150
 }, {
 	"dataIndex": "referenceInformation",
 	"title": "参考信息",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "reimbursementAmount",
 	"title": "报销金额",
@@ -983,7 +980,7 @@ export default [{
 	"title": "备注",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "roleId",
 	"title": "角色ID",
@@ -995,13 +992,13 @@ export default [{
 	"dataIndex": "route",
 	"title": "途经",
 	"formType": "input",
-	"max": "20"
+	"max": 20
 }, {
 	"dataIndex": "scrapApprovalInfomation",
 	"title": "报废审批信息",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "size",
 	"title": "本页数量",
@@ -1013,19 +1010,19 @@ export default [{
 	"title": "排序",
 	"formType": "input",
 	"dataType": "int",
-	"default": "1",
+	"default": 1,
 	"options": [{
-		"label": "1-99",
-		"value": ""
+		"label": "",
+		"value": null
 	}],
-	"max": "99",
-	"min": "1"
+	"max": 99,
+	"min": 1
 }, {
 	"dataIndex": "specialNeeds",
 	"title": "特殊需求",
 	"formType": "input",
 	"displayInTab": "n",
-	"max": "50"
+	"max": 50
 }, {
 	"dataIndex": "standard",
 	"title": "人均标准",
@@ -1036,7 +1033,7 @@ export default [{
 	"dataIndex": "start",
 	"title": "起点",
 	"formType": "input",
-	"max": "20"
+	"max": 20
 }, {
 	"dataIndex": "startTime",
 	"title": "开始时间",
@@ -1047,13 +1044,13 @@ export default [{
 	"title": "状态",
 	"formType": "switch",
 	"dataType": "int",
-	"default": "1",
+	"default": 1,
 	"options": [{
-		"label": "0",
-		"value": "启用"
+		"label": "启用",
+		"value": 0
 	}, {
-		"label": "1",
-		"value": "禁用"
+		"label": "禁用",
+		"value": 1
 	}]
 }, {
 	"dataIndex": "submitDate",
@@ -1069,7 +1066,7 @@ export default [{
 	"dataIndex": "title",
 	"title": "摘要",
 	"formType": "input",
-	"max": "100"
+	"max": 100
 }, {
 	"dataIndex": "total",
 	"title": "总记录数",
@@ -1100,7 +1097,7 @@ export default [{
 	"dataIndex": "trainingProgram",
 	"title": "培训项目",
 	"formType": "input",
-	"max": "50"
+	"max": 50
 }, {
 	"dataIndex": "trainingStartDate",
 	"title": "培训开始日期",
@@ -1120,31 +1117,31 @@ export default [{
 	"dataIndex": "trainingUnit",
 	"title": "培训单位",
 	"formType": "input",
-	"max": "32"
+	"max": 32
 }, {
 	"dataIndex": "travelDate",
 	"title": "出差日期",
 	"formType": "input",
-	"max": "30"
+	"max": 30
 }, {
 	"dataIndex": "type",
 	"title": "日志类型",
 	"formType": "input",
 	"options": [{
-		"label": "ADD",
-		"value": "新增"
+		"label": "新增",
+		"value": "ADD"
 	}, {
-		"label": "DELETE",
-		"value": "删除"
+		"label": "删除",
+		"value": "DELETE"
 	}, {
-		"label": "MODIFY",
-		"value": "编辑"
+		"label": "编辑",
+		"value": "MODIFY"
 	}, {
-		"label": "DISABLE",
-		"value": "禁用"
+		"label": "禁用",
+		"value": "DISABLE"
 	}, {
-		"label": "ENABLE",
-		"value": "启用"
+		"label": "启用",
+		"value": "ENABLE"
 	}],
 	"displayInQuery": "y",
 	"displayInAdd": "n"
@@ -1152,7 +1149,7 @@ export default [{
 	"dataIndex": "unitBelongs",
 	"title": "所属单位",
 	"formType": "input",
-	"max": "64"
+	"max": 64
 }, {
 	"dataIndex": "updateBy",
 	"title": "更新人ID",
@@ -1165,20 +1162,20 @@ export default [{
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "updateById",
 	"title": "更新人ID",
 	"formType": "input",
 	"displayInAdd": "n",
-	"max": "36"
+	"max": 36
 }, {
 	"dataIndex": "updateByName",
 	"title": "更新人",
 	"formType": "input",
 	"displayInTab": "n",
 	"displayInAdd": "n",
-	"max": "64"
+	"max": 64
 }, {
 	"dataIndex": "updateDate",
 	"title": "更新时间",

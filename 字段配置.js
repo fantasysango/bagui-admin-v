@@ -1,4 +1,4 @@
-var config = [
+var arrConfig = [
     { group: '', groupName: '', dataIndex: 'id', title: 'ID', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: 'emp', groupName: '用户', dataIndex: 'name', title: '用户姓名', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '是', displayInAdd: '', max: '30', min: '' },
     { group: '', groupName: '', dataIndex: 'code', title: '编码', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '30', min: '' },
@@ -14,9 +14,9 @@ var config = [
     { group: '', groupName: '', dataIndex: 'creatorId', title: '创建者ID', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'phone', title: '电话', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '20', min: '' },
     { group: '', groupName: '', dataIndex: 'description', title: '备注', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '100', min: '' },
-    { group: '', groupName: '', dataIndex: 'IsLeader', title: '是否为企业负责人', formType: '单选框', dataType: 'int', default: '', options: '0:否,1:是', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'IsDeptManager', title: '是否为部门负责人', formType: '单选框', dataType: 'int', default: '', options: '0:否,1:是', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'sort', title: '排序', formType: '', dataType: 'int', default: '1', options: '1-99', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '99', min: '1' },
+    { group: '', groupName: '', dataIndex: 'isLeader', title: '是否为企业负责人', formType: '单选框', dataType: 'int', default: '', options: '0:否,1:是', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'isDeptManager', title: '是否为部门负责人', formType: '单选框', dataType: 'int', default: '', options: '0:否,1:是', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'sort', title: '排序', formType: '', dataType: 'int', default: 'auto', options: '1-99', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '99', min: '1' },
     { group: '', groupName: '', dataIndex: 'updateBy', title: '更新人ID', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'updateDate', title: '更新时间', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: 'YYYY-MM-DD HH:mm:ss', min: '' },
     { group: '', groupName: '', dataIndex: 'createDate', title: '创建时间', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: 'YYYY-MM-DD HH:mm:ss', min: '' },
@@ -116,7 +116,7 @@ var config = [
     { group: '', groupName: '', dataIndex: 'dispatchTypeValue', title: '派车单类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'mainPassenger', title: '主要乘车人', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '30', min: '' },
     { group: '', groupName: '', dataIndex: 'reason', title: '事由', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '100', min: '' },
-    { group: '', groupName: '', dataIndex: 'passengersNumber', title: '乘客数量', formType: '', dataType: 'int', default: '', options: '0-99', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'passengersNumber', title: '乘客数量', formType: '', dataType: 'int', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'reasonDescription', title: '事由简述', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '150', min: '' },
     { group: '', groupName: '', dataIndex: 'startTime', title: '开始时间', formType: '时间选择框', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: 'YYYY-MM-DD HH:mm:ss', min: '' },
     { group: '', groupName: '', dataIndex: 'endTime', title: '结束时间', formType: '时间选择框', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: 'YYYY-MM-DD HH:mm:ss', min: '' },
@@ -196,9 +196,16 @@ var config = [
 
 ]
 
-utTrim = str => (str || '').replace(/^\s+|\s+$/g, '')
+var ctrlMap = { '单选框': 'radio', '开关': 'switch', '日期选择框': 'datepicker', '时间选择框': 'timepicker', '下拉框': 'select' }
 
-config.forEach(d => {
+var utTrim = str => (str || '').replace(/^\s+|\s+$/g, '')
+
+var utCheckNum = (type, v) => {
+    if (v !== '' && isFinite(v)) return v * 1   // && ['int', 'float', 'number'].includes(type)
+    return v
+}
+
+arrConfig.forEach(d => {
     Object.keys(d).forEach(k => {
         d[k] = (d[k] === 0 ? '0' : d[k]) || ''
         let v = d[k]
@@ -210,24 +217,33 @@ config.forEach(d => {
                         let str = utTrim(dd)
                         if (str === 'dynamic') return str
                         if (str === '0-99') {
-                            d.min = '0'
-                            d.max = '99'
+                            d.min = 0
+                            d.max = 99
                             return ''
                         }
-                        return { label: utTrim(str.split(':')[0]), value: utTrim(str.split(':')[1]) }
+                        let label = utTrim(str.split(':')[1])
+                        let value = utTrim(str.split(':')[0])
+                        if (['int', 'float', 'number'].includes(d.dataType)) value *= 1
+                        return { label, value }
                     })
                     d[k] = String(res) === 'dynamic' ? 'dynamic' : res
                 }
                 break
             case 'formType':
                 // 为空则默认 输入框'input'
-                d[k] = { '单选框': 'radio', '开关': 'switch', '日期选择框': 'datepicker', '时间选择框': 'timepicker', '下拉框': 'select'}[v] || 'input'
+                d[k] = ctrlMap[v] || 'input'
                 break
             case 'max': 
                 if (v.startsWith('YYYY')) {
                     d.format = v
                     d[k] = ''
+                } else {
+                    d[k] = utCheckNum(d.dataType, v)
                 }
+                break
+            case 'min':
+            case 'default':
+                d[k] = utCheckNum(d.dataType, v)
                 break
             default:
                 if (v === '是') d[k] = 'y'
@@ -236,5 +252,5 @@ config.forEach(d => {
         if (d[k] === '') delete d[k]
     })
 })
-config.sort((a, b) => a.dataIndex.toLowerCase() > b.dataIndex.toLowerCase() ? 1 : -1)
-console.log(config)
+arrConfig.sort((a, b) => a.dataIndex.toLowerCase() > b.dataIndex.toLowerCase() ? 1 : -1)
+console.log(JSON.stringify(arrConfig))

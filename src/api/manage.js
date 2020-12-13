@@ -69,3 +69,15 @@ export function saveSub (sub) {
     data: sub
   })
 }
+
+export function axiosOperateTab(parameter, config = {}) {
+  // const baseURL = 'http://hezhongsoft.com:8080'
+  const baseURL = 'http://47.96.126.38:8080'
+  return request({
+    baseURL,
+    url: '',  // 待在config中填充
+    method: 'post',
+    data: parameter,
+    ...config
+  })
+}

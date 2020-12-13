@@ -3,6 +3,7 @@ export default [
         code: '2.1',
         key: 'leader',
         title: '企业负责人信息',
+        notAllowDelete: true,
         cols:  ["name", "isLeader", "deptId", "collectionNumber1", "collectionNumber2", "collectionNumber3", "collectionNumber4", "createById", "number", "sort"]
     },
     {

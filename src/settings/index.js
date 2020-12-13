@@ -1,7 +1,7 @@
-import tabSetting from './tabSetting'
-import formSetting from './formSetting'
+import tabSettings from './tabSettings'
+const formSettings =  require('./formSettings.json')
 
 export default {
-    tabSetting,
-    formSetting
+    tabSettings,
+    formSettings
 }

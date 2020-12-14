@@ -1,5 +1,5 @@
 <template>
-  <page-header-wrapper>
+  <page-header-wrapper class="gb-tablewrap-nowrap">
     <a-card :bordered="false">
       <div class="table-page-search-wrapper">
         <!-- to be added -->
@@ -21,6 +21,7 @@
         rowKey="key"
         :columns="columns"
         :data="loadData"
+        :scroll="{ x: true }"
         :alert="true"
         :rowSelection="rowSelection"
         showPagination="auto"
@@ -122,15 +123,26 @@ export default {
           url: this.getFullURL('list'),
         }).then((res) => {
           console.log('res =====>', res)
-          // return res.result;
-          let data = res.list || []
-          this.tableData = data
+          let { pageNo, pageSize } = parameter
           if (res.code > 0) {
+            let { result, list } = res  // PS: list 可能为对象（result别名），也可能为数组
+            let data = list || []
+            if (!result && list && !(list instanceof Array)) {
+              result = list
+            }
+            let totalCount = data.length || 0
+            let totalPage = 1
+            if (result) {
+              data = result.list || []
+              totalCount = result.total
+              totalPage = result.pages
+            }
+            this.tableData = data
             return {
-              pageNo: 1,
-              pageSize: data.length,
-              totalCount: data.length,
-              totalPage: 1,
+              pageNo,
+              pageSize,
+              totalCount,
+              totalPage,
               data
             }
           } else {
@@ -139,11 +151,11 @@ export default {
               description: res.msg || '请求数据失败，请重试',
             })
             return {
-              pageSize: 10,
-              pageNo: 0,
-              totalPage: 0,
+              pageNo,
+              pageSize,
               totalCount: 0,
-              data
+              totalPage: 0,
+              data: []
             }
           }
         })
@@ -181,7 +193,6 @@ export default {
   },
   methods: {
     init() {
-      console.log(tabSettings, formSettings)
       let tabSet = tabSettings.find((d) => d.key === this.$route.meta.key)
       let formSet = []
       this.columns = !tabSet
@@ -190,6 +201,7 @@ export default {
             {        
               title: '#',
               dataIndex: 'serial',
+              fixed: 'left',
               scopedSlots: { customRender: 'serial' },
             },
             ...tabSet.cols
@@ -203,6 +215,7 @@ export default {
                       title: col.title,
                       dataIndex: col.dataIndex,
                       sorter: true,
+                      width: col.width || '150px',
                       customRender: this.fnRender
                     }
                   : null
@@ -211,6 +224,7 @@ export default {
             {        
               title: '操作',
               dataIndex: 'action',
+              fixed: 'right',
               scopedSlots: { customRender: 'action' },
             }
         ]
@@ -218,6 +232,7 @@ export default {
         tab: tabSet,
         form: formSet
       }
+      console.log(this.settingMap)
       this.notAllowDelete = !!tabSet.notAllowDelete
     },
     getFullURL(str) {
@@ -234,7 +249,7 @@ export default {
       let setting = formSettings.find(d => d.dataIndex === dataIndex)
       if (setting)  {
         let { formType, options } = setting
-        if  (['select', 'radio'].includes(formType)) {
+        if  (['select', 'radio'].includes(formType) && options instanceof Array) {
           let opt = options.find(d => d.value == text)
           text = (opt || {}).label || text
         }

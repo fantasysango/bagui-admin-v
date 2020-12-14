@@ -22,13 +22,13 @@ export default [
         code: '3.3',
         key: 'etc',
         title: 'ETC管理',
-        cols: ["id", "number", "operator", "buyCardDate", "status", "carId", "updateById", "status", "remarks", "deptId"],
+        cols: ["id", "number", "operator", "buyCardDate", "carId", "updateById", "status", "remarks", "deptId"],
     },
     {
         code: '3.4',
         key: 'gasolineCard',
         title: '油卡管理',
-        cols: ["id", "number", "operator", "buyCardDate", "status", "carId", "createById", "status", "remarks", "deptId", "customerName", "customerCode", "gasolineCardTypeCode"],
+        cols: ["id", "number", "operator", "buyCardDate", "carId", "createById", "status", "remarks", "deptId", "customerName", "customerCode", "gasolineCardTypeCode"],
     },
     {
         code: '3.5',

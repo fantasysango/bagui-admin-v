@@ -38,7 +38,7 @@
                 </a-select>
               </a-form-item>
               <!-- 单选框 -->
-              <a-form-item v-if="item.formType === 'radio'" :label="item.title">
+              <a-form-item v-else-if="item.formType === 'radio'" :label="item.title">
                 <a-radio-group
                   v-decorator="[
                     item.dataIndex,
@@ -118,7 +118,7 @@ export default {
     activeFormSet () {
       let formSet = this.setting.form
       if (!formSet) return []
-      return formSet.filter(d => d.displayInAdd !== 'n')
+      return formSet.filter(d => d.displayInAdd !== 'n' && d.dataIndex.toLowerCase() !== 'id')
     },
     fields() {
       return ['id', ...this.activeFormSet.map(d => d.dataIndex)]

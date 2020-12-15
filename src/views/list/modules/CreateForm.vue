@@ -50,8 +50,25 @@
                   </a-radio>
                 </a-radio-group>
               </a-form-item>
+              <a-form-item 
+                v-else-if="checkTypeNum(item)" 
+                :label="item.title" 
+                hasFeedback
+              >
+                <a-input-number
+                  v-decorator="[
+                    item.dataIndex,
+                    { initialValue: getDefaultVal(item), rules: [{ type: 'number', required: item.required === 'y', min: item.min, max: item.max }] },
+                  ]"
+                  style="width: 160px"
+                />
+              </a-form-item>
               <!-- 输入框（默认） -->
-              <a-form-item v-else :label="item.title">
+              <a-form-item 
+                v-else 
+                :label="item.title" 
+                hasFeedback
+              >
                 <a-input
                   v-decorator="[
                     item.dataIndex,
@@ -166,7 +183,10 @@ export default {
       let conf = this.getConf(item)
       if (!conf) return []
       return conf.options
-    }
+    },
+    checkTypeNum(item) {
+      return /^(int|float|number)/.test(item.dataType)
+    },
   }
 }
 </script>

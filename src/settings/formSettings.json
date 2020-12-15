@@ -916,19 +916,19 @@
 	"dataIndex": "purchasePrice",
 	"title": "购置单价",
 	"formType": "input",
-	"dataType": "Float",
+	"dataType": "float",
 	"displayInTab": "n"
 }, {
 	"dataIndex": "purchaseTax",
 	"title": "购置税",
 	"formType": "input",
-	"dataType": "Float",
+	"dataType": "float",
 	"displayInTab": "n"
 }, {
 	"dataIndex": "purchaseTotalPrice",
 	"title": "购置总价",
 	"formType": "input",
-	"dataType": "Float",
+	"dataType": "float",
 	"displayInTab": "n"
 }, {
 	"dataIndex": "purposeCode",

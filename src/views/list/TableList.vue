@@ -240,7 +240,7 @@ export default {
       if (!setting) return {}
       let { key } = setting
       // TODO: 待确认
-      if (key === 'leader' && str === 'edit')  key = 'leaderConfig'
+      // if (key === 'leader' && str === 'edit')  key = 'leaderConfig'
       return `/epd/${key}/${str}`
     },
     fnRender(text, record, index, config) {

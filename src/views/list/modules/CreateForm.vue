@@ -63,6 +63,24 @@
                   style="width: 160px"
                 />
               </a-form-item>
+              <a-form-item 
+                v-else-if="['datepicker', 'timepicker'].indexOf(item.formType) !== -1" 
+                :label="item.title" 
+                hasFeedback
+              >
+              <!-- @change="(date, dateString) => $nextTick(() => form.setFieldsValue(item.dataIndex, dateString))" -->
+                <a-date-picker
+                  :format="getDefaultFormat(item)"
+                  v-decorator="[
+                    item.dataIndex,
+                    { 
+                      normalize: v => fnNormalize(v, item),
+                      initialValue: getDefaultVal(item), 
+                      rules: [{ type: 'string', required: item.required === 'y' }] 
+                    },
+                  ]"
+                ></a-date-picker>
+              </a-form-item>
               <!-- 输入框（默认） -->
               <a-form-item 
                 v-else 
@@ -85,6 +103,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import pick from 'lodash.pick'
 
 export default {
@@ -128,6 +147,7 @@ export default {
       }
     }
     return {
+      moment,
       form: this.$form.createForm(this)
     }
   },
@@ -154,12 +174,23 @@ export default {
     })
   },
   methods: {
+    fnNormalize(v, item) {
+      if (v && typeof v === 'object') return v.format(this.getDefaultFormat(item))
+      return v
+    },
     getConf(item) {
       let { dataIndex } = item
       let formSet = this.setting.form
       if (!formSet) return null
       let conf = formSet.find(d => d.dataIndex == dataIndex)
       return conf
+    },
+    getDefaultFormat(item) {
+      let { formType, format } = item
+      if (item.format) return item.format
+      if (formType === 'datepicker') return 'YYYY-MM-DD'
+      else if (formType === 'timepicker') return 'YYYY-MM-DD HH:mm:ss'
+      return undefined
     },
     getDefaultVal(item) {
       let conf = this.getConf(item)

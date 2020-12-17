@@ -237,11 +237,17 @@ export default {
       this.notAllowDelete = !!tabSet.notAllowDelete
     },
     // TODO: 待完善
-    fetchDynamicOpts(conf) {
+    fetchDynamicOpts() {
       this.settingMap.form.forEach(d => {
         if (d.options === 'dynamic') {
           setTimeout(() => {
-            d.options = [1,2,3,4]
+            console.log(d)
+            d.options = [1,2,3,4].map(d => {
+              return {
+                label: '选项' + d,
+                value: d
+              }
+            })
           }, 1000)  
         }
       })

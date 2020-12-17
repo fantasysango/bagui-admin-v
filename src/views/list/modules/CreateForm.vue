@@ -210,9 +210,19 @@ export default {
       if (!conf.formType || conf.formType === 'input') v = v == undefined ? '' : String(v)
       return v
     },
+    // TODO: 待完善
+    fetchDynamicOpts(conf) {
+      setTimeout(() => {
+        conf.options = [1,2,3,4]
+      }, 1000)
+    },
     getOpts(item) {
       let conf = this.getConf(item)
       if (!conf) return []
+      if (conf.options === 'dynamic') {
+        conf.options = []
+        this.fetchDynamicOpts(conf)
+      }
       return conf.options
     },
     checkTypeNum(item) {

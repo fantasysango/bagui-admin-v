@@ -232,8 +232,19 @@ export default {
         tab: tabSet,
         form: formSet
       }
+      this.fetchDynamicOpts()
       console.log(this.settingMap)
       this.notAllowDelete = !!tabSet.notAllowDelete
+    },
+    // TODO: 待完善
+    fetchDynamicOpts(conf) {
+      this.settingMap.form.forEach(d => {
+        if (d.options === 'dynamic') {
+          setTimeout(() => {
+            d.options = [1,2,3,4]
+          }, 1000)  
+        }
+      })
     },
     getFullURL(str) {
       let setting = this.settingMap.tab

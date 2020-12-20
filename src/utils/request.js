@@ -50,6 +50,7 @@ request.interceptors.request.use(config => {
     // config.headers['Access-Token'] = token
     config.headers['token'] = token
     config.headers['empId'] = storage.get(ACCESS_EMPID) || ''
+    store.commit('extendLogin')
   }
   return config
 }, errorHandler)

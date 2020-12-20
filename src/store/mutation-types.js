@@ -1,6 +1,7 @@
 // export const ACCESS_TOKEN = 'Access-Token'
 export const ACCESS_TOKEN = 'token'
 export const ACCESS_EMPID = 'empId'
+export const ACCESS_LOGININFO = 'loginInfo'
 
 export const SIDEBAR_TYPE = 'sidebar_type'
 export const TOGGLE_MOBILE_TYPE = 'is_mobile'
@@ -24,3 +25,5 @@ export const NAV_THEME = {
   LIGHT: 'light',
   DARK: 'dark'
 }
+
+export const OUTDATE_TIME = 15 * 60 * 1000

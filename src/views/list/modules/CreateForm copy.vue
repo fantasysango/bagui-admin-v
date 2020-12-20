@@ -1,7 +1,7 @@
 <template>
   <a-modal
     :title="model ? '编辑' : '新建'"
-    :width="800"
+    :width="640"
     :visible="visible"
     :confirmLoading="loading"
     okText="确定"
@@ -24,7 +24,7 @@
             v-for="item in activeFormSet"
             :key="item.dataIndex"
             :span="checkWide(item) ? 24 : 12"
-            :class="{ 'my-label-multirow': item.title.length > 10 }"
+            :class="{ 'my-label-multirow': item.title.length > 8 }"
           >
             <!-- :labelCol="item.title.length > 6 ? { span: 10 } : null" -->
             <template>
@@ -55,25 +55,25 @@
                   </a-radio>
                 </a-radio-group>
               </a-form-item>
-              <!-- 切换按钮 -->
-              <a-form-item v-else-if="item.formType === 'switch'" :label="item.title">
-                <a-switch 
-                  v-if="isRegistered"
-                  :checked-children="getOpts(item).find(d => !d.value).label"
-                  :un-checked-children="getOpts(item).find(d => d.value).label"
-                  :defaultChecked="model ? !model[item.dataIndex] : !getDefaultVal(item)"
-                  @change="v => onSwitchChange(v, item)"
-                />
-                <!-- :defaultChecked="model ? !model[item.dataIndex] : !getDefaultVal(item)" -->
-                <!-- :checked="model ? !model[item.dataIndex] : !form.getFieldValue(item.dataIndex)" -->
-              </a-form-item>
-              <!-- 时间选择器 -->
               <a-form-item 
-                v-else-if="checkTypeDate(item)" 
+                v-else-if="checkTypeNum(item)" 
                 :label="item.title" 
                 hasFeedback
               >
-              <!-- @change="(date, dateString) => $nextTick(() => form.setFieldsValue({ [item.dataIndex]: dateString))" -->
+                <a-input-number
+                  v-decorator="[
+                    item.dataIndex,
+                    { initialValue: getDefaultVal(item), rules: [{ type: 'number', required: item.required === 'y', min: item.min, max: item.max }] },
+                  ]"
+                  style="width: 160px"
+                />
+              </a-form-item>
+              <a-form-item 
+                v-else-if="['datepicker', 'timepicker'].indexOf(item.formType) !== -1" 
+                :label="item.title" 
+                hasFeedback
+              >
+              <!-- @change="(date, dateString) => $nextTick(() => form.setFieldsValue(item.dataIndex, dateString))" -->
                 <a-date-picker
                   :format="getDefaultFormat(item)"
                   v-decorator="[
@@ -85,20 +85,6 @@
                     },
                   ]"
                 ></a-date-picker>
-              </a-form-item>
-              <!-- 数字输入框 -->
-              <a-form-item 
-                v-else-if="checkTypeNum(item)" 
-                :label="item.title" 
-                hasFeedback
-              >
-                <a-input-number
-                  v-decorator="[
-                    item.dataIndex,
-                    { initialValue: getDefaultVal(item), rules: [{ type: 'number', required: item.required === 'y', min: item.min, max: item.max }] },
-                  ]"
-                  style="width: 100%;"
-                />
               </a-form-item>
               <!-- 输入框（默认） -->
               <a-form-item 
@@ -118,7 +104,23 @@
           </a-col>
         </a-row>
       </a-form>
-      <child-table v-if="childCols.length" :dataSource="childData" :setting="setting" />
+      <a-row v-if="childCols.length">
+        <a-button class="editable-add-btn" @click="handleAdd">新增</a-button>
+        <a-table bordered :data-source="childData" :columns="childCols">
+          <template v-for="col in childCols" #[col]="text, record">
+            <editable-cell :text="text" @change="onCellChange(record.key, col, $event)" />
+          </template>
+          <template slot="operation" slot-scope="text, record">
+            <a-popconfirm
+              v-if="dataSource.length"
+              title="Sure to delete?"
+              @confirm="() => onDelete(record.key)"
+            >
+              <a href="javascript:;">Delete</a>
+            </a-popconfirm>
+          </template>
+        </a-table>
+      </a-row>
     </a-spin>
   </a-modal>
 </template>
@@ -126,11 +128,11 @@
 <script>
 import moment from 'moment'
 import pick from 'lodash.pick'
-import ChildTable from './ChildTable'
+import EditableCell from './EditableCell'
 
 export default {
   components: {
-    ChildTable
+    EditableCell
   },
   props: {
     visible: {
@@ -172,13 +174,12 @@ export default {
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 19 }
+        sm: { span: 18 }
       }
     }
     return {
       moment,
-      form: this.$form.createForm(this),
-      isRegistered: false
+      form: this.$form.createForm(this)
     }
   },
   computed: {
@@ -195,9 +196,8 @@ export default {
       return tabSet.childCols || []
     },
     childData() {
-      if (!this.model) return []
       let tabSet = this.setting.tab || {}
-      return tabSet.childKey ? this.model[tabSet.childKey] || [] : []
+      return this.model[tabSet.childKey]
     }
   },
   created () {
@@ -208,23 +208,16 @@ export default {
 
     // 当 model 发生改变时，为表单设置值
     this.$watch('model', () => {
-      this.isRegistered = false
-      setTimeout(() => this.isRegistered = true)
       console.log(this.setting, this.model)
       this.model && this.form.setFieldsValue(pick(this.model, this.fields))
     })
   },
   methods: {
-    onSwitchChange(v, item) {
-      v = Number(!v)
-      let k = item.dataIndex
-      this.model[k] = v
-      this.form.setFieldsValue({ [k]: v })
+    onCellChange(key, col, e) {
+      console.log(key, col)
     },
     fnNormalize(v, item) {
-      if (this.checkTypeDate(item)){
-        if (v && typeof v === 'object') v = v.format(this.getDefaultFormat(item))  // v instanceof moment
-      } else if (item.formType === 'switch') v = !v
+      if (v && typeof v === 'object') return v.format(this.getDefaultFormat(item))
       return v
     },
     getConf(item) {
@@ -257,16 +250,12 @@ export default {
       // return v
       let v = conf.default
       if (!conf.formType || conf.formType === 'input') v = v == undefined ? '' : String(v)
-      else if (conf.formType === 'switch') v = v == undefined ? true : Boolean(v)
       return v
     },
     getOpts(item) {
       let conf = this.getConf(item)
       if (!conf || conf.options === 'dynamic') return []
       return conf.options
-    },
-    checkTypeDate(item)  {
-      return ['datepicker', 'timepicker'].indexOf(item.formType) !== -1
     },
     checkTypeNum(item) {
       return /^(int|float|number)/.test(item.dataType)
@@ -288,13 +277,6 @@ export default {
     height: 40px;
     line-height: 1.2;
     white-space: normal;
-  }
-  
-}
-/deep/ .ant-form-item-control-wrapper {
-  &.ant-col-sm-19 {
-    padding-right: 15px;
-
   }
 }
 .editable-add-btn {

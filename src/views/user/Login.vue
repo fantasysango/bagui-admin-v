@@ -12,12 +12,12 @@
           <a-input
             size="large"
             type="text"
-            placeholder="账户: admin"
+            placeholder="账户名"
             v-decorator="[
               'username',
               {
-                initialValue: 'guoshuai',
-                rules: [{ required: true, message: '请输入帐户名或邮箱地址' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'
+                initialValue: defaultUser,
+                rules: [{ required: true, message: '请输入帐户名' }, { validator: handleUsernameOrEmail }], validateTrigger: 'change'
               }
             ]"
           >
@@ -28,11 +28,11 @@
         <a-form-item>
           <a-input-password
             size="large"
-            placeholder="密码: admin or ant.design"
+            placeholder="密码"
             v-decorator="[
               'password',
               {
-                initialValue: '123456',
+                initialValue: defaultPsw,
                 rules: [{ required: true, message: '请输入密码' }], validateTrigger: 'blur'
               }
             ]"
@@ -180,7 +180,9 @@ export default {
         // login type: 0 email, 1 username, 2 telephone
         loginType: 0,
         smsSendBtn: false
-      }
+      },
+      defaultUser: process.env.NODE_ENV === 'development' ? 'guoshuai' : '',
+      defaultPsw: process.env.NODE_ENV === 'development' ? '123456' : ''
     }
   },
   created () {

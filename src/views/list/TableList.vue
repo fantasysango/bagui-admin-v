@@ -18,17 +18,17 @@
       <s-table
         ref="table"
         size="default"
-        rowKey="key"
+        rowKey="id"
         :columns="columns"
         :data="loadData"
         :scroll="{ x: true }"
-        :alert="true"
-        :rowSelection="rowSelection"
+        :alert="!notAllowDelete"
+        :rowSelection="notAllowDelete ? null : rowSelection"
         showPagination="auto"
       >
         <template #serial="text, record, index">{{ index + 1 }}</template>
         <template #action="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a href="javascript:;" @click="handleEdit(record)">编辑</a>
           <a-popconfirm
             v-if="!notAllowDelete"
             placement="topRight"
@@ -37,12 +37,13 @@
             cancel-text="取消"
             @confirm="handleDelete(record)"
           >
-            <a href="#" style="margin-left: 1em">删除</a>
+            <a href="javascript:;" style="margin-left: 1em">删除</a>
           </a-popconfirm>
         </template>
       </s-table>
 
       <create-form
+        v-if="isFormReady"
         ref="createModal"
         :visible="visible"
         :loading="confirmLoading"
@@ -75,6 +76,7 @@ export default {
     return {
       // create model
       visible: false,
+      isFormReady: true,
       confirmLoading: false,
       mdl: null,
       // 高级搜索 展开/关闭
@@ -127,9 +129,7 @@ export default {
           if (res.code > 0) {
             let { result, list } = res  // PS: list 可能为对象（result别名），也可能为数组
             let data = list || []
-            if (!result && list && !(list instanceof Array)) {
-              result = list
-            }
+            if (!result && list && !(list instanceof Array)) result = list
             let totalCount = data.length || 0
             let totalPage = 1
             if (result) {
@@ -164,9 +164,10 @@ export default {
       selectedRows: [],
       columns: [],
       settingMap: {
-        tab: null,
-        form: null
+        tab: null,  // {}
+        form: null, // []
       },
+      childData: [],
       notAllowDelete: false,
     }
   },
@@ -184,17 +185,40 @@ export default {
   watch: {
     '$route.meta.key'(v)  {
       this.init()
-      const form = this.$refs.createModal.form
-      // 重置表单数据
-      form.resetFields()
+      // const form = this.$refs.createModal.form
+      // // 重置表单数据
+      // form.resetFields()
+
+      this.isFormReady = false
+      setTimeout(() => this.isFormReady = true)
+      
       // 刷新表格
       this.$refs.table.refresh()
+      this.selectedRowKeys = []
+      this.selectedRows = []
     }
   },
   methods: {
     init() {
       let tabSet = tabSettings.find((d) => d.key === this.$route.meta.key)
       let formSet = []
+      let tmpCols = tabSet.cols
+        .map((k) => {
+          let cols = formSettings.filter((d) => d.dataIndex === k)
+          let col = cols[0]
+          if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
+          col && formSet.push(col)
+          return col && col.displayInTab !== 'n'
+            ? {
+                title: col.title,
+                dataIndex: col.dataIndex,
+                sorter: true,
+                width: col.width || '150px',
+                customRender: this.fnRender
+              }
+            : null
+        })
+        .filter((d) => !!d)
       this.columns = !tabSet
         ? null
         : [
@@ -204,23 +228,7 @@ export default {
               fixed: 'left',
               scopedSlots: { customRender: 'serial' },
             },
-            ...tabSet.cols
-              .map((k) => {
-                let cols = formSettings.filter((d) => d.dataIndex === k)
-                let col = cols[0]
-                if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
-                col && formSet.push(col)
-                return col && col.displayInTab !== 'n'
-                  ? {
-                      title: col.title,
-                      dataIndex: col.dataIndex,
-                      sorter: true,
-                      width: col.width || '150px',
-                      customRender: this.fnRender
-                    }
-                  : null
-              })
-              .filter((d) => !!d),
+            ...tmpCols,
             {        
               title: '操作',
               dataIndex: 'action',
@@ -232,41 +240,111 @@ export default {
         tab: tabSet,
         form: formSet
       }
-      this.fetchDynamicOpts()
       console.log(this.settingMap)
       this.notAllowDelete = !!tabSet.notAllowDelete
+      this.fetchDynamicOpts()
     },
-    // TODO: 待完善
     fetchDynamicOpts() {
-      this.settingMap.form.forEach(d => {
-        if (d.options === 'dynamic') {
-          setTimeout(() => {
-            console.log(d)
-            d.options = [1,2,3,4].map(d => {
-              return {
-                label: '选项' + d,
-                value: d
+      let resolve = null
+      let promise = new Promise((r) => {
+        resolve = r
+      })
+      let results = []
+      let len = 0
+      let checkResults = (bool) => {
+        results.push(bool)
+        if (results.length === len) {
+          let final = !results.find(d => d === false)
+          !final && this.$message.error('获取选项失败')
+          resolve(final)
+        }
+      }
+      this.settingMap.form.forEach((d, i, a) => {
+        if (d.dynamic && d.displayInAdd  !== 'n') {
+          let { dataIndex, dictType, dictUrl, dictLabel, dictValue } = d
+          dictValue = dictValue || dictLabel || 'code'
+          dictLabel = dictLabel || 'value'
+          if (dataIndex === 'permissionIds') {
+            d.options = (this.$store.getters.loginInfo || {}).permissions.map(d => ({ label: d, value: d }))
+            return
+          }
+          len++
+          let params = dictType ? { dictType } : this.getBaseParam()
+          let url = dictType ? this.getFullURL('list', 'dict') : this.getFullURL(dictUrl, '')
+          axiosOperateTab(params, {
+            url, // '/epd/dict/list'
+          }).then(res => {
+            if (res.code > 0) {
+              let data = []
+              if (dictType) {
+                data = res.list || []
+              } else {
+                let { result, list } = res  // PS: list 可能为对象（result别名），也可能为数组
+                data = list || []
+                if (!result && list && !(list instanceof Array)) result = list
+                if (result) data = result.list || []
               }
-            })
-          }, 1000)  
+              d.options = data.map(d => {
+                return {
+                  label: d[dictLabel],
+                  value: d[dictValue]
+                }
+              })
+              checkResults(true)
+            } else {
+              // this.$message.error(res.msg || '获取选项失败')
+              checkResults(false)
+            }
+          }).catch(e => {
+            console.error(e)
+            checkResults(false)
+          })
         }
       })
+      return promise
     },
-    getFullURL(str) {
-      let setting = this.settingMap.tab
-      if (!setting) return {}
-      let { key } = setting
-      // TODO: 待确认
-      // if (key === 'leader' && str === 'edit')  key = 'leaderConfig'
-      return `/epd/${key}/${str}`
+    async fetchChildData(record) {
+      let { key, childKey } = this.settingMap.tab
+      if (childKey) {
+        let params = this.getBaseParam({
+          id: record.id  
+        })
+        let res = await axiosOperateTab(params, {
+          url: this.getFullURL('detail'),
+        })
+        if (res.code > 0) {
+          this.childData = res[key] || {}
+          record = {
+            ...record,
+            ...this.childData,
+          }
+        } else {
+          this.$message.error(res.msg || '获取详情失败')
+          return Promise.resolve(false)
+        }
+      }
+      return Promise.resolve(true)
+    },
+    getFullURL(str, key = null) {
+      if (key == null) {
+        let setting = this.settingMap.tab
+        if (!setting) return ''
+        key = setting.key
+      }
+      return `/epd${key ? '/' + key : ''}${str.startsWith('/') ? str : '/' + str}`
+    },
+    getBaseParam(obj = {}, type = '') {
+      return Object.assign({
+        deptId: this.$store.getters.empInfo.deptId,
+      }, obj)
     },
     fnRender(text, record, index, config) {
       // console.log(record)
       let { dataIndex } = config
       let setting = formSettings.find(d => d.dataIndex === dataIndex)
-      if (setting)  {
+      if (setting) {
         let { formType, options } = setting
-        if  (['select', 'radio'].includes(formType) && options instanceof Array) {
+        if  (['select', 'radio', 'switch'].includes(formType) && options instanceof Array) {
           let opt = options.find(d => d.value == text)
           text = (opt || {}).label || text
         }
@@ -277,21 +355,22 @@ export default {
       this.mdl = null
       this.visible = true
     },
-    handleEdit(record) {
+    async handleEdit(record) {
+      // if (!await this.fetchDynamicOpts()) return
+      if (!await this.fetchChildData(record)) return
       this.visible = true
-      this.mdl = { ...record }
+      this.mdl = _.cloneDeep(record)
     },
     handleDelete(record) {
       console.log('要删除的项', record)
-      if (this.tabSet.key === 'leader') {
+      if (this.tabSet.notAllowDelete) {
         this.$message.warning('该记录无法删除')
         return
       }
       const form = this.$refs.createModal.form
-      let params = {
-        deptId: this.$store.getters.empInfo.deptId,
-        id: record.id
-      }
+      let params = this.getBaseParam({
+        id: record.id  
+      })
       axiosOperateTab(params, {
         url: this.getFullURL('delete'),
       }).then((res) => {
@@ -306,36 +385,41 @@ export default {
         }
       }).catch(e => {
         console.error(e)
-        this.$message.error('网络异常')
       }).then(() => this.confirmLoading = false)
     },
     handleOk() {
       const form = this.$refs.createModal.form
       this.confirmLoading = true
-      form.validateFields((errors, values) => {
+      form.validateFields(async (errors, values) => {
         if (!errors) {
           console.log('values', { ...values })
           values = { ...this.mdl, ...values }
-          let params = {
-            createById: this.$store.getters.empInfo.id,
-            deptId: this.$store.getters.empInfo.deptId,
+          let getParams = (fields, type = 'create') => {
+            let tmpKey = type === 'create' ? 'createById' : 'updateById'
+            // 'creatorId' 'updateBy'
+            let params = this.getBaseParam({
+              [tmpKey]: this.$store.getters.empInfo.id,
+            })
+            fields.forEach(d => {
+              let v = values[d]
+              let p = params[d]
+              // TODO: 待确认
+              if (v == undefined && p != undefined) v = p
+              if (!v && v !== 0) v = null
+              params[d] = v
+            })
+            return params
           }
-          // let formSet = this.settingMap.form || []
-          // let fields = ['id', ...formSet.map(d => d.dataIndex)]
-          let fields = this.settingMap.tab.cols
-          fields.forEach(d => {
-            let v = values[d]
-            let p = params[d]
-            // TODO: 待确认
-            if (v == undefined && p != undefined) v = p
-            if (!v && v !== 0) v = null
-            params[d] = v
-          })
-          if (values.id) {
-            // 修改 e.g.
-            axiosOperateTab(params, {
-              url: this.getFullURL('edit'),
-            }).then((res) => {
+          try {
+            let tabSet = this.settingMap.tab
+            // let formSet = this.settingMap.form || []
+            // let fields = ['id', ...formSet.map(d => d.dataIndex)]
+            let fields = tabSet.cols
+            if (values.id) {
+              let res = await axiosOperateTab(
+                getParams(fields), 
+                { url: this.getFullURL('edit') }
+              )
               if (res.code > 0) {
                 this.visible = false
                 // 重置表单数据
@@ -343,19 +427,28 @@ export default {
                 // 刷新表格
                 this.$refs.table.refresh()
 
-                this.$message.info('修改成功')
+                if (tabSet.childKey) {
+                  res = await axiosOperateTab(
+                    getParams(tabSet.childCols), 
+                    { url: this.getFullURL('edit', tabSet.childKey) }
+                  )
+                  if (res.isOk) {
+                    this.$message.info('修改成功')
+                  } else {
+                    this.$message.error(res.msg || '操作失败')
+                  }
+                } else {
+                  this.$message.info('修改成功')
+                }
               } else {
                 this.$message.error(res.msg || '操作失败')
               }
-            }).catch(e => {
-              console.error(e)
-              this.$message.error('网络异常')
-            }).then(() => this.confirmLoading = false)
-          } else {
-            // 新增
-            axiosOperateTab(params, {
-              url: this.getFullURL('add'),
-            }).then((res) => {
+            } else {
+              // 新增
+              let res = await axiosOperateTab(
+                getParams(fields), 
+                { url: this.getFullURL('add') }
+              )
               if (res.code > 0) {
                 this.visible = false
                 // 重置表单数据
@@ -367,14 +460,12 @@ export default {
               } else {
                 this.$message.error(res.msg || '操作失败')
               }
-            }).catch(e => {
-              console.error(e)
-              this.$message.error('网络异常')
-            }).then(() => this.confirmLoading = false)
+            }
+          } catch(e) {
+            console.error(e)
           }
-        } else {
-          this.confirmLoading = false
         }
+        this.confirmLoading = false
       })
     },
     handleCancel() {
@@ -382,13 +473,6 @@ export default {
 
       const form = this.$refs.createModal.form
       form.resetFields() // 清理表单数据（可不做）
-    },
-    handleSub(record) {
-      if (record.status !== 0) {
-        this.$message.info(`${record.no} 订阅成功`)
-      } else {
-        this.$message.error(`${record.no} 订阅失败，规则已关闭`)
-      }
     },
     onSelectChange(selectedRowKeys, selectedRows) {
       this.selectedRowKeys = selectedRowKeys
@@ -405,3 +489,8 @@ export default {
   },
 }
 </script>
+<style lang="less" scoped>
+  /deep/ .ant-table-body {
+    overflow-x: auto !important;
+  }
+</style>

@@ -1,6 +1,6 @@
 import storage from 'store'
 import { login, getInfo, logout } from '@/api/login'
-import { ACCESS_TOKEN, ACCESS_EMPID } from '@/store/mutation-types'
+import { ACCESS_TOKEN, ACCESS_EMPID, ACCESS_LOGININFO, OUTDATE_TIME } from '@/store/mutation-types'
 import { welcome } from '@/utils/util'
 
 const user = {
@@ -10,14 +10,17 @@ const user = {
     welcome: '',
     avatar: '',
     roles: [],
-    permissions: [],
-    empInfo: {},
+    loginInfo: {},
     info: {}
   },
 
   mutations: {
     SET_DATA: (state, obj) => {
       Object.assign(state, obj)
+    },
+    SET_LOGININFO: (state, result) => {
+      state.loginInfo = result
+      storage.set(ACCESS_EMPID, ((result || {}).emp || {}).id, OUTDATE_TIME)
     },
     SET_TOKEN: (state, token) => {
       state.token = token
@@ -34,6 +37,11 @@ const user = {
     },
     SET_INFO: (state, info) => {
       state.info = info
+    },
+    extendLogin(state) {
+      storage.set(ACCESS_TOKEN, state.token, OUTDATE_TIME)
+      storage.set(ACCESS_LOGININFO, state.loginInfo, OUTDATE_TIME)
+      storage.set(ACCESS_EMPID, ((state.loginInfo || {}).emp || {}).id, OUTDATE_TIME)
     }
   },
 
@@ -46,16 +54,10 @@ const user = {
           const result = response
           console.log('登录信息 =====>', result)
           if (result.code > 0) {
-            let empId = result.emp.id
-            storage.set(ACCESS_EMPID, empId, 7 * 24 * 60 * 60 * 1000)
-            storage.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
+            storage.set(ACCESS_TOKEN, result.token, OUTDATE_TIME)
+            storage.set(ACCESS_LOGININFO, result, OUTDATE_TIME)
             commit('SET_TOKEN', result.token)
-            // commit('SET_ROLES', result.roleIds)
-            // commit('SET_INFO', result.emp)
-            commit('SET_DATA', {
-              empInfo: result.emp,
-              permissions: result.permissions
-            })
+            commit('SET_LOGININFO', result)
             resolve()
           } else {
             reject(result.msg)
@@ -103,8 +105,11 @@ const user = {
       return new Promise((resolve) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
+          commit('SET_LOGININFO', '')
           commit('SET_ROLES', [])
           storage.remove(ACCESS_TOKEN)
+          storage.remove(ACCESS_LOGININFO)
+          storage.remove(ACCESS_EMPID)
           resolve()
         }).catch(() => {
           resolve()

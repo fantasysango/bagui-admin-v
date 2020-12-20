@@ -2,7 +2,8 @@ import store from '@/store'
 import storage from 'store'
 import {
   ACCESS_TOKEN,
-  ACCESS_EMPID,
+  // ACCESS_EMPID,
+  ACCESS_LOGININFO,
   APP_LANGUAGE,
   TOGGLE_CONTENT_WIDTH,
   TOGGLE_FIXED_HEADER,
@@ -26,7 +27,7 @@ export default function Initializer () {
   store.commit(TOGGLE_COLOR, storage.get(TOGGLE_COLOR, defaultSettings.primaryColor))
   store.commit(TOGGLE_MULTI_TAB, storage.get(TOGGLE_MULTI_TAB, defaultSettings.multiTab))
   store.commit('SET_TOKEN', storage.get(ACCESS_TOKEN))
-  store.commit('SET_DATA', { empId: storage.get(ACCESS_EMPID) })
+  store.commit('SET_LOGININFO', storage.get(ACCESS_LOGININFO))
 
   store.dispatch('setLang', storage.get(APP_LANGUAGE, 'zh-CN')) // en-US
   // last step

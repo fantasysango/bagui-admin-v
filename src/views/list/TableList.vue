@@ -9,7 +9,7 @@
         <a-button type="primary" icon="plus" @click="handleAdd">新建</a-button>
         <a-dropdown v-if="selectedRowKeys.length > 0 && !notAllowDelete">
           <a-menu slot="overlay">
-            <a-menu-item key="1" @click="handleDelete(selectedRowKeys)"><a-icon type="delete" />删除</a-menu-item>
+            <a-menu-item key="1" @click="handleDeleteBatch(selectedRowKeys)"><a-icon type="delete" />删除</a-menu-item>
           </a-menu>
           <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /> </a-button>
         </a-dropdown>
@@ -199,11 +199,17 @@ export default {
     }
   },
   methods: {
-    init() {
+    async init() {
       let tabSet = tabSettings.find((d) => d.key === this.$route.meta.key)
+      this.settingMap.tab = tabSet
       let formSet = []
       let tmpCols = tabSet.cols
-        .map((k) => {
+      try {
+        tmpCols = await this.fetchStructure() || tmpCols
+      } catch(e) {
+        console.error(e)
+      }
+      tmpCols = tmpCols.map((k) => {
           let cols = formSettings.filter((d) => d.dataIndex === k)
           let col = cols[0]
           if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
@@ -236,13 +242,34 @@ export default {
               scopedSlots: { customRender: 'action' },
             }
         ]
-      this.settingMap = {
-        tab: tabSet,
-        form: formSet
-      }
+      this.settingMap.form = formSet
+      // this.settingMap = {
+      //   tab: tabSet,
+      //   form: formSet
+      // }
       console.log(this.settingMap)
       this.notAllowDelete = !!tabSet.notAllowDelete
       this.fetchDynamicOpts()
+    },
+    fetchStructure() {
+      let params = Object.assign({
+        deptId: this.$store.getters.empInfo.deptId,
+        pageNum: 1,
+        pageSize: 1
+      }, this.queryParam)
+      return axiosOperateTab(params, {
+        url: this.getFullURL('list'),
+      }).then((res) => {
+        console.log('res =====>', res)
+        if (res.code > 0) {
+          let { result, list } = res  // PS: list 可能为对象（result别名），也可能为数组
+          let data = list || []
+          if (!result && list && !(list instanceof Array)) result = list
+          if (result) data = result.list || []
+          return data[0] ? Object.keys(data[0]) : null
+        }
+        return null
+      })
     },
     fetchDynamicOpts() {
       let resolve = null
@@ -361,9 +388,12 @@ export default {
       this.visible = true
       this.mdl = _.cloneDeep(record)
     },
+    handleDeleteBatch(keys) {
+      this.$message.warning('暂时无法批量删除')
+    },
     handleDelete(record) {
       console.log('要删除的项', record)
-      if (this.tabSet.notAllowDelete) {
+      if (this.notAllowDelete) {
         this.$message.warning('该记录无法删除')
         return
       }

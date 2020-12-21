@@ -61,7 +61,7 @@
                   v-if="isRegistered"
                   :checked-children="getOpts(item).find(d => !d.value).label"
                   :un-checked-children="getOpts(item).find(d => d.value).label"
-                  :defaultChecked="model ? !model[item.dataIndex] : !getDefaultVal(item)"
+                  :defaultChecked="getDefaultChecked(item)"
                   @change="v => onSwitchChange(v, item)"
                 />
                 <!-- :defaultChecked="model ? !model[item.dataIndex] : !getDefaultVal(item)" -->
@@ -178,14 +178,15 @@ export default {
     return {
       moment,
       form: this.$form.createForm(this),
-      isRegistered: false
+      isRegistered: true
     }
   },
   computed: {
     activeFormSet() {
       let formSet = this.setting.form
       if (!formSet) return []
-      return formSet.filter(d => d.displayInAdd !== 'n' && d.dataIndex.toLowerCase() !== 'id')
+      let tabSet = this.setting.tab
+      return formSet.filter(d => d.displayInAdd !== 'n' && d.dataIndex.toLowerCase() !== 'id' && tabSet.cols.includes(d.dataIndex))
     },
     fields() {
       return ['id', ...this.activeFormSet.map(d => d.dataIndex)]
@@ -200,6 +201,11 @@ export default {
       return tabSet.childKey ? this.model[tabSet.childKey] || [] : []
     }
   },
+  watch: {
+    // visible(v)  {
+    //   if (!v) this.isRegistered = false
+    // }
+  },
   created () {
     console.log('custom modal created')
 
@@ -209,16 +215,27 @@ export default {
     // 当 model 发生改变时，为表单设置值
     this.$watch('model', () => {
       this.isRegistered = false
-      setTimeout(() => this.isRegistered = true)
+      setTimeout(() => {
+        this.setting.form.forEach(item => {
+          if (item.formType === 'switch') {
+            let v = this.getDefaultChecked(item)
+            this.onSwitchChange(v, item)
+          }
+        })
+        this.isRegistered = true
+      })
       console.log(this.setting, this.model)
       this.model && this.form.setFieldsValue(pick(this.model, this.fields))
     })
   },
   methods: {
+    getDefaultChecked(item) {
+      return this.model ? !this.model[item.dataIndex] : !this.getDefaultVal(item)
+    },
     onSwitchChange(v, item) {
       v = Number(!v)
       let k = item.dataIndex
-      this.model[k] = v
+      if (this.model) this.model[k] = v
       this.form.setFieldsValue({ [k]: v })
     },
     fnNormalize(v, item) {
@@ -257,7 +274,7 @@ export default {
       // return v
       let v = conf.default
       if (!conf.formType || conf.formType === 'input') v = v == undefined ? '' : String(v)
-      else if (conf.formType === 'switch') v = v == undefined ? true : Boolean(v)
+      else if (conf.formType === 'switch') v = Boolean(v)
       return v
     },
     getOpts(item) {

@@ -27,94 +27,92 @@
             :class="{ 'my-label-multirow': item.title.length > 10 }"
           >
             <!-- :labelCol="item.title.length > 6 ? { span: 10 } : null" -->
-            <template>
-              <!-- 下拉框 -->
-              <a-form-item v-if="item.formType === 'select'" :label="item.title">
-                <a-select
-                  v-decorator="[
-                    item.dataIndex,
-                    { initialValue: getDefaultVal(item), rules: [{ required: false, message: '请选择一项内容！' }] },
-                  ]"
-                  placeholder="请选择"
-                >
-                  <a-select-option v-for="opt in getOpts(item)" :value="opt.value" :key="opt.value">
-                    {{opt.label}}
-                  </a-select-option>
-                </a-select>
-              </a-form-item>
-              <!-- 单选框 -->
-              <a-form-item v-else-if="item.formType === 'radio'" :label="item.title">
-                <a-radio-group
-                  v-decorator="[
-                    item.dataIndex,
-                    { initialValue: getDefaultVal(item) }
-                  ]"
-                >
-                  <a-radio v-for="opt in getOpts(item)" :value="opt.value" :key="opt.value">
-                    {{opt.label}}
-                  </a-radio>
-                </a-radio-group>
-              </a-form-item>
-              <!-- 切换按钮 -->
-              <a-form-item v-else-if="item.formType === 'switch'" :label="item.title">
-                <a-switch 
-                  v-if="isRegistered"
-                  :checked-children="getOpts(item).find(d => !d.value).label"
-                  :un-checked-children="getOpts(item).find(d => d.value).label"
-                  :defaultChecked="getDefaultChecked(item)"
-                  @change="v => onSwitchChange(v, item)"
-                />
-                <!-- :defaultChecked="model ? !model[item.dataIndex] : !getDefaultVal(item)" -->
-                <!-- :checked="model ? !model[item.dataIndex] : !form.getFieldValue(item.dataIndex)" -->
-              </a-form-item>
-              <!-- 时间选择器 -->
-              <a-form-item 
-                v-else-if="checkTypeDate(item)" 
-                :label="item.title" 
-                hasFeedback
+            <!-- 下拉框 -->
+            <a-form-item v-if="item.formType === 'select'" :label="item.title">
+              <a-select
+                v-decorator="[
+                  item.dataIndex,
+                  { initialValue: getDefaultVal(item), rules: [{ required: false, message: '请选择一项内容！' }] },
+                ]"
+                placeholder="请选择"
               >
-              <!-- @change="(date, dateString) => $nextTick(() => form.setFieldsValue({ [item.dataIndex]: dateString))" -->
-                <a-date-picker
-                  :format="getDefaultFormat(item)"
-                  v-decorator="[
-                    item.dataIndex,
-                    { 
-                      normalize: v => fnNormalize(v, item),
-                      initialValue: getDefaultVal(item), 
-                      rules: [{ type: 'string', required: item.required === 'y' }] 
-                    },
-                  ]"
-                ></a-date-picker>
-              </a-form-item>
-              <!-- 数字输入框 -->
-              <a-form-item 
-                v-else-if="checkTypeNum(item)" 
-                :label="item.title" 
-                hasFeedback
+                <a-select-option v-for="opt in getOpts(item)" :value="opt.value" :key="opt.value">
+                  {{opt.label}}
+                </a-select-option>
+              </a-select>
+            </a-form-item>
+            <!-- 单选框 -->
+            <a-form-item v-else-if="item.formType === 'radio'" :label="item.title">
+              <a-radio-group
+                v-decorator="[
+                  item.dataIndex,
+                  { initialValue: getDefaultVal(item) }
+                ]"
               >
-                <a-input-number
-                  v-decorator="[
-                    item.dataIndex,
-                    { initialValue: getDefaultVal(item), rules: [{ type: 'number', required: item.required === 'y', min: item.min, max: item.max }] },
-                  ]"
-                  style="width: 100%;"
-                />
-              </a-form-item>
-              <!-- 输入框（默认） -->
-              <a-form-item 
-                v-else 
-                :label="item.title" 
-                v-bind="checkWide(item) ? formLayoutWide : {}"
-                hasFeedback
-              >
-                <a-input
-                  v-decorator="[
-                    item.dataIndex,
-                    { initialValue: getDefaultVal(item), rules: [{ required: item.required === 'y', min: item.min, max: item.max }] },
-                  ]"
-                />
-              </a-form-item>
-            </template>
+                <a-radio v-for="opt in getOpts(item)" :value="opt.value" :key="opt.value">
+                  {{opt.label}}
+                </a-radio>
+              </a-radio-group>
+            </a-form-item>
+            <!-- 切换按钮 -->
+            <a-form-item v-else-if="item.formType === 'switch'" :label="item.title">
+              <a-switch 
+                v-if="isRegistered"
+                :checked-children="getOpts(item).find(d => !d.value).label"
+                :un-checked-children="getOpts(item).find(d => d.value).label"
+                :defaultChecked="getDefaultChecked(item)"
+                @change="v => onSwitchChange(v, item)"
+              />
+              <!-- :defaultChecked="model ? !model[item.dataIndex] : !getDefaultVal(item)" -->
+              <!-- :checked="model ? !model[item.dataIndex] : !form.getFieldValue(item.dataIndex)" -->
+            </a-form-item>
+            <!-- 时间选择器 -->
+            <a-form-item 
+              v-else-if="checkTypeDate(item)" 
+              :label="item.title" 
+              hasFeedback
+            >
+            <!-- @change="(date, dateString) => $nextTick(() => form.setFieldsValue({ [item.dataIndex]: dateString))" -->
+              <a-date-picker
+                :format="getDefaultFormat(item)"
+                v-decorator="[
+                  item.dataIndex,
+                  { 
+                    normalize: v => fnNormalize(v, item),
+                    initialValue: getDefaultVal(item), 
+                    rules: [{ type: 'string', required: item.required === 'y' }] 
+                  },
+                ]"
+              ></a-date-picker>
+            </a-form-item>
+            <!-- 数字输入框 -->
+            <a-form-item 
+              v-else-if="checkTypeNum(item)" 
+              :label="item.title" 
+              hasFeedback
+            >
+              <a-input-number
+                v-decorator="[
+                  item.dataIndex,
+                  { initialValue: getDefaultVal(item), rules: [{ type: 'number', required: item.required === 'y', min: item.min, max: item.max }] },
+                ]"
+                style="width: 100%;"
+              />
+            </a-form-item>
+            <!-- 输入框（默认） -->
+            <a-form-item 
+              v-else 
+              :label="item.title" 
+              v-bind="checkWide(item) ? formLayoutWide : {}"
+              hasFeedback
+            >
+              <a-input
+                v-decorator="[
+                  item.dataIndex,
+                  { initialValue: getDefaultVal(item), rules: [{ required: item.required === 'y', min: item.min, max: item.max }] },
+                ]"
+              />
+            </a-form-item>
           </a-col>
         </a-row>
       </a-form>
@@ -306,7 +304,6 @@ export default {
     line-height: 1.2;
     white-space: normal;
   }
-  
 }
 /deep/ .ant-form-item-control-wrapper {
   &.ant-col-sm-19 {

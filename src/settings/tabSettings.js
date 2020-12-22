@@ -36,30 +36,35 @@ export default [
         code: '3.5',
         key: 'officialVehicles',
         title: '公务用车管理',
+        searchCols: ["driverId", "carId", "startTime1", "startTime2", "endTime1", "endTime2"],
         cols: ["id", "deptId", "dispatchTheme", "dispatchNumber", "dispatchTypeCode", "mainPassenger", "reason", "passengersNumber", "phone", "reasonDescription", "startTime", "endTime", "start", "end", "route", "driverId", "carId", "mileage", "specialNeeds", "remarks", "applyEmp", "applyDept", "applyTime", "deptApproval", "deptApprovalComments", "deptApprovalTime", "officeImplementer", "officeImplementComments", "officeImplementTime"],
     },
     {
         code: '4.1',
         key: 'training',
         title: '培训费管理',
+        searchCols: ["leaderId", "carId", "startTime1", "startTime2", "endTime1", "endTime2"],
         cols: ["id", "deptId", "trainingTypeCode", "trainingUnit", "trainingProgram", "trainingStartDate", "trainingEndDate", "trainingDays", "approvalBasis", "isInPlan", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"]
     },
     {
         code: '4.2',
         key: 'travel',
         title: '差旅费管理',
+        searchCols: ["leaderId", "startDate", "endDate"],
         cols: ["id", "deptId", "reimbursementDate", "travelDate", "destination", "title", "amountWithoutTax", "tax", "amount", "fromId", "referenceInformation", "leaderId", "accountBooksCode", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
     {
         code: '4.3',
         key: 'transportationSubsidy',
         title: '交通补贴管理',
+        searchCols: ["leaderId", "startDate", "endDate"],
         cols: ["id", "deptId", "paymentTypeCode", "submitDate", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
     {
         code: '4.4',
         key: 'communication',
         title: '通讯费管理',
+        searchCols: ["leaderId", "startDate", "endDate"],
         cols: ["id", "deptId", "communicationTypeCode", "date", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
     {
@@ -72,18 +77,21 @@ export default [
         code: '4.6',
         key: 'entertainment',
         title: '招待费管理',
+        searchCols: ["leaderId", "startDate", "endDate"],
         cols: ["id", "number", "date", "entertainmentTypeCode", "reason", "applyDeptId", "applyEmpId", "alcoholAmount", "reimbursementAmount", "guestNumber", "accompanyNumber", "totalNumber", "average", "entertainmentNatureCode", "standard", "deptId", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
     {
         code: '4.7',
         key: 'abroad',
         title: '因公临时出国（境）管理',
+        searchCols: ["leaderId", "startDate", "endDate"],
         cols: ["id", "mainUnitName", "activityOrganizationUnit", "projectName", "destination", "date", "actualExpenses", "daysNumber", "isInPlan", "deptId", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
     {
         code: '4.8',
         key: 'operation',
         title: '运行费管理',
+        searchCols: ["leaderId", "startDate", "endDate"],
         cols: ["id", "date", "operationPaymentTypeCode", "carId", "driverId", "deptId", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
 ]

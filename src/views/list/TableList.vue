@@ -2,7 +2,10 @@
   <page-header-wrapper class="gb-tablewrap-nowrap">
     <a-card :bordered="false">
       <div class="table-page-search-wrapper">
-        <!-- to be added -->
+        <search-form
+          :setting="settingMap"
+          @query="setQueryParam"
+        />
       </div>
 
       <div class="table-operator">
@@ -64,6 +67,7 @@ import settings from '@/settings'
 const { tabSettings, formSettings } = settings
 
 import CreateForm from './modules/CreateForm'
+import SearchForm from './modules/SearchForm'
 
 export default {
   name: 'TableList',
@@ -71,6 +75,7 @@ export default {
     STable,
     Ellipsis,
     CreateForm,
+    SearchForm,
   },
   data() {
     return {
@@ -166,6 +171,7 @@ export default {
       settingMap: {
         tab: null,  // {}
         form: null, // []
+        search: null, // []
       },
       childData: [],
       notAllowDelete: false,
@@ -203,13 +209,21 @@ export default {
       let tabSet = tabSettings.find((d) => d.key === this.$route.meta.key)
       this.settingMap.tab = tabSet
       let formSet = []
-      let tmpCols = tabSet.cols
+      let searchSet = []
+      tabSet.searchCols && tabSet.searchCols.forEach(k => {
+        let cols = formSettings.filter((d) => d.dataIndex === k)
+        let col = cols[0]
+        if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
+        col && searchSet.push(col)
+      })
+      this.settingMap.search = searchSet
+      let tabCols = tabSet.cols
       try {
-        tmpCols = await this.fetchStructure() || tmpCols
+        tabCols = await this.fetchStructure() || tabCols
       } catch(e) {
         console.error(e)
       }
-      tmpCols = tmpCols.map((k) => {
+      tabCols = tabCols.map((k) => {
           let cols = formSettings.filter((d) => d.dataIndex === k)
           let col = cols[0]
           if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
@@ -234,7 +248,7 @@ export default {
               fixed: 'left',
               scopedSlots: { customRender: 'serial' },
             },
-            ...tmpCols,
+            ...tabCols,
             {        
               title: '操作',
               dataIndex: 'action',
@@ -511,10 +525,8 @@ export default {
     toggleAdvanced() {
       this.advanced = !this.advanced
     },
-    resetSearchForm() {
-      this.queryParam = {
-        date: moment(new Date()),
-      }
+    setQueryParam(param) {
+      this.queryParam = param
     },
   },
 }

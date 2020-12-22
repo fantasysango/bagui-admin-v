@@ -256,6 +256,28 @@ arrConfig.forEach(d => {
         if (d[k] === '') delete d[k]
     })
 })
+
+// 额外添加 开始时间/开始日期 —— 结束时间/结束日期
+;(() => {
+    let startDate = arrConfig.find(d => /startDate/i.test(d.dataIndex))
+    if (startDate) startDate = { ...startDate, dataIndex: 'startDate', title: '开始时间', displayInQuery: 'y' }
+    let endDate = arrConfig.find(d => /endDate/i.test(d.dataIndex))
+    if (endDate) endDate = { ...endDate, dataIndex: 'endDate', title: '结束时间', displayInQuery: 'y' }
+    let startTime1 = arrConfig.find(d => /startTime/i.test(d.dataIndex))
+    let startTime2 = startTime1
+    if (startTime1) {
+        startTime1 = { ...startTime1, dataIndex: 'startTime1', title: '开始日期', displayInQuery: 'y' }
+        startTime2 = { ...startTime2, dataIndex: 'startTime2', title: '', displayInQuery: 'y' }
+    }
+    let endTime1 = arrConfig.find(d => /endTime/i.test(d.dataIndex))
+    let endTime2 = endTime1
+    if (endTime1) {
+        endTime1 = { ...endTime1, dataIndex: 'endTime1', title: '结束日期', displayInQuery: 'y' }
+        endTime2 = { ...endTime2, dataIndex: 'endTime2', title: '', displayInQuery: 'y' }
+    }
+    arrConfig.push(startDate, endDate, startTime1, startTime2, endTime1, endTime2)
+})()
+
 arrConfig.sort((a, b) => a.dataIndex.toLowerCase() > b.dataIndex.toLowerCase() ? 1 : -1)
 console.log(JSON.stringify(arrConfig))
 

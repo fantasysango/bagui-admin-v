@@ -3,6 +3,7 @@
     <a-card :bordered="false">
       <div class="table-page-search-wrapper">
         <search-form
+          ref="search"
           :setting="settingMap"
           @query="setQueryParam"
         />
@@ -198,6 +199,9 @@ export default {
       this.isFormReady = false
       setTimeout(() => this.isFormReady = true)
       
+      this.queryParam = {}
+      // this.$refs.search.doReset({ query: false })
+      
       // 刷新表格
       this.$refs.table.refresh()
       this.selectedRowKeys = []
@@ -214,7 +218,7 @@ export default {
         let cols = formSettings.filter((d) => d.dataIndex === k)
         let col = cols[0]
         if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
-        col && searchSet.push(col)
+        col && searchSet.push(_.cloneDeep(col))
       })
       this.settingMap.search = searchSet
       let tabCols = tabSet.cols
@@ -527,6 +531,7 @@ export default {
     },
     setQueryParam(param) {
       this.queryParam = param
+      this.$refs.table.refresh()
     },
   },
 }

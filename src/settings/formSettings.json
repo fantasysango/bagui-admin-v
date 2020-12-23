@@ -583,7 +583,7 @@
 	},
 	{
 		"dataIndex": "endDate",
-		"title": "结束时间",
+		"title": "结束日期",
 		"formType": "datepicker",
 		"format": "YYYY-MM-DD",
 		"displayInQuery": "y"
@@ -596,17 +596,18 @@
 	},
 	{
 		"dataIndex": "endTime1",
-		"title": "结束日期",
+		"title": "结束时间",
 		"formType": "timepicker",
 		"format": "YYYY-MM-DD HH:mm:ss",
 		"displayInQuery": "y"
 	},
 	{
 		"dataIndex": "endTime2",
-		"title": "",
+		"title": "至",
 		"formType": "timepicker",
 		"format": "YYYY-MM-DD HH:mm:ss",
-		"displayInQuery": "y"
+		"displayInQuery": "y",
+		"colon": false
 	},
 	{
 		"dataIndex": "entertainmentNatureCode",
@@ -1086,7 +1087,6 @@
 		"options": [],
 		"dictType": "OPERATION_PAYMENT_TYPE",
 		"displayInTab": "n",
-		"displayInAdd": "n",
 		"dynamic": true
 	},
 	{
@@ -1097,6 +1097,7 @@
 		"formType": "select",
 		"options": [],
 		"dictType": "OPERATION_PAYMENT_TYPE",
+		"displayInAdd": "n",
 		"dynamic": true
 	},
 	{
@@ -1382,7 +1383,7 @@
 	},
 	{
 		"dataIndex": "startDate",
-		"title": "开始时间",
+		"title": "开始日期",
 		"formType": "datepicker",
 		"format": "YYYY-MM-DD",
 		"displayInQuery": "y"
@@ -1395,17 +1396,18 @@
 	},
 	{
 		"dataIndex": "startTime1",
-		"title": "开始日期",
+		"title": "开始时间",
 		"formType": "timepicker",
 		"format": "YYYY-MM-DD HH:mm:ss",
 		"displayInQuery": "y"
 	},
 	{
 		"dataIndex": "startTime2",
-		"title": "",
+		"title": "至",
 		"formType": "timepicker",
 		"format": "YYYY-MM-DD HH:mm:ss",
-		"displayInQuery": "y"
+		"displayInQuery": "y",
+		"colon": false
 	},
 	{
 		"dataIndex": "status",

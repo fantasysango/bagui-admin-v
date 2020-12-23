@@ -1,7 +1,7 @@
 <template>
   <div class="gb-tablewrap-nowrap">
     <a-button class="editable-add-btn" @click="handleAdd"> 添加 </a-button>
-    <a-table bordered :data-source="dataSource" :columns="columns" :scroll="{ x: true }">
+    <a-table bordered :data-source="dataSource" :columns="columns" :scroll="{ x: true }" showPagination="auto">
       <template v-for="(col, index) in columns" :slot="col.dataIndex" slot-scope="text, record">
         <editable-cell :text="text" @change="onCellChange(record.key, 'name', $event)" :key="index" />
       </template>
@@ -126,12 +126,10 @@ export default {
       this.dataSource = dataSource.filter((item) => item.key !== key)
     },
     handleAdd() {
-      const { dataSource } = this
-      const newData = {
-        name: `Edward King ${count}`,
-        age: 32,
-        address: `London, Park Lane no. ${count}`,
-      }
+      const { dataSource } = this  
+      const newData = {}
+      let tabSet = this.setting.tab
+      tabSet.childCols.forEach(d => newData[d] = '')
       this.dataSource = [...dataSource, newData]
     },
   },

@@ -43,7 +43,11 @@ export default [
         code: '4.1',
         key: 'training',
         title: '培训费管理',
-        searchCols: ["leaderId", "carId", "startTime1", "startTime2", "endTime1", "endTime2"],
+        searchCols: ["leaderId", "startTime1", "startTime2", "endTime1", "endTime2", "startDate", "endDate"],
+        searchSetMap: {
+            startTime1: { title: '培训开始时间' },
+            startDate: { title: '入账开始日期' }
+        },
         cols: ["id", "deptId", "trainingTypeCode", "trainingUnit", "trainingProgram", "trainingStartDate", "trainingEndDate", "trainingDays", "approvalBasis", "isInPlan", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"]
     },
     {
@@ -51,6 +55,9 @@ export default [
         key: 'travel',
         title: '差旅费管理',
         searchCols: ["leaderId", "startDate", "endDate"],
+        searchSetMap: {
+            startDate: { title: '入账开始日期' }
+        },
         cols: ["id", "deptId", "reimbursementDate", "travelDate", "destination", "title", "amountWithoutTax", "tax", "amount", "fromId", "referenceInformation", "leaderId", "accountBooksCode", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
     {
@@ -65,6 +72,9 @@ export default [
         key: 'communication',
         title: '通讯费管理',
         searchCols: ["leaderId", "startDate", "endDate"],
+        searchSetMap: {
+            startDate: { title: '入账开始日期' }
+        },
         cols: ["id", "deptId", "communicationTypeCode", "date", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
     {
@@ -78,6 +88,9 @@ export default [
         key: 'entertainment',
         title: '招待费管理',
         searchCols: ["leaderId", "startDate", "endDate"],
+        searchSetMap: {
+            startDate: { title: '入账开始日期' }
+        },
         cols: ["id", "number", "date", "entertainmentTypeCode", "reason", "applyDeptId", "applyEmpId", "alcoholAmount", "reimbursementAmount", "guestNumber", "accompanyNumber", "totalNumber", "average", "entertainmentNatureCode", "standard", "deptId", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
     {
@@ -85,6 +98,9 @@ export default [
         key: 'abroad',
         title: '因公临时出国（境）管理',
         searchCols: ["leaderId", "startDate", "endDate"],
+        searchSetMap: {
+            startDate: { title: '入账开始日期' }
+        },
         cols: ["id", "mainUnitName", "activityOrganizationUnit", "projectName", "destination", "date", "actualExpenses", "daysNumber", "isInPlan", "deptId", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
     {
@@ -92,6 +108,9 @@ export default [
         key: 'operation',
         title: '运行费管理',
         searchCols: ["leaderId", "startDate", "endDate"],
+        searchSetMap: {
+            startDate: { title: '入账开始日期' }
+        },
         cols: ["id", "date", "operationPaymentTypeCode", "carId", "driverId", "deptId", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
 ]

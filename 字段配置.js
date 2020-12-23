@@ -191,8 +191,8 @@ var arrConfig = [
     { group: '', groupName: '', dataIndex: 'daysNumber', title: '天数', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: 'abroad', groupName: '因公临时出国', dataIndex: 'isInPlan', title: '是否计划内考察', formType: '单选框', dataType: 'int', default: '', options: '0:否,1:是', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: 'operation', groupName: '运行费', dataIndex: 'date', title: '日期', formType: '日期选择框', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
-    { group: 'operation', groupName: '运行费', dataIndex: 'operationPaymentTypeCode', title: '支付类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'OPERATION_PAYMENT_TYPE', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '', min: '' },
-    { group: 'operation', groupName: '运行费', dataIndex: 'operationPaymentTypeValue', title: '支付类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'OPERATION_PAYMENT_TYPE', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: 'operation', groupName: '运行费', dataIndex: 'operationPaymentTypeCode', title: '支付类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'OPERATION_PAYMENT_TYPE', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: 'operation', groupName: '运行费', dataIndex: 'operationPaymentTypeValue', title: '支付类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'OPERATION_PAYMENT_TYPE', displayInTab: '', displayInQuery: '', displayInAdd: '否', max: '', min: '' },
 
 ]
 
@@ -260,20 +260,20 @@ arrConfig.forEach(d => {
 // 额外添加 开始时间/开始日期 —— 结束时间/结束日期
 ;(() => {
     let startDate = arrConfig.find(d => /startDate/i.test(d.dataIndex))
-    if (startDate) startDate = { ...startDate, dataIndex: 'startDate', title: '开始时间', displayInQuery: 'y' }
+    if (startDate) startDate = { ...startDate, dataIndex: 'startDate', title: '开始日期', displayInQuery: 'y' }
     let endDate = arrConfig.find(d => /endDate/i.test(d.dataIndex))
-    if (endDate) endDate = { ...endDate, dataIndex: 'endDate', title: '结束时间', displayInQuery: 'y' }
+    if (endDate) endDate = { ...endDate, dataIndex: 'endDate', title: '结束日期', displayInQuery: 'y' }
     let startTime1 = arrConfig.find(d => /startTime/i.test(d.dataIndex))
     let startTime2 = startTime1
     if (startTime1) {
-        startTime1 = { ...startTime1, dataIndex: 'startTime1', title: '开始日期', displayInQuery: 'y' }
-        startTime2 = { ...startTime2, dataIndex: 'startTime2', title: '', displayInQuery: 'y' }
+        startTime1 = { ...startTime1, dataIndex: 'startTime1', title: '开始时间', displayInQuery: 'y' }
+        startTime2 = { ...startTime2, dataIndex: 'startTime2', title: '至', displayInQuery: 'y', colon: false }
     }
     let endTime1 = arrConfig.find(d => /endTime/i.test(d.dataIndex))
     let endTime2 = endTime1
     if (endTime1) {
-        endTime1 = { ...endTime1, dataIndex: 'endTime1', title: '结束日期', displayInQuery: 'y' }
-        endTime2 = { ...endTime2, dataIndex: 'endTime2', title: '', displayInQuery: 'y' }
+        endTime1 = { ...endTime1, dataIndex: 'endTime1', title: '结束时间', displayInQuery: 'y' }
+        endTime2 = { ...endTime2, dataIndex: 'endTime2', title: '至', displayInQuery: 'y', colon: false }
     }
     arrConfig.push(startDate, endDate, startTime1, startTime2, endTime1, endTime2)
 })()

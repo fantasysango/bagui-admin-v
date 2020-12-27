@@ -4,6 +4,7 @@
     :width="800"
     :visible="visible"
     :confirmLoading="loading"
+    :maskClosable="false"
     okText="确定"
     cancelText="取消"
     @ok="() => { $emit('ok') }"
@@ -116,7 +117,7 @@
           </a-col>
         </a-row>
       </a-form>
-      <child-table v-if="childCols.length" :dataSource="childData" :setting="setting" />
+      <child-table v-if="childCols.length" :dataSource="childData" :settingMap="settingMap" />
     </a-spin>
   </a-modal>
 </template>
@@ -125,11 +126,13 @@
 import moment from 'moment'
 import pick from 'lodash.pick'
 import ChildTable from './ChildTable'
+import MixGetSettings from '@/mixins/MixGetSettings'
 
 export default {
   components: {
     ChildTable
   },
+  mixins: [MixGetSettings],
   props: {
     visible: {
       type: Boolean,
@@ -147,9 +150,9 @@ export default {
       type: Object,
       default: () => null
     },
-    setting: {
+    settingMap: {
       type: Object,
-      default: { tab: null, form: null }
+      default: { tab: null, form: null, search: null }
     },
   },
   data () {
@@ -181,21 +184,21 @@ export default {
   },
   computed: {
     activeFormSet() {
-      let formSet = this.setting.form
+      let formSet = this.settingMap.form
       if (!formSet) return []
-      let tabSet = this.setting.tab
+      let tabSet = this.settingMap.tab
       return formSet.filter(d => d.displayInAdd !== 'n' && d.dataIndex.toLowerCase() !== 'id' && tabSet.cols.includes(d.dataIndex))
     },
     fields() {
       return ['id', ...this.activeFormSet.map(d => d.dataIndex)]
     },
     childCols() {
-      let tabSet = this.setting.tab || {}
+      let tabSet = this.settingMap.tab || {}
       return tabSet.childCols || []
     },
     childData() {
       if (!this.model) return []
-      let tabSet = this.setting.tab || {}
+      let tabSet = this.settingMap.tab || {}
       return tabSet.childKey ? this.model[tabSet.childKey] || [] : []
     }
   },
@@ -214,7 +217,7 @@ export default {
     this.$watch('model', () => {
       this.isRegistered = false
       setTimeout(() => {
-        this.setting.form.forEach(item => {
+        this.settingMap.form.forEach(item => {
           if (item.formType === 'switch') {
             let v = this.getDefaultChecked(item)
             this.onSwitchChange(v, item)
@@ -222,7 +225,7 @@ export default {
         })
         this.isRegistered = true
       })
-      console.log(this.setting, this.model)
+      console.log(this.settingMap, this.model)
       this.model && this.form.setFieldsValue(pick(this.model, this.fields))
     })
   },
@@ -242,53 +245,6 @@ export default {
       } else if (item.formType === 'switch') v = !v
       return v
     },
-    getConf(item) {
-      let { dataIndex } = item
-      let formSet = this.setting.form
-      if (!formSet) return null
-      let conf = formSet.find(d => d.dataIndex == dataIndex)
-      return conf
-    },
-    getDefaultFormat(item) {
-      let { formType, format } = item
-      if (item.format) return item.format
-      if (formType === 'datepicker') return 'YYYY-MM-DD'
-      else if (formType === 'timepicker') return 'YYYY-MM-DD HH:mm:ss'
-      return undefined
-    },
-    getDefaultVal(item) {
-      let conf = this.getConf(item)
-      if (!conf) return ''
-      // TODO: 待完善代码
-      // let v = ''
-      // if (conf.default === 'auto') {
-      //   switch (item.dataIndex) {
-      //     case 'sort':
-      //       v = this.tableData.length + 1
-      //       break
-      //     default:
-      //   }
-      // }
-      // return v
-      let v = conf.default
-      if (!conf.formType || conf.formType === 'input') v = v == undefined ? '' : String(v)
-      else if (conf.formType === 'switch') v = Boolean(v)
-      return v
-    },
-    getOpts(item) {
-      let conf = this.getConf(item)
-      if (!conf || conf.options === 'dynamic') return []
-      return conf.options
-    },
-    checkTypeDate(item)  {
-      return ['datepicker', 'timepicker'].indexOf(item.formType) !== -1
-    },
-    checkTypeNum(item) {
-      return /^(int|float|number)/.test(item.dataType)
-    },
-    checkWide(item) {
-      return /备注|意见/.test(item.title)
-    }
   }
 }
 </script>
@@ -310,8 +266,5 @@ export default {
     padding-right: 15px;
 
   }
-}
-.editable-add-btn {
-  margin-bottom: 8px;
 }
 </style>

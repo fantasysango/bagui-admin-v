@@ -76,13 +76,14 @@
 	},
 	{
 		"dataIndex": "applyDeptId",
-		"title": "申请部门ID",
+		"title": "申请部门",
 		"formType": "select",
 		"options": [],
 		"dictUrl": "/dept/list",
 		"dictLabel": "name",
 		"dictValue": "id",
 		"displayInTab": "n",
+		"orgTitle": "申请部门ID",
 		"dynamic": true
 	},
 	{
@@ -104,13 +105,14 @@
 	},
 	{
 		"dataIndex": "applyEmpId",
-		"title": "申请人ID",
+		"title": "申请人",
 		"formType": "select",
 		"options": [],
 		"dictUrl": "/emp/list",
 		"dictLabel": "empname",
 		"dictValue": "id",
 		"displayInTab": "n",
+		"orgTitle": "申请人ID",
 		"dynamic": true
 	},
 	{
@@ -176,14 +178,14 @@
 	},
 	{
 		"dataIndex": "carId",
-		"title": "车辆ID",
+		"title": "车辆",
 		"formType": "select",
 		"options": [],
 		"dictUrl": "/car/list",
 		"dictLabel": "number",
 		"dictVaue": "id",
 		"displayInTab": "n",
-		"displayInAdd": "n",
+		"orgTitle": "车辆ID",
 		"dynamic": true
 	},
 	{
@@ -288,24 +290,18 @@
 	},
 	{
 		"dataIndex": "createById",
-		"title": "创建人ID",
+		"title": "创建人",
 		"formType": "input",
 		"displayInTab": "n",
 		"displayInAdd": "n",
-		"max": 36
-	},
-	{
-		"dataIndex": "createById",
-		"title": "创建人ID",
-		"formType": "input",
-		"displayInTab": "n",
-		"displayInAdd": "n",
-		"max": 36
+		"max": 36,
+		"orgTitle": "创建人ID"
 	},
 	{
 		"dataIndex": "createByName",
 		"title": "创建人",
 		"formType": "input",
+		"displayInTab": "n",
 		"displayInAdd": "n",
 		"max": 64
 	},
@@ -319,10 +315,11 @@
 	},
 	{
 		"dataIndex": "creatorId",
-		"title": "创建者ID",
+		"title": "创建者",
 		"formType": "input",
 		"displayInTab": "n",
-		"displayInAdd": "n"
+		"displayInAdd": "n",
+		"orgTitle": "创建者ID"
 	},
 	{
 		"dataIndex": "customerCode",
@@ -413,7 +410,7 @@
 	},
 	{
 		"dataIndex": "deptId",
-		"title": "部门ID",
+		"title": "部门",
 		"formType": "select",
 		"options": [],
 		"dictUrl": "/dept/list",
@@ -422,6 +419,7 @@
 		"displayInTab": "n",
 		"displayInQuery": "y",
 		"displayInAdd": "n",
+		"orgTitle": "部门ID",
 		"dynamic": true
 	},
 	{
@@ -536,14 +534,14 @@
 	},
 	{
 		"dataIndex": "driverId",
-		"title": "驾驶员id",
+		"title": "驾驶员",
 		"formType": "select",
 		"options": [],
 		"dictUrl": "/driver/list",
 		"dictLabel": "name",
 		"dictValue": "id",
 		"displayInTab": "n",
-		"displayInAdd": "n",
+		"orgTitle": "驾驶员id",
 		"dynamic": true
 	},
 	{
@@ -653,14 +651,14 @@
 	},
 	{
 		"dataIndex": "etcId",
-		"title": "ETCid",
+		"title": "ETC",
 		"formType": "select",
 		"options": [],
 		"dictUrl": "/etc/list",
 		"dictLabel": "number",
 		"dictValue": "id",
 		"displayInTab": "n",
-		"displayInAdd": "n",
+		"orgTitle": "ETCid",
 		"dynamic": true
 	},
 	{
@@ -706,14 +704,14 @@
 	},
 	{
 		"dataIndex": "gasolineCardId",
-		"title": "油卡ID",
+		"title": "油卡",
 		"formType": "select",
 		"options": [],
 		"dictUrl": "/gasolineCard/list",
 		"dictLabel": "number",
 		"dictValue": "id",
 		"displayInTab": "n",
-		"displayInAdd": "n",
+		"orgTitle": "油卡ID",
 		"dynamic": true
 	},
 	{
@@ -878,7 +876,7 @@
 	},
 	{
 		"dataIndex": "leaderId",
-		"title": "企业负责人ID",
+		"title": "企业负责人",
 		"formType": "select",
 		"options": [],
 		"dictUrl": "/leader/list",
@@ -887,6 +885,7 @@
 		"displayInTab": "n",
 		"displayInQuery": "y",
 		"max": 36,
+		"orgTitle": "企业负责人ID",
 		"dynamic": true
 	},
 	{
@@ -897,6 +896,7 @@
 		"dictUrl": "/leader/list",
 		"dictLabel": "name",
 		"dictValue": "id",
+		"displayInTab": "n",
 		"max": 64,
 		"dynamic": true
 	},
@@ -1132,13 +1132,14 @@
 	},
 	{
 		"dataIndex": "parentId",
-		"title": "上级部门ID",
+		"title": "上级部门",
 		"formType": "select",
 		"options": [],
 		"dictUrl": "/dept/list",
 		"dictLabel": "name",
 		"dictValue": "id",
 		"max": 36,
+		"orgTitle": "上级部门ID",
 		"dynamic": true
 	},
 	{
@@ -1316,7 +1317,7 @@
 	},
 	{
 		"dataIndex": "roleId",
-		"title": "角色ID",
+		"title": "角色",
 		"formType": "select",
 		"options": [],
 		"dictUrl": "/role/list",
@@ -1324,6 +1325,7 @@
 		"dictValue": "id",
 		"displayInTab": "n",
 		"displayInAdd": "n",
+		"orgTitle": "角色ID",
 		"dynamic": true
 	},
 	{
@@ -1548,25 +1550,28 @@
 	},
 	{
 		"dataIndex": "updateBy",
-		"title": "更新人ID",
-		"formType": "input",
-		"displayInTab": "n",
-		"displayInAdd": "n"
-	},
-	{
-		"dataIndex": "updateById",
-		"title": "更新人ID",
+		"title": "更新人",
 		"formType": "input",
 		"displayInTab": "n",
 		"displayInAdd": "n",
-		"max": 36
+		"orgTitle": "更新人ID"
 	},
 	{
 		"dataIndex": "updateById",
-		"title": "更新人ID",
+		"title": "更新人",
+		"formType": "input",
+		"displayInTab": "n",
+		"displayInAdd": "n",
+		"max": 36,
+		"orgTitle": "更新人ID"
+	},
+	{
+		"dataIndex": "updateById",
+		"title": "更新人",
 		"formType": "input",
 		"displayInAdd": "n",
-		"max": 36
+		"max": 36,
+		"orgTitle": "更新人ID"
 	},
 	{
 		"dataIndex": "updateByName",
@@ -1600,6 +1605,13 @@
 		"options": [],
 		"dictType": "CAR_USE_TYPE",
 		"displayInTab": "n",
+		"dynamic": true
+	},
+	{
+		"dataIndex": "year",
+		"title": "年份",
+		"formType": "select",
+		"default": "${CURRENT_YEAR}",
 		"dynamic": true
 	}
 ]

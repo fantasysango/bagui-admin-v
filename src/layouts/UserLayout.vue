@@ -4,8 +4,9 @@
       <div class="top">
         <div class="header">
           <a href="/">
-            <img src="~@/assets/logo.png" class="logo" alt="logo">
-            <span class="title">八规项目</span>
+            <img src="~@/assets/logo.png" class="logo" alt="logo" style="border-radius:  50%;">
+            <span class="title">八项规定台账项目</span>
+            <!-- <img src="~@/assets/banner_logo.png" class="logo" alt="logo"> -->
           </a>
         </div>
         <!-- <div class="desc">

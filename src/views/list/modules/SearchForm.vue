@@ -74,30 +74,37 @@
 
 <script>
 import moment from 'moment'
+import MixGetSettings from '@/mixins/MixGetSettings'
 
 export default {
   name: 'SearchForm',
   components: {
   },
+  mixins: [MixGetSettings],
   props: {
-    setting: {
+    compType: {
+      type: String,
+      default: () => 'table'
+    },
+    settingMap: {
       type: Object,
-      default: { tab: null, search: null }
+      default: { tab: null, form: null, search: null }
     },
   },
   data () {
     return {
       advanced: false,
-      queryForm: {}
+      queryForm: {},
     }
   },
   computed: {
     activeSearchSet() {
-      let searchSet = this.setting.search
+      let searchSet = this.settingMap.search
       if (!searchSet) return []
-      let tabSet = this.setting.tab
       return searchSet
-      // .filter(d => d.displayInAdd !== 'n' && tabSet.cols.includes(d.dataIndex))
+
+      // let tabSet = this.settingMap.tab
+      // return searchSet.filter(d => d.displayInAdd !== 'n' && tabSet.cols.includes(d.dataIndex))
     },
   },
   watch: {
@@ -130,34 +137,34 @@ export default {
     toggleAdvanced () {
       this.advanced = !this.advanced
     },
-    getConf(item) {
-      let { dataIndex } = item
-      let formSet = this.setting.form
-      if (!formSet) return null
-      let conf = formSet.find(d => d.dataIndex == dataIndex)
-      return conf
-    },
-    getOpts(item) {
-      let conf = this.getConf(item)
-      if (!conf || conf.options === 'dynamic') return []
-      return conf.options
-    },
-    getDefaultFormat(item) {
-      let { formType, format } = item
-      if (item.format) return item.format
-      if (formType === 'datepicker') return 'YYYY-MM-DD'
-      else if (formType === 'timepicker') return 'YYYY-MM-DD HH:mm:ss'
-      return undefined
-    },
-    checkTypeDate(item)  {
-      return ['datepicker', 'timepicker'].indexOf(item.formType) !== -1
-    },
-    checkTypeNum(item) {
-      return /^(int|float|number)/.test(item.dataType)
-    },
-    checkWide(item) {
-      return /备注|意见/.test(item.title)
-    }
+    // getConf(item) {
+    //   let { dataIndex } = item
+    //   let formSet = this.settingMap.form
+    //   if (!formSet) return null
+    //   let conf = formSet.find(d => d.dataIndex == dataIndex)
+    //   return conf
+    // },
+    // getOpts(item) {
+    //   let conf = this.getConf(item)
+    //   if (!conf || conf.options === 'dynamic') return []
+    //   return conf.options
+    // },
+    // getDefaultFormat(item) {
+    //   let { formType, format } = item
+    //   if (item.format) return item.format
+    //   if (formType === 'datepicker') return 'YYYY-MM-DD'
+    //   else if (formType === 'timepicker') return 'YYYY-MM-DD HH:mm:ss'
+    //   return undefined
+    // },
+    // checkTypeDate(item)  {
+    //   return ['datepicker', 'timepicker'].indexOf(item.formType) !== -1
+    // },
+    // checkTypeNum(item) {
+    //   return /^(int|float|number)/.test(item.dataType)
+    // },
+    // checkWide(item) {
+    //   return /备注|意见/.test(item.title)
+    // }
   }
 }
 </script>

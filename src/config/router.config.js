@@ -460,6 +460,22 @@ export const asyncRouterMap = [
           },
         ]
       },
+      {
+        path: '/charts',
+        name: 'Charts',
+        component: RouteView,
+        redirect: '/charts/index',
+        meta: { title: '报表管理', icon: 'table', permission: ['table'] },
+        children: [
+          {
+            path: '/charts/index',
+            name: 'ChartsIndex',
+            hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+            component: () => import('@/views/list/ChartWrap'),
+            meta: { title: '公务用车年度台账', keepAlive: true, permission: ['table'], key: 'training' }
+          },
+        ]
+      },
     ]
   },
   {

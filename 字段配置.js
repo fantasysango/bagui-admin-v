@@ -40,7 +40,6 @@ var arrConfig = [
     { group: '', groupName: '', dataIndex: 'collectionNumber2', title: '托收协议2', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '36', min: '' },
     { group: '', groupName: '', dataIndex: 'collectionNumber3', title: '托收协议3', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '36', min: '' },
     { group: '', groupName: '', dataIndex: 'collectionNumber4', title: '托收协议4', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '36', min: '' },
-    { group: '', groupName: '', dataIndex: 'createById', title: '创建人ID', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '36', min: '' },
     { group: 'leader', groupName: '企业负责人', dataIndex: 'number', title: '工号', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '64', min: '' },
     { group: '', groupName: '', dataIndex: 'updateById', title: '更新人ID', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '否', max: '36', min: '' },
     { group: '', groupName: '', dataIndex: 'carConfigType', title: '用车类型', formType: '', dataType: '', default: '', options: 'dynamic', dictType: 'CAR_CONFIG_TYPE', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
@@ -75,9 +74,9 @@ var arrConfig = [
     { group: '', groupName: '', dataIndex: 'propertyUnit', title: '产权单位', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '30', min: '' },
     { group: '', groupName: '', dataIndex: 'purchaseApplyDateAndDocumentNumber', title: '购置申请日期及文号', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '50', min: '' },
     { group: '', groupName: '', dataIndex: 'applicationReplyDateAndDocumentNumber', title: '批复日期及文号', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '50', min: '' },
-    { group: '', groupName: '', dataIndex: 'driverId', title: '驾驶员id', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/driver/list', dictLabel: 'name', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'etcId', title: 'ETCid', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/etc/list', dictLabel: 'number', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'gasolineCardId', title: '油卡ID', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/gasolineCard/list', dictLabel: 'number', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'driverId', title: '驾驶员id', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/driver/list', dictLabel: 'name', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'etcId', title: 'ETCid', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/etc/list', dictLabel: 'number', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'gasolineCardId', title: '油卡ID', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/gasolineCard/list', dictLabel: 'number', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'disposalTypeCode', title: '处置类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'CAR_DISPOSAL_TYPE', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'disposalTypeValue', title: '处置类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'CAR_DISPOSAL_TYPE', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'disposer', title: '处置人', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '30', min: '' },
@@ -93,16 +92,16 @@ var arrConfig = [
     { group: '', groupName: '', dataIndex: 'remarks', title: '备注', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '100', min: '' },
     { group: 'driver', groupName: '驾驶员', dataIndex: 'name', title: '姓名', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '是', displayInAdd: '', max: '64', min: '' },
     { group: '', groupName: '', dataIndex: 'updateById', title: '更新人ID', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '36', min: '' },
-    { group: '', groupName: '', dataIndex: 'createByName', title: '创建人', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '否', max: '64', min: '' },
+    { group: '', groupName: '', dataIndex: 'createByName', title: '创建人', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '64', min: '' },
     { group: '', groupName: '', dataIndex: 'deptName', title: '部门名称', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '64', min: '' },
-    { group: '', groupName: '', dataIndex: 'leaderName', title: '企业负责人', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/leader/list', dictLabel: 'name', dictValue: 'id', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '64', min: '' },
+    { group: '', groupName: '', dataIndex: 'leaderName', title: '企业负责人', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/leader/list', dictLabel: 'name', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '64', min: '' },
     { group: '', groupName: '', dataIndex: 'leaderId', title: '企业负责人ID', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/leader/list', dictLabel: 'name', dictValue: 'id', displayInTab: '否', displayInQuery: '是', displayInAdd: '', max: '36', min: '' },
     { group: '', groupName: '', dataIndex: 'updateByName', title: '更新人', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '64', min: '' },
     { group: '', groupName: '', dataIndex: 'etcNumber', title: 'ETC卡号', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/etc/list', dictLabel: 'number', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'gasolineNumber', title: '油卡卡号', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/gasolineCard/list', dictLabel: 'number', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: 'etc', groupName: 'ETC', dataIndex: 'number', title: '卡号', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '36', min: '' },
     { group: '', groupName: '', dataIndex: 'operator', title: '操作人', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '64', min: '' },
-    { group: '', groupName: '', dataIndex: 'carId', title: '车辆ID', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/car/list', dictLabel: 'number', dictVaue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'carId', title: '车辆ID', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/car/list', dictLabel: 'number', dictVaue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'carNumber', title: '车牌号', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/car/list', dictLabel: 'number', dictVaue: 'id', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: 'gasolineCard', groupName: '油卡', dataIndex: 'number', title: '卡号', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '36', min: '' },
     { group: '', groupName: '', dataIndex: 'gasolineCardTypeCode', title: '油卡类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'GASOLINECARD_TYPE', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '', min: '' },
@@ -193,7 +192,6 @@ var arrConfig = [
     { group: 'operation', groupName: '运行费', dataIndex: 'date', title: '日期', formType: '日期选择框', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: 'operation', groupName: '运行费', dataIndex: 'operationPaymentTypeCode', title: '支付类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'OPERATION_PAYMENT_TYPE', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: 'operation', groupName: '运行费', dataIndex: 'operationPaymentTypeValue', title: '支付类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'OPERATION_PAYMENT_TYPE', displayInTab: '', displayInQuery: '', displayInAdd: '否', max: '', min: '' },
-
 ]
 
 var ctrlMap = { '单选框': 'radio', '开关': 'switch', '日期选择框': 'datepicker', '时间选择框': 'timepicker', '下拉框': 'select', '下拉框SP': 'select' }
@@ -210,6 +208,13 @@ arrConfig.forEach(d => {
         d[k] = (d[k] === 0 ? '0' : d[k]) || ''
         let v = d[k]
         switch (k) {
+            case 'title': {
+                if (/\S+ID$/i.test(d[k])) {
+                    d['orgTitle'] = d[k]
+                    d[k] = d[k].replace(/ID$/i, '')
+                }
+                break
+            }
             case 'options':
                 if (v) {
                     let arr = v.split(v.indexOf('，') !== -1 ? '，' : ',')
@@ -257,8 +262,8 @@ arrConfig.forEach(d => {
     })
 })
 
-// 额外添加 开始时间/开始日期 —— 结束时间/结束日期
 ;(() => {
+    // 额外添加 开始时间/开始日期 —— 结束时间/结束日期
     let startDate = arrConfig.find(d => /startDate/i.test(d.dataIndex))
     if (startDate) startDate = { ...startDate, dataIndex: 'startDate', title: '开始日期', displayInQuery: 'y' }
     let endDate = arrConfig.find(d => /endDate/i.test(d.dataIndex))
@@ -276,6 +281,9 @@ arrConfig.forEach(d => {
         endTime2 = { ...endTime2, dataIndex: 'endTime2', title: '至', displayInQuery: 'y', colon: false }
     }
     arrConfig.push(startDate, endDate, startTime1, startTime2, endTime1, endTime2)
+    // 额外添加 年份
+    let year = { dataIndex: 'year', title: '年份', formType: 'select', default: '${CURRENT_YEAR}', dynamic: true }
+    arrConfig.push(year)
 })()
 
 arrConfig.sort((a, b) => a.dataIndex.toLowerCase() > b.dataIndex.toLowerCase() ? 1 : -1)

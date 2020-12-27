@@ -113,4 +113,11 @@ export default [
         },
         cols: ["id", "date", "operationPaymentTypeCode", "carId", "driverId", "deptId", "leaderId", "accountBooksCode", "amount", "documentNumber", "financialSystemNumber", "entryDate", "remarks"],
     },
+    {
+        code: '5.1',
+        key: 'OVOReport',
+        title: '公务用车年度台账',
+        compType: 'chart',
+        searchCols: ["year", "leaderId", "carId"]
+    },
 ]

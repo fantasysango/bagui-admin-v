@@ -1,10 +1,13 @@
 <template>
   <page-header-wrapper class="gb-tablewrap-nowrap">
+    <template v-slot:title>
+      <span></span>
+    </template>
     <a-card :bordered="false">
       <div class="table-page-search-wrapper">
         <search-form
           ref="search"
-          :setting="settingMap"
+          :settingMap="settingMap"
           @query="setQueryParam"
         />
       </div>
@@ -33,6 +36,7 @@
         <template #serial="text, record, index">{{ index + 1 }}</template>
         <template #action="text, record">
           <a href="javascript:;" @click="handleEdit(record)">编辑</a>
+          <a v-if="(settingMap.tab || {}).childKey" href="javascript:;" @click="handleEdit(record, { type: 'child' })" style="margin-left: .5em;">配置</a>
           <a-popconfirm
             v-if="!notAllowDelete"
             placement="topRight"
@@ -52,9 +56,17 @@
         :visible="visible"
         :loading="confirmLoading"
         :model="mdl"
-        :setting="settingMap"
+        :settingMap="settingMap"
         @cancel="handleCancel"
         @ok="handleOk"
+      />
+
+      <child-modal
+        v-if="visibleOfChild"
+        :visible="visibleOfChild"
+        :settingMap="settingMap"
+        :model="mdl"
+        @cancel="() => this.visibleOfChild = false"
       />
     </a-card>
   </page-header-wrapper>
@@ -69,6 +81,7 @@ const { tabSettings, formSettings } = settings
 
 import CreateForm from './modules/CreateForm'
 import SearchForm from './modules/SearchForm'
+import ChildModal from './modules/ChildModal'
 
 export default {
   name: 'TableList',
@@ -77,11 +90,13 @@ export default {
     Ellipsis,
     CreateForm,
     SearchForm,
+    ChildModal
   },
   data() {
     return {
       // create model
       visible: false,
+      visibleOfChild: false,
       isFormReady: true,
       confirmLoading: false,
       mdl: null,
@@ -218,7 +233,7 @@ export default {
         let cols = formSettings.filter((d) => d.dataIndex === k)
         let col = cols[0]
         if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
-        col && searchSet.push(_.cloneDeep(col))
+        col && searchSet.push(col)
       })
       this.settingMap.search = searchSet
       let tabCols = tabSet.cols
@@ -304,6 +319,7 @@ export default {
           resolve(final)
         }
       }
+      // TODO: 正常情况下 formSet 包括 searchSet 的所有子项
       this.settingMap.form.forEach((d, i, a) => {
         if (d.dynamic && d.displayInAdd  !== 'n') {
           let { dataIndex, dictType, dictUrl, dictLabel, dictValue } = d
@@ -400,11 +416,17 @@ export default {
       this.mdl = null
       this.visible = true
     },
-    async handleEdit(record) {
-      // if (!await this.fetchDynamicOpts()) return
-      if (!await this.fetchChildData(record)) return
-      this.visible = true
+    async handleEdit(record, config = {}) {
+      config = {
+        type: '', // '' | 'child'
+        ...config
+      }
       this.mdl = _.cloneDeep(record)
+      if (config.type === 'child') {
+        if (await this.fetchChildData(record)) this.visibleOfChild = true
+        return
+      }
+      this.visible = true
     },
     handleDeleteBatch(keys) {
       this.$message.warning('暂时无法批量删除')
@@ -539,5 +561,8 @@ export default {
 <style lang="less" scoped>
   /deep/ .ant-table-body {
     overflow-x: auto !important;
+  }
+  /deep/ .ant-page-header-heading {
+    margin-top: 0;
   }
 </style>

@@ -2,7 +2,8 @@
   <!-- <a-dropdown v-if="currentUser && currentUser.name" placement="bottomRight"> -->
   <a-dropdown v-if="empInfo && empInfo.name" placement="bottomRight">
     <span class="ant-pro-account-avatar">
-      <a-avatar size="small" src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" class="antd-pro-global-header-index-avatar" />
+      <!-- TODO: 暂未开放头像设置 -->
+      <!-- <a-avatar size="small" src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" class="antd-pro-global-header-index-avatar" /> -->
       <!-- <span>{{ currentUser.name }}</span> -->
       <span>{{ empInfo.account }}</span>
     </span>

@@ -20,10 +20,13 @@
           我们推荐使用这种方式进行 LOGO 和 title 自定义
     -->
     <template v-slot:menuHeaderRender>
-      <div>
+      <div v-if="collapsed">
         <!-- <logo-svg /> -->
-        <img src="~@/assets/logo.png" />
-        <h1>{{ title }}</h1>
+        <img src="~@/assets/logo.png" style="border-radius: 50%;" />
+        <!-- <h1>{{ title }}</h1> -->
+      </div>
+      <div v-else class="my-logo-wrap" :class="{ 'is-topmenu': settings.layout === 'topmenu' }">
+        <img src="~@/assets/banner_logo.png" />
       </div>
     </template>
 
@@ -168,4 +171,14 @@ export default {
 
 <style lang="less">
 @import "./BasicLayout.less";
+
+.my-logo-wrap  {
+  &:not(.is-topmenu) {
+    margin-left: -24px;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
 </style>

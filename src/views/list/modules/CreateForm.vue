@@ -117,7 +117,7 @@
           </a-col>
         </a-row>
       </a-form>
-      <child-table v-if="childCols.length" :dataSource="childData" :settingMap="settingMap" />
+      <!-- <child-table v-if="childCols.length" :dataSource="childData" :settingMap="settingMap" /> -->
     </a-spin>
   </a-modal>
 </template>

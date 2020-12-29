@@ -14,8 +14,7 @@ export const asyncRouterMap = [
     name: 'index',
     component: BasicLayout,
     meta: { title: 'menu.home' },
-    redirect: '/enterprise/index',
-    // redirect: '/dashboard/workplace',
+    redirect: '/dashboard',
     // children: [
     //   // dashboard
     //   {
@@ -336,6 +335,21 @@ export const asyncRouterMap = [
     children: [
       // 本项目列表 
       {
+        path: '/dashboard',
+        name: 'dashboard',
+        redirect: '/dashboard/analysis',
+        component: RouteView,
+        meta: { title: 'menu.dashboard', keepAlive: true, icon: bxAnaalyse, permission: [ 'dashboard' ] },
+        children: [
+          {
+            path: '/dashboard/analysis/:pageNo([1-9]\\d*)?',
+            name: 'Analysis',
+            component: () => import('@/views/dashboard/Analysis'),
+            meta: { title: 'menu.dashboard.analysis', keepAlive: false, permission: [ 'dashboard' ] }
+          },
+        ]
+      },
+      {
         path: '/enterprise',
         name: 'Enterprise',
         component: RouteView,
@@ -349,13 +363,13 @@ export const asyncRouterMap = [
             component: () => import('@/views/list/TableList'),
             meta: { title: '企业负责人信息', keepAlive: true, permission: ['table'], key: 'leader' }
           },
-          {
-            path: '/list/table-list-bak/:pageNo([1-9]\\d*)?',
-            name: 'TableListWrapperBak',
-            hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-            component: () => import('@/views/list/TableListBak'),
-            meta: { title: '查询表格备份', keepAlive: true, permission: ['table'] }
-          },
+          // {
+          //   path: '/list/table-list-bak/:pageNo([1-9]\\d*)?',
+          //   name: 'TableListWrapperBak',
+          //   hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+          //   component: () => import('@/views/list/TableListBak'),
+          //   meta: { title: '查询表格备份', keepAlive: true, permission: ['table'] }
+          // },
         ]
       },
       {

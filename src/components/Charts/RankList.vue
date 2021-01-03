@@ -31,15 +31,18 @@ export default {
 <style lang="less" scoped>
 
   .rank {
-    padding: 0 32px 32px 72px;
+    padding: 0 24px 32px 64px;
 
     .list {
       margin: 25px 0 0;
       padding: 0;
       list-style: none;
+      max-height: 270px;
+      overflow: auto;
 
       li {
         margin-top: 16px;
+        padding-right: 8px;
 
         span {
           color: rgba(0, 0, 0, .65);
@@ -71,7 +74,7 @@ export default {
   }
 
   .mobile .rank {
-    padding: 0 32px 32px 32px;
+    padding: 0 24px 24px 24px;
   }
 
 </style>

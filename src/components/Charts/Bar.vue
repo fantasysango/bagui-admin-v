@@ -4,6 +4,7 @@
     <v-chart
       height="254"
       :data="data"
+      :scale="scale"
       :forceFit="true"
       :padding="['auto', 'auto', '40', '50']">
       <v-tooltip />
@@ -29,17 +30,18 @@ export default {
     },
     scale: {
       type: Array,
-      default: () => {
-        return [{
-          dataKey: 'x',
-          min: 2
-        }, {
-          dataKey: 'y',
-          title: '时间',
-          min: 1,
-          max: 22
-        }]
-      }
+      // default: () => {
+      //   return [{
+      //     dataKey: 'x',
+      //     min: 2
+      //   }, {
+      //     dataKey: 'y',
+      //     title: '时间',
+      //     min: 1,
+      //     max: 22
+      //   }]
+      // }
+      default: () => null
     },
     tooltip: {
       type: Array,

@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import CONST from './_CONST'
 
 const api = {
   user: '/user',
@@ -71,10 +72,8 @@ export function saveSub (sub) {
 }
 
 export function axiosOperateTab(parameter, config = {}) {
-  // const baseURL = 'http://hezhongsoft.com:8080'
-  const baseURL = 'http://47.96.126.38:8080'
   return request({
-    baseURL,
+    baseURL: CONST.HOST,
     url: '',  // 待在config中填充
     method: 'post',
     data: parameter,

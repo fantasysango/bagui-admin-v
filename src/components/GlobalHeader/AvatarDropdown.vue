@@ -5,6 +5,7 @@
       <!-- TODO: 暂未开放头像设置 -->
       <!-- <a-avatar size="small" src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" class="antd-pro-global-header-index-avatar" /> -->
       <!-- <span>{{ currentUser.name }}</span> -->
+      <a-avatar size="small" icon="user" class="antd-pro-global-header-index-avatar" />
       <span>{{ empInfo.account }}</span>
     </span>
     <template v-slot:overlay>

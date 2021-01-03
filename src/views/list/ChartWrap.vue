@@ -189,7 +189,7 @@ export default {
       }
       return `/epd${key ? '/' + key : ''}${str.startsWith('/') ? str : '/' + str}`
     },
-    getBaseParam(obj = {}, type = '') {
+    getBaseParam(obj = {}) {
       return Object.assign({
         deptId: this.$store.getters.empInfo.deptId,
       }, obj)

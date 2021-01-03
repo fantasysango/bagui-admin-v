@@ -337,16 +337,22 @@ export const asyncRouterMap = [
       {
         path: '/dashboard',
         name: 'dashboard',
-        redirect: '/dashboard/analysis',
+        redirect: '/dashboard/index',
         component: RouteView,
-        meta: { title: 'menu.dashboard', keepAlive: true, icon: bxAnaalyse, permission: [ 'dashboard' ] },
+        meta: { title: '总览', keepAlive: true, icon: bxAnaalyse, permission: [ 'dashboard' ] },
         children: [
           {
-            path: '/dashboard/analysis/:pageNo([1-9]\\d*)?',
-            name: 'Analysis',
+            path: '/dashboard/index',
+            name: 'DashboardIndex',
             component: () => import('@/views/dashboard/Analysis'),
-            meta: { title: 'menu.dashboard.analysis', keepAlive: false, permission: [ 'dashboard' ] }
+            meta: { title: '分析页', keepAlive: false, permission: [ 'dashboard' ] }
           },
+          // {
+          //   path: '/dashboard/analysis/:pageNo([1-9]\\d*)?',
+          //   name: 'Analysis',
+          //   component: () => import('@/views/dashboard/AnalysisBak'),
+          //   meta: { title: '分析页备份', keepAlive: false, permission: [ 'dashboard' ] }
+          // },
         ]
       },
       {
@@ -354,7 +360,7 @@ export const asyncRouterMap = [
         name: 'Enterprise',
         component: RouteView,
         redirect: '/enterprise/index',
-        meta: { title: '企业负责人管理', icon: 'table', permission: ['table'] },
+        meta: { title: '企业负责人管理', icon: 'bgLeader', permission: ['table'] },
         children: [
           {
             path: '/enterprise/index',
@@ -377,7 +383,7 @@ export const asyncRouterMap = [
         name: 'Car',
         component: RouteView,
         redirect: '/car/index',
-        meta: { title: '车辆管理', icon: 'table', permission: ['table'] },
+        meta: { title: '车辆管理', icon: 'bgCar', permission: ['table'] },
         children: [
           {
             path: '/car/index',
@@ -421,7 +427,7 @@ export const asyncRouterMap = [
         name: 'Payment',
         component: RouteView,
         redirect: '/payment/index',
-        meta: { title: '费用管理', icon: 'table', permission: ['table'] },
+        meta: { title: '费用管理', icon: 'bgPayment', permission: ['table'] },
         children: [
           {
             path: '/payment/index',
@@ -479,7 +485,7 @@ export const asyncRouterMap = [
         name: 'Charts',
         component: RouteView,
         redirect: '/charts/index',
-        meta: { title: '报表管理', icon: 'table', permission: ['table'] },
+        meta: { title: '报表管理', icon: 'bgChart', permission: ['table'] },
         children: [
           {
             path: '/charts/index',

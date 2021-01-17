@@ -98,6 +98,7 @@ export default {
       visible: false,
       visibleOfChild: false,
       isFormReady: true,
+      isTableReady: false,
       confirmLoading: false,
       mdl: null,
       // 高级搜索 展开/关闭
@@ -111,6 +112,7 @@ export default {
       tableData: [],
       // 加载数据方法 必须为 Promise 对象
       loadData: (parameter) => {
+        if (!this.isTableReady) return Promise.reject()
         let { sortField, sortOrder } = parameter
         if (sortField) {
           return new Promise(resolve => {
@@ -206,7 +208,6 @@ export default {
   },
   watch: {
     '$route.meta.key'(v)  {
-      this.init()
       // const form = this.$refs.createModal.form
       // // 重置表单数据
       // form.resetFields()
@@ -217,10 +218,9 @@ export default {
       this.queryParam = {}
       // this.$refs.search.doReset({ query: false })
       
-      // 刷新表格
-      this.$refs.table.refresh()
       this.selectedRowKeys = []
       this.selectedRows = []
+      this.init()
     }
   },
   methods: {
@@ -282,7 +282,12 @@ export default {
       // }
       console.log(this.settingMap)
       this.notAllowDelete = !!tabSet.notAllowDelete
-      this.fetchDynamicOpts()
+      await this.fetchDynamicOpts()
+      this.refreshTable()
+    },
+    refreshTable() {
+      this.isTableReady = true
+      this.$refs.table.refresh()
     },
     fetchStructure() {
       let params = Object.assign({
@@ -449,7 +454,7 @@ export default {
           // 重置表单数据
           form.resetFields()
           // 刷新表格
-          this.$refs.table.refresh()
+          this.refreshTable()
         } else {
           this.$message.error(res.msg || '操作失败')
         }
@@ -495,7 +500,7 @@ export default {
                 // 重置表单数据
                 form.resetFields()
                 // 刷新表格
-                this.$refs.table.refresh()
+                this.refreshTable()
 
                 if (tabSet.childKey) {
                   res = await axiosOperateTab(
@@ -524,7 +529,7 @@ export default {
                 // 重置表单数据
                 form.resetFields()
                 // 刷新表格
-                this.$refs.table.refresh()
+                this.refreshTable()
 
                 this.$message.info('新增成功')
               } else {
@@ -553,7 +558,7 @@ export default {
     },
     setQueryParam(param) {
       this.queryParam = param
-      this.$refs.table.refresh()
+      this.refreshTable()
     },
   },
 }

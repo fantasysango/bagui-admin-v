@@ -27,7 +27,7 @@ import {
 } from '@/components'
 
 export default {
-  name: 'Analysis',
+  name: 'MyChartCard',
   components: {
     ChartCard,
     Trend,

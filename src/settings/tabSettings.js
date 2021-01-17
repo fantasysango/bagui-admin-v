@@ -120,4 +120,18 @@ export default [
         compType: 'chart',
         searchCols: ["year", "leaderId", "carId"]
     },
+    {
+        code: '5.1',
+        key: 'OVOReport',
+        title: '公务用车年度台账',
+        compType: 'chart',
+        searchCols: ["year", "leaderId", "carId"]
+    },
+    {
+        code: '5.2',
+        key: 'tbReport',
+        title: '交通补贴确认',
+        compType: 'chart',
+        searchCols: ["year", "month"]
+    }, 
 ]

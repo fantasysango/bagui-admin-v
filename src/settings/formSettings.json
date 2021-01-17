@@ -25,10 +25,7 @@
 	{
 		"dataIndex": "accountBooksValue",
 		"title": "账簿",
-		"formType": "select",
-		"options": [],
-		"dictType": "ACCOUNT_BOOKS",
-		"dynamic": true
+		"formType": "input"
 	},
 	{
 		"dataIndex": "activityOrganizationUnit",
@@ -89,12 +86,7 @@
 	{
 		"dataIndex": "applyDeptName",
 		"title": "申请部门",
-		"formType": "select",
-		"options": [],
-		"dictUrl": "/dept/list",
-		"dictLabel": "name",
-		"dictValue": "id",
-		"dynamic": true
+		"formType": "input"
 	},
 	{
 		"dataIndex": "applyEmp",
@@ -118,12 +110,7 @@
 	{
 		"dataIndex": "applyEmpName",
 		"title": "申请人",
-		"formType": "select",
-		"options": [],
-		"dictUrl": "/emp/list",
-		"dictLabel": "empname",
-		"dictValue": "id",
-		"dynamic": true
+		"formType": "input"
 	},
 	{
 		"dataIndex": "applyTime",
@@ -275,10 +262,7 @@
 	{
 		"dataIndex": "configModeValue",
 		"title": "配置类型",
-		"formType": "select",
-		"options": [],
-		"dictType": "CAR_CONFIG_MODE",
-		"dynamic": true
+		"formType": "input"
 	},
 	{
 		"group": "log",
@@ -488,10 +472,7 @@
 	{
 		"dataIndex": "displacementValue",
 		"title": "排量",
-		"formType": "select",
-		"options": [],
-		"dictType": "CAR_DISPLACEMENT",
-		"dynamic": true
+		"formType": "input"
 	},
 	{
 		"dataIndex": "disposalDate",
@@ -547,13 +528,7 @@
 	{
 		"dataIndex": "driverName",
 		"title": "驾驶员",
-		"formType": "select",
-		"options": [],
-		"dictUrl": "/driver/list",
-		"dictLabel": "name",
-		"dictValue": "id",
-		"displayInTab": "n",
-		"dynamic": true
+		"formType": "input"
 	},
 	{
 		"dataIndex": "educationDegree",
@@ -696,11 +671,7 @@
 	{
 		"dataIndex": "fundsSourceValue",
 		"title": "资金来源",
-		"formType": "select",
-		"options": [],
-		"dictType": "CAR_FUNDS_SOURCE",
-		"displayInTab": "n",
-		"dynamic": true
+		"formType": "input"
 	},
 	{
 		"dataIndex": "gasolineCardId",
@@ -891,14 +862,9 @@
 	{
 		"dataIndex": "leaderName",
 		"title": "企业负责人",
-		"formType": "select",
-		"options": [],
-		"dictUrl": "/leader/list",
-		"dictLabel": "name",
-		"dictValue": "id",
+		"formType": "input",
 		"displayInTab": "n",
-		"max": 64,
-		"dynamic": true
+		"max": 64
 	},
 	{
 		"dataIndex": "leaveDate",
@@ -1263,10 +1229,7 @@
 	{
 		"dataIndex": "purposeValue",
 		"title": "车辆用途",
-		"formType": "select",
-		"options": [],
-		"dictType": "CAR_PURPOSE",
-		"dynamic": true
+		"formType": "input"
 	},
 	{
 		"group": "entertainment",
@@ -1601,17 +1564,21 @@
 	{
 		"dataIndex": "useTypeValue",
 		"title": "使用类型",
-		"formType": "select",
-		"options": [],
-		"dictType": "CAR_USE_TYPE",
-		"displayInTab": "n",
-		"dynamic": true
+		"formType": "input"
 	},
 	{
 		"dataIndex": "year",
 		"title": "年份",
 		"formType": "select",
 		"default": "${CURRENT_YEAR}",
+		"dynamic": true,
+		"min": 2020
+	},
+	{
+		"dataIndex": "month",
+		"title": "月份",
+		"formType": "select",
+		"default": "${CURRENT_MONTH}",
 		"dynamic": true
 	}
 ]

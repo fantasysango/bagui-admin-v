@@ -90,6 +90,10 @@ export default {
       type: Object,
       default: { tab: null, form: null, search: null }
     },
+    autoQuery: {
+      type: Boolean,
+      default: () => false
+    }
   },
   data () {
     return {
@@ -109,19 +113,33 @@ export default {
   },
   watch: {
     activeSearchSet(v) {
-      let obj =  {}
-      if (v) {
-        Object.keys(v).forEach(k => {
-          obj[k] = ''
-        })
-      } 
-      this.queryForm = obj
-      // 防止表单未注册
+      this.init()
     }
   },
   created () {
+    this.init()
   },
   methods: {
+    init(config = {}) {
+      let obj = {}
+      this.activeSearchSet.forEach(d => {
+         let v = d.default
+        if (typeof v === 'string') {
+          let date = new Date()
+          let curYear = date.getFullYear()
+          let curMonth = date.getMonth() + 1
+          if (curMonth === 1) {
+            curMonth = 12
+            curYear--
+          }
+          v = v.replace(/\$\{((\s+)?)CURRENT_YEAR((\s+)?)\}/g, curYear)
+          v = v.replace(/\$\{((\s+)?)CURRENT_MONTH((\s+)?)\}/g, curMonth)
+        }
+        obj[d.dataIndex] = v
+      })
+      this.queryForm = obj
+      this.autoQuery && this.doQuery()
+    },
     doQuery() {
       console.log(JSON.stringify(this.queryForm))
       this.$emit('query', this.queryForm)
@@ -131,8 +149,11 @@ export default {
         query: true,
         ...config
       }
-      this.queryForm = {}
-      config.query && this.doQuery()
+      // this.queryForm = {}
+      // config.query && this.doQuery()
+      
+      this.init()
+      if (config.query && !this.autoQuery) this.doQuery()
     },
     toggleAdvanced () {
       this.advanced = !this.advanced

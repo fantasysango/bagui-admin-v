@@ -40,6 +40,7 @@ export default {
       // 对字符串进行变量替换
       if (typeof v === 'string') {
         v.replace(/\$\{CURRENT_YEAR\}/g, (new Date()).getFullYear())
+        v.replace(/\$\{CURRENT_MONTH\}/g, (new Date()).getMonth() + 1)
       }
       return v
     },

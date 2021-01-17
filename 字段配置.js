@@ -58,12 +58,12 @@ var arrConfig = [
     { group: '', groupName: '', dataIndex: 'displacementCode', title: '排量', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'CAR_DISPLACEMENT', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'accountBooksCode', title: '账簿', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'ACCOUNT_BOOKS', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'carTypeCode', title: '车辆类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'CAR_TYPE', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'purposeValue', title: '车辆用途', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'CAR_PURPOSE', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'configModeValue', title: '配置类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'CAR_CONFIG_MODE', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'useTypeValue', title: '使用类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'CAR_USE_TYPE', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'fundsSourceValue', title: '资金来源', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'CAR_FUNDS_SOURCE', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'displacementValue', title: '排量', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'CAR_DISPLACEMENT', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'accountBooksValue', title: '账簿', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'ACCOUNT_BOOKS', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'purposeValue', title: '车辆用途', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'configModeValue', title: '配置类型', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'useTypeValue', title: '使用类型', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'fundsSourceValue', title: '资金来源', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'displacementValue', title: '排量', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'accountBooksValue', title: '账簿', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'isWithinBudget', title: '是否预算内购车', formType: '单选框', dataType: 'int', default: '0', options: '0:否,1:是', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'purchaseDate', title: '购置日期', formType: '日期选择框', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: 'YYYY-MM-DD', min: '' },
     { group: '', groupName: '', dataIndex: 'purchaseTotalPrice', title: '购置总价', formType: '', dataType: 'float', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
@@ -94,7 +94,7 @@ var arrConfig = [
     { group: '', groupName: '', dataIndex: 'updateById', title: '更新人ID', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '36', min: '' },
     { group: '', groupName: '', dataIndex: 'createByName', title: '创建人', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '64', min: '' },
     { group: '', groupName: '', dataIndex: 'deptName', title: '部门名称', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '64', min: '' },
-    { group: '', groupName: '', dataIndex: 'leaderName', title: '企业负责人', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/leader/list', dictLabel: 'name', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '64', min: '' },
+    { group: '', groupName: '', dataIndex: 'leaderName', title: '企业负责人', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '64', min: '' },
     { group: '', groupName: '', dataIndex: 'leaderId', title: '企业负责人ID', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/leader/list', dictLabel: 'name', dictValue: 'id', displayInTab: '否', displayInQuery: '是', displayInAdd: '', max: '36', min: '' },
     { group: '', groupName: '', dataIndex: 'updateByName', title: '更新人', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '否', max: '64', min: '' },
     { group: '', groupName: '', dataIndex: 'etcNumber', title: 'ETC卡号', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/etc/list', dictLabel: 'number', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
@@ -133,7 +133,7 @@ var arrConfig = [
     { group: '', groupName: '', dataIndex: 'officeImplementer', title: '办公室落实人', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '32', min: '' },
     { group: '', groupName: '', dataIndex: 'officeImplementComments', title: '办公室落实意见', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '100', min: '' },
     { group: '', groupName: '', dataIndex: 'officeImplementTime', title: '办公室落实时间', formType: '时间选择框', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: 'YYYY-MM-DD HH:mm:ss', min: '' },
-    { group: '', groupName: '', dataIndex: 'driverName', title: '驾驶员', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/driver/list', dictLabel: 'name', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'driverName', title: '驾驶员', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'amount', title: '金额', formType: '', dataType: 'float', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'documentNumber', title: '凭证号', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '30', min: '' },
     { group: '', groupName: '', dataIndex: 'financialSystemNumber', title: '财务系统/资金平台单号', formType: '', dataType: '', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
@@ -168,9 +168,9 @@ var arrConfig = [
     { group: '', groupName: '', dataIndex: 'entertainmentTypeCode', title: '招待类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'COMMUNICATION_TYPE', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'entertainmentTypeValue', title: '招待类型', formType: '下拉框', dataType: '', default: '', options: 'dynamic', dictType: 'COMMUNICATION_TYPE', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: 'entertainment', groupName: '招待费', dataIndex: 'reason', title: '招待事由', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'applyDeptName', title: '申请部门', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/dept/list', dictLabel: 'name', dictValue: 'id', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'applyDeptName', title: '申请部门', formType: '', dataType: '', options: '', default: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'applyDeptId', title: '申请部门ID', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/dept/list', dictLabel: 'name', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
-    { group: '', groupName: '', dataIndex: 'applyEmpName', title: '申请人', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/emp/list', dictLabel: 'empname', dictValue: 'id', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
+    { group: '', groupName: '', dataIndex: 'applyEmpName', title: '申请人', formType: '', dataType: '', default: '', options: '', displayInTab: '', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'applyEmpId', title: '申请人ID', formType: '下拉框SP', dataType: '', default: '', options: 'dynamic', dictUrl: '/emp/list', dictLabel: 'empname', dictValue: 'id', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'alcoholAmount', title: '酒水金额', formType: '', dataType: 'float', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
     { group: '', groupName: '', dataIndex: 'reimbursementAmount', title: '报销金额', formType: '', dataType: 'float', default: '', options: '', displayInTab: '否', displayInQuery: '', displayInAdd: '', max: '', min: '' },
@@ -281,12 +281,16 @@ arrConfig.forEach(d => {
         endTime2 = { ...endTime2, dataIndex: 'endTime2', title: '至', displayInQuery: 'y', colon: false }
     }
     arrConfig.push(startDate, endDate, startTime1, startTime2, endTime1, endTime2)
-    // 额外添加 年份
-    let year = { dataIndex: 'year', title: '年份', formType: 'select', default: '${CURRENT_YEAR}', dynamic: true }
-    arrConfig.push(year)
 })()
 
 arrConfig.sort((a, b) => a.dataIndex.toLowerCase() > b.dataIndex.toLowerCase() ? 1 : -1)
+
+// 额外添加 年份、月份
+arrConfig.push(...[
+    { dataIndex: 'year', title: '年份', formType: 'select', default: '${CURRENT_YEAR}', dynamic: true, min: 2020 },
+    { dataIndex: 'month', title: '月份', formType: 'select', default: '${CURRENT_MONTH}', dynamic: true },
+])
+
 console.log(JSON.stringify(arrConfig))
 
 // 备用分割代码：

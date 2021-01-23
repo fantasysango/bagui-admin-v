@@ -494,13 +494,13 @@ export const asyncRouterMap = [
             component: () => import('@/views/charts/CarUse'),
             meta: { title: '公务用车年度台账', keepAlive: true, permission: ['table'], key: 'OVOReport' }
           },
-          // {
-          //   path: '/charts/allowance',
-          //   name: 'ChartsAllowance',
-          //   hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-          //   component: () => import('@/views/charts/Allowance'),
-          //   meta: { title: '交通补贴确认', keepAlive: true, permission: ['table'], key: 'tbReport' }
-          // },
+          {
+            path: '/charts/allowance',
+            name: 'ChartsAllowance',
+            hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+            component: () => import('@/views/charts/Allowance'),
+            meta: { title: '交通补贴确认', keepAlive: true, permission: ['table'], key: 'tbReport' }
+          },
         ]
       },
     ]

@@ -57,7 +57,19 @@ request.interceptors.request.use(config => {
 
 // response interceptor
 request.interceptors.response.use((response) => {
-  return response.data
+  const res = response.data
+  if (res.msg && res.msg.startsWith('未登录')) {
+    // 从 localstorage 获取 token
+    const token = storage.get(ACCESS_TOKEN)
+    if (token) {
+      store.dispatch('Logout').then(() => {
+        setTimeout(() => {
+          window.location.reload()
+        }, 1500)
+      })
+    }
+  }
+  return res
 }, errorHandler)
 
 const installer = {

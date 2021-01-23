@@ -132,6 +132,9 @@ export default [
         key: 'tbReport',
         title: '交通补贴确认',
         compType: 'chart',
-        searchCols: ["year", "month"]
+        searchCols: {
+            1: ["year", "month"],
+            2: ["year", "driverId"],
+        }
     }, 
 ]

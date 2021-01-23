@@ -72,11 +72,16 @@ export function saveSub (sub) {
 }
 
 export function axiosOperateTab(parameter, config = {}) {
+  let data = {}
+  Object.keys(parameter).forEach(k => {
+    let v = parameter[k]
+    data[k] = v === undefined ? '' : v
+  })
   return request({
     baseURL: CONST.HOST,
     url: '',  // 待在config中填充
     method: 'post',
-    data: parameter,
+    data,
     ...config
   })
 }

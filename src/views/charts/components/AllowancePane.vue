@@ -1,52 +1,56 @@
 <template>
-  <page-header-wrapper class="gb-tablewrap-nowrap">
-    <template v-slot:title>
-      <span></span>
-    </template>
-    <a-card :bordered="false">
-      <div class="table-page-search-wrapper">
-        <search-form ref="search" :settingMap="settingMap" :autoQuery="true" @query="setQueryParam" />
-      </div>
-      <div class="chart-operater">
-        <a-button-group style="display: block">
-          <a-button :type="isShowTable ? '' : 'primary'" icon="bar-chart" @click="isShowTable = false" />
-          <a-button :type="!isShowTable ? '' : 'primary'" icon="table" @click="isShowTable = true" />
-          <a-button type="primary" @click="doExport" style="float: right">导出</a-button>
-        </a-button-group>
-        <br />
-        <chart-table v-if="isShowTable" :tableConf="tableConf" />
-        <ve-histogram
-          v-else
-          theme-name="light"
-          :data="chartData"
-          :settings="chartSettings"
-          :extend="chartExtend"
-          :after-config="fnAfterConfig"
-        ></ve-histogram>
-      </div>
-    </a-card>
-  </page-header-wrapper>
+  <div class="allowance-panel">
+    <div class="table-page-search-wrapper">
+      <search-form ref="search" :settingMap="settingMap" :autoQuery="true" @query="setQueryParam" />
+    </div>
+    <div class="chart-operater">
+      <a-button-group style="display: block">
+        <a-button :type="isShowTable ? '' : 'primary'" icon="bar-chart" @click="isShowTable = false" />
+        <a-button :type="!isShowTable ? '' : 'primary'" icon="table" @click="isShowTable = true" />
+        <a-button type="primary" @click="doExport" style="float: right">导出</a-button>
+      </a-button-group>
+      <br />
+      <chart-table v-if="isShowTable" :tableConf="tableConf" />
+      <a-row v-else>
+        <a-col :xl="12" :lg="12" :md="12" :sm="24" :xs="24">
+          <ve-ring
+            ref="chart"
+            theme-name="light"
+            :data="chartData"
+            :settings="chartSettings"
+            :extend="chartExtend"
+            :after-config="fnAfterConfig"
+            @ready="onChartReady"
+          ></ve-ring>
+        </a-col>
+        <a-col :xl="12" :lg="12" :md="12" :sm="24" :xs="24">
+          <div v-for="(item, index) in cardItems" class="my-item" :key="index" :style="{ borderTopColor: colors[index] }">
+            <p class="my-item-value">{{ item.value }}</p>
+            <hr class="my-item-split" />
+            <p class="my-item-percent">{{ item.percent }}%</p>
+            <p class="my-item-name">{{ item.name }}</p>
+          </div>
+        </a-col>
+      </a-row>
+    </div>
+  </div>
 </template>
 
 <script>
+import SearchForm from '@/views/list/modules/SearchForm'
+import MixGetSettings from '@/mixins/MixGetSettings'
+import ChartTable from './ChartTable'
+
 import { axiosOperateTab } from '@/api/manage'
 import settings from '@/settings'
 const { tabSettings, formSettings } = settings
 
-import SearchForm from '@/views/list/modules/SearchForm'
-import MixGetSettings from '@/mixins/MixGetSettings'
-import ChartTable from './components/ChartTable'
-
 const seriesCols = [
   { title: '油料费', dataIndex: 'FUEL' },
-  { title: '修理费', dataIndex: 'MAINTENANCE_COST' },
-  { title: '停车过桥费', dataIndex: 'PARKING_AND_BRIDGE' },
+  { title: '修理费', dataIndex: 'REPAIR' },
   { title: '保险费', dataIndex: 'INSURANCE' },
-  { title: '保养费', dataIndex: 'MAINTAIN' },
-  { title: '车船使用税', dataIndex: 'VEHICLE_AND_VESSEL_USE_TAX' },
-  { title: '年检费', dataIndex: 'ANNUAL_INSPECTION' },
-  { title: '其他', dataIndex: 'OTHER' },
-  { title: '行驶里程', dataIndex: 'MILEAGE', series: 'line' },
+  { title: '停车费', dataIndex: 'PARKING' },
+  { title: '出租车和租车费', dataIndex: 'TAXI_OR_RENT' },
 ]
 
 const extraCols = [
@@ -57,52 +61,57 @@ const extraCols = [
 
 const findCol = (v) => [...extraCols, ...seriesCols].find((d) => d.title === v)
 
+const paneConfMap = {
+  1: {
+    typeForExport: 2,
+    urlSuffixOfChart: 'pieByMonth',
+    urlSuffixOfTable: 'listByMonth',
+  },
+  2: {
+    typeForExport: 3,
+    urlSuffixOfChart: 'pieByLeader',
+    urlSuffixOfTable: 'listByLeader',
+  },
+}
+
 export default {
-  name: 'CarUse',
+  name: 'AllowancePane',
   components: {
     ChartTable,
     SearchForm,
   },
   mixins: [MixGetSettings],
+  props: {
+    paneKey: {
+      required: true,
+    },
+  },
   data() {
-    const col_bar = seriesCols.filter((d) => !d.series).map((d) => d.title)
-    const col_line = seriesCols.filter((d) => d.series === 'line').map((d) => d.title)
-    const columns_chart = ['月份', ...col_bar, ...col_line]
-    const columns_tab = [findCol('年份'), findCol('车牌号'), ...seriesCols, findCol('总费用')]
+    let paneConf = paneConfMap[this.paneKey]
     return {
       isShowTable: false,
       // 查询参数
       queryParam: {},
       chartSettings: {
-        showLine: ['行驶里程'],
-        stack: { 总费用: col_bar },
-        axisSite: { right: ['行驶里程'] },
-        // xAxisName: ['\n\n月'],
-        yAxisType: ['KMB', 'value'],
-        yAxisName: ['元', '公里'],
-        barWidth: 30,
+        radius: ['50%', '70%'],
+        label: {
+          show: false
+        },
+        labelLine: {
+          show: false
+        }
       },
       chartExtend: {
-        grid: {
-          right: 20,
-        },
-        xAxis: {
-          axisLine: { show: true },
-          nameLocation: 'end',
-          nameTextStyle: {},
-        },
-        yAxis: {
-          axisLine: { show: true },
-          axisTick: { show: true, inside: true },
-          splitLine: { show: false },
-        },
+        legend: {
+          show: false
+        }
       },
       chartData: {
-        columns: columns_chart,
+        columns: ['name', 'value'],
         rows: [],
       },
       tableConf: {
-        columns: columns_tab,
+        columns: [],
         rows: [],
       },
       settingMap: {
@@ -110,18 +119,54 @@ export default {
         form: null, // []
         search: null, // []
       },
+      paneConf,
+      colors: [],
       fnAfterConfig: (options) => {
-        options.series.forEach((d) => {
-          Object.assign(d, {
-            barMaxWidth: '50%',
-          })
+        // 新增一个系列用于显示中间标题
+        options.series.push({
+          name: '标题',
+          type: 'pie',
+          radius: ['0', '50%'],
+          avoidLabelOverlap: false,
+          label: {
+            show: true,
+            position: 'center',
+            fontSize: '20',
+            fontWeight: 'bold',
+            color: '#666',
+            formatter: '交通补贴确认',
+          },
+          emphasis: {
+            label: {
+              show: true,
+            },
+          },
+          labelLine: {
+            show: false,
+          },
+          itemStyle: {
+            color: 'rgba(0, 0, 0, 0)'
+          },
+          tooltip: {
+            show: false
+          },
+          data: [{ name: '占位', value: 1 }],
         })
         return options
       },
       urlOfExport: '',
     }
   },
-  computed: {},
+  computed: {
+    cardItems() {
+      let { rows } = this.chartData
+      let sum = rows.reduce((a, b) => a + b.VALUE, 0)
+      return rows.map(d => ({
+        ...d,
+        percent: !sum ? 0 : Math.round(100 * d.VALUE / sum) / 100
+      }))
+    }
+  },
   watch: {},
   created() {
     this.init()
@@ -131,46 +176,38 @@ export default {
       let tabSet = tabSettings.find((d) => d.key === this.$route.meta.key)
       this.settingMap.tab = tabSet
       let searchSet = []
-      tabSet.searchCols &&
-        tabSet.searchCols.forEach((k) => {
+      let tmpCols = (tabSet.searchCols || {})[this.paneKey]
+      tmpCols &&
+        tmpCols.forEach((k) => {
           let cols = formSettings.filter((d) => d.dataIndex === k)
           let col = cols[0]
           if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
           col && searchSet.push(col)
         })
       this.settingMap.search = searchSet
-      this.settingMap.form = searchSet
       console.log(this.settingMap)
       this.fetchDynamicOpts()
     },
     fetchData() {
-      const requestParameters = Object.assign(
-        {
-          deptId: this.$store.getters.empInfo.deptId,
-          // "leaderId": "a3480cd1-f278-11ea-af38-00ff8b330500",
-          // "year":"2020",
-          // "carId":"e4d112f6-f8ba-11ea-be3f-54e1ad115d9c"
-        },
-        this.queryParam
-      )
+      const requestParameters = this.getBaseParam(this.queryParam)
       console.log('loadData request parameters:', requestParameters)
       this.fetchChartData(requestParameters)
       this.fetchTableData(requestParameters)
     },
     fetchChartData(requestParameters) {
       axiosOperateTab(requestParameters, {
-        url: this.getFullURL('barData'),
+        url: this.getFullURL(this.paneConf.urlSuffixOfChart),
       }).then((res) => {
         console.log(res)
         let rows = []
         if (res.code > 0) {
-          res.xList.forEach((x, i) => {
-            let item = {
-              月份: parseInt(x) + '月',
-            }
-            seriesCols.forEach((d) => (item[d.title] = (res[d.dataIndex] || [])[i]))
-            rows.push(item)
-          })
+          rows = (res.data || []).map(d => ({
+            name: d.NAME,
+            value: d.VALUE,
+          }))
+          // rows.forEach((d) => {
+          //   d.value = d.value || Math.round(Math.random() * 100)
+          // })
         } else {
           this.$message.error(res.msg || '获取数据失败')
         }
@@ -179,7 +216,7 @@ export default {
     },
     fetchTableData(requestParameters) {
       axiosOperateTab(requestParameters, {
-        url: this.getFullURL('list'),
+        url: this.getFullURL(this.paneConf.urlSuffixOfTable),
       }).then((res) => {
         console.log(res)
         let rows = []
@@ -270,12 +307,10 @@ export default {
     doExport() {
       const requestParameters = this.getBaseParam({
         ...this.queryParam,
-        pageType: 1,
+        pageType: this.paneConf.typeForExport,
       })
       axiosOperateTab(requestParameters, {
         url: this.getFullURL('file/exportReport', ''),
-        // method: 'get',
-        // params: requestParameters,
       }).then((res) => {
         if (res.code > 0) {
           console.log(res)
@@ -283,6 +318,9 @@ export default {
           this.$message.error(res.msg || '获取数据失败')
         }
       })
+    },
+    onChartReady(chartIns) {
+      this.colors = [...chartIns.getOption().color]
     },
     getFullURL(str, key = null) {
       if (key == null) {
@@ -308,7 +346,48 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-/deep/ .ant-page-header-heading {
-  margin-top: 0;
+.allowance-panel {
+  padding: 24px;
+}
+
+.my-item {
+  float: left;
+  width: 150px;
+  height: 165px;
+  margin: 15px;
+  padding: 0 5px;
+  text-align: center;
+  border: 1px solid #e8e8e8;
+  border-color: rgba(0,0,0,.09);
+  border-top-width: 3px ;
+  background: rgb(251,251,251);
+  box-shadow: 0 2px 8px rgba(0,0,0,.09);
+  overflow: auto;
+  &:hover {
+    box-shadow: 0 2px 16px rgba(0,0,0,.29);
+  }
+}
+
+.my-item-value {
+  margin-top: 10px;
+  font-size: 32px;
+}
+
+.my-item-split {
+  width: 20px;
+  margin: 5px auto;
+  border: none;
+  border-top: solid 3px;
+  border-top-color: inherit;
+}
+
+.my-item-percent {
+  font-size: 14px;
+}
+
+.my-item-name {
+  margin-top: 10px;
+  font-size: 20px;
+  line-height: 1.2;
 }
 </style>

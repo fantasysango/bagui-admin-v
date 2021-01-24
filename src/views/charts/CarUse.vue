@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { axiosOperateTab } from '@/api/manage'
+import { axiosOperateTab, axiosExportTabe } from '@/api/manage'
 import settings from '@/settings'
 const { tabSettings, formSettings } = settings
 
@@ -68,7 +68,7 @@ export default {
     const col_bar = seriesCols.filter((d) => !d.series).map((d) => d.title)
     const col_line = seriesCols.filter((d) => d.series === 'line').map((d) => d.title)
     const columns_chart = ['月份', ...col_bar, ...col_line]
-    const columns_tab = [findCol('年份'), findCol('车牌号'), ...seriesCols, findCol('总费用')]
+    const columns_table = [findCol('年份'), findCol('车牌号'), ...seriesCols, findCol('总费用')]
     return {
       isShowTable: false,
       // 查询参数
@@ -102,7 +102,7 @@ export default {
         rows: [],
       },
       tableConf: {
-        columns: columns_tab,
+        columns: columns_table,
         rows: [],
       },
       settingMap: {
@@ -139,6 +139,7 @@ export default {
           col && searchSet.push(col)
         })
       this.settingMap.search = searchSet
+      // PS: 报表管理仅需查询展示，没有增删改
       this.settingMap.form = searchSet
       console.log(this.settingMap)
       this.fetchDynamicOpts()
@@ -191,114 +192,14 @@ export default {
         this.tableConf.rows = rows
       })
     },
-    // TODO: 此方法待抽离
-    fetchDynamicOpts() {
-      let resolve = null
-      let promise = new Promise((r) => {
-        resolve = r
-      })
-      let results = []
-      let len = 0
-      let checkResults = (bool) => {
-        results.push(bool)
-        if (results.length === len) {
-          let final = !results.find((d) => d === false)
-          !final && this.$message.error('获取选项失败')
-          resolve(final)
-        }
-      }
-      // TODO: 与 TableList.vue 不一样的地方
-      this.settingMap.search.forEach((d, i, a) => {
-        if (d.dynamic) {
-          let { dataIndex, dictType, dictUrl, dictLabel, dictValue } = d
-          dictValue = dictValue || dictLabel || 'code'
-          dictLabel = dictLabel || 'value'
-          if (dataIndex === 'year') {
-            d.options = []
-            let start = d.min || 2021
-            let year = new Date().getFullYear()
-            do {
-              d.options.push({ label: String(year), value: year })
-            } while (--year >= start)
-            d.default = d.default || (d.options[0] || {}).value
-            return
-          } else if (dataIndex === 'month') {
-            d.options = []
-            for (let month = 0; month < 12; month++) {
-              d.options.push({ label: String(month), value: month })
-            }
-            d.default = d.default || new Date().getMonth()
-            return
-          }
-          len++
-          let params = dictType ? { dictType } : this.getBaseParam()
-          let url = dictType ? this.getFullURL('list', 'dict') : this.getFullURL(dictUrl, '')
-          axiosOperateTab(params, {
-            url, // '/epd/dict/list'
-          })
-            .then((res) => {
-              if (res.code > 0) {
-                let data = []
-                if (dictType) {
-                  data = res.list || []
-                } else {
-                  let { result, list } = res // PS: list 可能为对象（result别名），也可能为数组
-                  data = list || []
-                  if (!result && list && !(list instanceof Array)) result = list
-                  if (result) data = result.list || []
-                }
-                d.options = data.map((d) => {
-                  return {
-                    label: d[dictLabel],
-                    value: d[dictValue],
-                  }
-                })
-                checkResults(true)
-              } else {
-                // this.$message.error(res.msg || '获取选项失败')
-                checkResults(false)
-              }
-            })
-            .catch((e) => {
-              console.error(e)
-              checkResults(false)
-            })
-        }
-      })
-      return results.length ? promise : Promise.resolve()
-    },
     doExport() {
       const requestParameters = this.getBaseParam({
         ...this.queryParam,
         pageType: 1,
       })
-      axiosOperateTab(requestParameters, {
-        url: this.getFullURL('file/exportReport', ''),
-        // method: 'get',
-        // params: requestParameters,
-      }).then((res) => {
-        if (res.code > 0) {
-          console.log(res)
-        } else {
-          this.$message.error(res.msg || '获取数据失败')
-        }
+      axiosExportTabe(requestParameters).then((res) => {
+        console.log(res)
       })
-    },
-    getFullURL(str, key = null) {
-      if (key == null) {
-        let setting = this.settingMap.tab
-        if (!setting) return ''
-        key = setting.key
-      }
-      return `/epd${key ? '/' + key : ''}${str.startsWith('/') ? str : '/' + str}`
-    },
-    getBaseParam(obj = {}) {
-      return Object.assign(
-        {
-          deptId: this.$store.getters.empInfo.deptId,
-        },
-        obj
-      )
     },
     setQueryParam(param) {
       this.queryParam = param

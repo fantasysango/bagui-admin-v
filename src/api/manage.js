@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import CONST from './_CONST'
+import CONSTANTS from './_CONSTANTS'
 
 const api = {
   user: '/user',
@@ -72,16 +72,31 @@ export function saveSub (sub) {
 }
 
 export function axiosOperateTab(parameter, config = {}) {
-  let data = {}
+  let params = {}
   Object.keys(parameter).forEach(k => {
     let v = parameter[k]
-    data[k] = v === undefined ? '' : v
+    params[k] = v === undefined ? '' : v
   })
   return request({
-    baseURL: CONST.HOST,
+    baseURL: CONSTANTS.HOST,
     url: '',  // 待在config中填充
     method: 'post',
-    data,
+    data: params,
+    ...config
+  })
+}
+
+export function axiosExportTabe(parameter, config = {}) {
+  let params = {}
+  Object.keys(parameter).forEach(k => {
+    let v = parameter[k]
+    params[k] = v === undefined ? '' : v
+  })
+  return request({
+    baseURL: CONSTANTS.HOST,
+    url: '/epd/file/exportReport',  // 待在config中填充
+    method: 'post',
+    data: params,
     ...config
   })
 }

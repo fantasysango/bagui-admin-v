@@ -141,8 +141,10 @@ export default {
       this.autoQuery && this.doQuery()
     },
     doQuery() {
+      let params = { ...this.queryForm }
       console.log(JSON.stringify(this.queryForm))
-      this.$emit('query', this.queryForm)
+      if (params.month && String(params.month).length === 1) params.month = '0' + params.month
+      this.$emit('query', params)
     },
     doReset(config = {}) {
       config = {
@@ -192,8 +194,8 @@ export default {
 <style lang="less" scoped>
 .my-label-multirow {
   /deep/ .ant-form-item label {
-    display: flex;
-    align-items: center;;
+    // display: flex;
+    // align-items: center;
     height: 40px;
     line-height: 1.2;
     white-space: normal;
@@ -201,6 +203,7 @@ export default {
 }
 .my-col {
   float: left;
+  // display: inline-block;
   padding-right: 0 !important;
 }
 // /deep/ .my-item-colon_false {

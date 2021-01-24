@@ -24,11 +24,18 @@
           ></ve-ring>
         </a-col>
         <a-col :xl="12" :lg="12" :md="12" :sm="24" :xs="24">
-          <div v-for="(item, index) in cardItems" class="my-item" :key="index" :style="{ borderTopColor: colors[index] }">
-            <p class="my-item-value">{{ item.value }}</p>
-            <hr class="my-item-split" />
-            <p class="my-item-percent">{{ item.percent }}%</p>
-            <p class="my-item-name">{{ item.name }}</p>
+          <div class="my-items">
+            <div
+              v-for="(item, index) in cardItems"
+              class="my-item"
+              :key="index"
+              :style="{ borderTopColor: colors[index] }"
+            >
+              <p class="my-item-value">{{ item.value }}</p>
+              <hr class="my-item-split" />
+              <p class="my-item-percent">{{ item.percent }}%</p>
+              <p class="my-item-name">{{ item.name }}</p>
+            </div>
           </div>
         </a-col>
       </a-row>
@@ -41,7 +48,7 @@ import SearchForm from '@/views/list/modules/SearchForm'
 import MixGetSettings from '@/mixins/MixGetSettings'
 import ChartTable from './ChartTable'
 
-import { axiosOperateTab } from '@/api/manage'
+import { axiosOperateTab, axiosExportTabe } from '@/api/manage'
 import settings from '@/settings'
 const { tabSettings, formSettings } = settings
 
@@ -54,9 +61,10 @@ const seriesCols = [
 ]
 
 const extraCols = [
-  { title: '年份', dataIndex: 'YEAR', owner: ['table'] },
-  { title: '车牌号', dataIndex: 'CAR_NUMBER', owner: ['table'] },
-  { title: '总费用', dataIndex: 'TOTAL', owner: ['table'] },
+  { title: '年份', dataIndex: 'YEAR' },
+  { title: '月份', dataIndex: 'MONTH' },
+  { title: '企业负责人', dataIndex: 'LEADERNAME' },
+  // { title: '总费用', dataIndex: 'TOTAL' },
 ]
 
 const findCol = (v) => [...extraCols, ...seriesCols].find((d) => d.title === v)
@@ -66,11 +74,13 @@ const paneConfMap = {
     typeForExport: 2,
     urlSuffixOfChart: 'pieByMonth',
     urlSuffixOfTable: 'listByMonth',
+    columnsOfTable: [findCol('月份'), ...seriesCols]
   },
   2: {
     typeForExport: 3,
     urlSuffixOfChart: 'pieByLeader',
     urlSuffixOfTable: 'listByLeader',
+    columnsOfTable: [findCol('企业负责人'), ...seriesCols]
   },
 }
 
@@ -87,7 +97,7 @@ export default {
     },
   },
   data() {
-    let paneConf = paneConfMap[this.paneKey]
+    const paneConf = paneConfMap[this.paneKey]
     return {
       isShowTable: false,
       // 查询参数
@@ -95,23 +105,23 @@ export default {
       chartSettings: {
         radius: ['50%', '70%'],
         label: {
-          show: false
+          show: false,
         },
         labelLine: {
-          show: false
-        }
+          show: false,
+        },
       },
       chartExtend: {
         legend: {
-          show: false
-        }
+          show: false,
+        },
       },
       chartData: {
         columns: ['name', 'value'],
         rows: [],
       },
       tableConf: {
-        columns: [],
+        columns: paneConf.columnsOfTable,
         rows: [],
       },
       settingMap: {
@@ -145,10 +155,10 @@ export default {
             show: false,
           },
           itemStyle: {
-            color: 'rgba(0, 0, 0, 0)'
+            color: 'rgba(0, 0, 0, 0)',
           },
           tooltip: {
-            show: false
+            show: false,
           },
           data: [{ name: '占位', value: 1 }],
         })
@@ -161,11 +171,11 @@ export default {
     cardItems() {
       let { rows } = this.chartData
       let sum = rows.reduce((a, b) => a + b.VALUE, 0)
-      return rows.map(d => ({
+      return rows.map((d) => ({
         ...d,
-        percent: !sum ? 0 : Math.round(100 * d.VALUE / sum) / 100
+        percent: !sum ? 0 : Math.round((100 * d.VALUE) / sum) / 100,
       }))
-    }
+    },
   },
   watch: {},
   created() {
@@ -185,6 +195,8 @@ export default {
           col && searchSet.push(col)
         })
       this.settingMap.search = searchSet
+      // PS: 报表管理仅需查询展示，没有增删改
+      this.settingMap.form = searchSet
       console.log(this.settingMap)
       this.fetchDynamicOpts()
     },
@@ -201,7 +213,7 @@ export default {
         console.log(res)
         let rows = []
         if (res.code > 0) {
-          rows = (res.data || []).map(d => ({
+          rows = (res.data || []).map((d) => ({
             name: d.NAME,
             value: d.VALUE,
           }))
@@ -221,122 +233,33 @@ export default {
         console.log(res)
         let rows = []
         if (res.code > 0) {
-          rows = res.list || []
+          rows = res.result.list || []
+          let totalRow = {}
+          seriesCols.forEach(d => {
+            let k = 't_' + d.dataIndex
+            let v = res[k]
+            if (v != undefined) totalRow[k] = v
+          })
+          let categ = this.paneConf.columnsOfTable[0]
+          if (categ) totalRow[categ.dataIndex] = '总计'
+          row.push(totalRow)
         } else {
           this.$message.error(res.msg || '获取数据失败')
         }
         this.tableConf.rows = rows
       })
     },
-    // TODO: 此方法待抽离
-    fetchDynamicOpts() {
-      let resolve = null
-      let promise = new Promise((r) => {
-        resolve = r
-      })
-      let results = []
-      let len = 0
-      let checkResults = (bool) => {
-        results.push(bool)
-        if (results.length === len) {
-          let final = !results.find((d) => d === false)
-          !final && this.$message.error('获取选项失败')
-          resolve(final)
-        }
-      }
-      // TODO: 与 TableList.vue 不一样的地方
-      this.settingMap.search.forEach((d, i, a) => {
-        if (d.dynamic) {
-          let { dataIndex, dictType, dictUrl, dictLabel, dictValue } = d
-          dictValue = dictValue || dictLabel || 'code'
-          dictLabel = dictLabel || 'value'
-          if (dataIndex === 'year') {
-            d.options = []
-            let start = d.min || 2021
-            let year = new Date().getFullYear()
-            do {
-              d.options.push({ label: String(year), value: year })
-            } while (--year >= start)
-            d.default = d.default || (d.options[0] || {}).value
-            return
-          } else if (dataIndex === 'month') {
-            d.options = []
-            for (let month = 0; month < 12; month++) {
-              d.options.push({ label: String(month), value: month })
-            }
-            d.default = d.default || new Date().getMonth()
-            return
-          }
-          len++
-          let params = dictType ? { dictType } : this.getBaseParam()
-          let url = dictType ? this.getFullURL('list', 'dict') : this.getFullURL(dictUrl, '')
-          axiosOperateTab(params, {
-            url, // '/epd/dict/list'
-          })
-            .then((res) => {
-              if (res.code > 0) {
-                let data = []
-                if (dictType) {
-                  data = res.list || []
-                } else {
-                  let { result, list } = res // PS: list 可能为对象（result别名），也可能为数组
-                  data = list || []
-                  if (!result && list && !(list instanceof Array)) result = list
-                  if (result) data = result.list || []
-                }
-                d.options = data.map((d) => {
-                  return {
-                    label: d[dictLabel],
-                    value: d[dictValue],
-                  }
-                })
-                checkResults(true)
-              } else {
-                // this.$message.error(res.msg || '获取选项失败')
-                checkResults(false)
-              }
-            })
-            .catch((e) => {
-              console.error(e)
-              checkResults(false)
-            })
-        }
-      })
-      return results.length ? promise : Promise.resolve()
-    },
     doExport() {
       const requestParameters = this.getBaseParam({
         ...this.queryParam,
         pageType: this.paneConf.typeForExport,
       })
-      axiosOperateTab(requestParameters, {
-        url: this.getFullURL('file/exportReport', ''),
-      }).then((res) => {
-        if (res.code > 0) {
-          console.log(res)
-        } else {
-          this.$message.error(res.msg || '获取数据失败')
-        }
+      axiosExportTabe(requestParameters).then((res) => {
+        console.log(res)
       })
     },
     onChartReady(chartIns) {
       this.colors = [...chartIns.getOption().color]
-    },
-    getFullURL(str, key = null) {
-      if (key == null) {
-        let setting = this.settingMap.tab
-        if (!setting) return ''
-        key = setting.key
-      }
-      return `/epd${key ? '/' + key : ''}${str.startsWith('/') ? str : '/' + str}`
-    },
-    getBaseParam(obj = {}) {
-      return Object.assign(
-        {
-          deptId: this.$store.getters.empInfo.deptId,
-        },
-        obj
-      )
     },
     setQueryParam(param) {
       this.queryParam = param
@@ -350,26 +273,30 @@ export default {
   padding: 24px;
 }
 
+.my-items {
+  max-width: 580px;
+  margin: 0 auto;
+}
+
 .my-item {
   float: left;
   width: 150px;
   height: 165px;
   margin: 15px;
-  padding: 0 5px;
+  padding: 10px 5px 0;
   text-align: center;
   border: 1px solid #e8e8e8;
-  border-color: rgba(0,0,0,.09);
-  border-top-width: 3px ;
-  background: rgb(251,251,251);
-  box-shadow: 0 2px 8px rgba(0,0,0,.09);
-  overflow: auto;
+  border-color: rgba(0, 0, 0, 0.09);
+  border-top-width: 3px;
+  background: rgb(251, 251, 251);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+  overflow: hidden;
   &:hover {
-    box-shadow: 0 2px 16px rgba(0,0,0,.29);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.29);
   }
 }
 
 .my-item-value {
-  margin-top: 10px;
   font-size: 32px;
 }
 

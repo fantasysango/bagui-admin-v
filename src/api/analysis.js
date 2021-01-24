@@ -1,9 +1,9 @@
 import request from '@/utils/request'
-import CONST from './_CONST'
+import CONSTANTS from './_CONSTANTS'
 
 export function axiosHomeCard(parameter, index, config = {}) {
   return request({
-    baseURL: CONST.HOST,
+    baseURL: CONSTANTS.HOST,
     url: '/epd/home/' + index,
     method: 'post',
     data: parameter,
@@ -13,7 +13,7 @@ export function axiosHomeCard(parameter, index, config = {}) {
 
 export function axiosHomeCostBar(parameter, config = {}) {
   return request({
-    baseURL: CONST.HOST,
+    baseURL: CONSTANTS.HOST,
     url: '/epd/home/allCost',
     method: 'post',
     data: parameter,
@@ -23,7 +23,7 @@ export function axiosHomeCostBar(parameter, config = {}) {
 
 export function axiosHomeCostRank(parameter, config = {}) {
   return request({
-    baseURL: CONST.HOST,
+    baseURL: CONSTANTS.HOST,
     url: '/epd/home/ranking',
     method: 'post',
     data: parameter,

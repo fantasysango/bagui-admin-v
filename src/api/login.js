@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import CONST from './_CONST'
+import CONSTANTS from './_CONSTANTS'
 
 const userApi = {
   Login: '/auth/login',
@@ -28,7 +28,7 @@ const userApi = {
 export function login (parameter) {
   return request({
     // url: userApi.Login,
-    baseURL: CONST.HOST,
+    baseURL: CONSTANTS.HOST,
     url: '/epd/emp/login',
     method: 'post',
     data: parameter

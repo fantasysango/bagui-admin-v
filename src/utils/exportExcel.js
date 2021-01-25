@@ -1,10 +1,12 @@
+import { axiosExportTabe } from '@/api/manage'
+
 /**
  * 导出excel
  * @param {Object} title  标题列key-val
  * @param {Object} data   值列key-val
  * @param {Object} fileName  文件名称
  */
-function JSONToExcelConvertor(title, data, fileName) {
+export function JSONToExcelConvertor(title, data, fileName) {
     var CSV = '';
     var row = "";
 
@@ -47,4 +49,39 @@ function JSONToExcelConvertor(title, data, fileName) {
         link.click();
         document.body.removeChild(link);
     }
+}
+
+export function createDownHref(blob, fileName) {
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(blob)
+    a.download = fileName || '未命名文件'
+    a.click()
+    URL.revokeObjectURL(a.href)
+    a.remove()
+}
+
+export async function exportAndDownExcel(params, fileName) {
+    axiosExportTabe(params, { responseType: 'blob' }).then(async (blob) => {
+        console.log(blob)
+        let fileHead = await new Promise(resolve => {
+            let reader = new FileReader()
+            reader.addEventListener('loadend', () => {
+                let tmpArr = Array.from(new Uint8Array(reader.result.slice(0, 8)))
+                resolve(tmpArr.map(d => d.toString(16)).join(''))
+            })
+            reader.readAsArrayBuffer(blob)
+        })
+        if (fileHead.toUpperCase() !== 'D0CF11E0A1B11AE1') {
+            let str = await new Promise(resolve => {
+                let reader = new FileReader()
+                reader.addEventListener('loadend', () => resolve(reader.result))
+                reader.readAsText(blob)
+            }) || '{}'
+            console.log(str)
+            let res = JSON.parse(str)
+            this.$message.error(res.msg || '获取导出文件错误')
+            return
+        }
+        createDownHref(blob, `${fileName}.xls`)
+    })
 }

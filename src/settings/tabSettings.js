@@ -136,5 +136,12 @@ export default [
             1: ["year", "month"],
             2: ["year", "driverId"],
         }
+    },
+    {
+        code: '5.3',
+        key: 'trainingReport',
+        title: '企业负责人培训台账',
+        compType: 'chart',
+        searchCols: ["year"]
     }, 
 ]

@@ -6,7 +6,7 @@
     <a-card :bordered="false">
       <a-tabs :default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
         <a-tab-pane v-for="pane in panels" :loading="true" :tab="pane.title" :key="pane.index">
-          <AllowancePane :paneKey="pane.index" />
+          <AllowancePane :pane="pane" />
         </a-tab-pane>
       </a-tabs>
     </a-card>

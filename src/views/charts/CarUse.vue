@@ -29,13 +29,14 @@
 </template>
 
 <script>
-import { axiosOperateTab, axiosExportTabe } from '@/api/manage'
-import settings from '@/settings'
-const { tabSettings, formSettings } = settings
-
 import SearchForm from '@/views/list/modules/SearchForm'
 import MixGetSettings from '@/mixins/MixGetSettings'
 import ChartTable from './components/ChartTable'
+
+import { axiosOperateTab } from '@/api/manage'
+import { exportAndDownExcel } from '@/utils/exportExcel'
+import settings from '@/settings'
+const { tabSettings, formSettings } = settings
 
 const seriesCols = [
   { title: '油料费', dataIndex: 'FUEL' },
@@ -197,9 +198,9 @@ export default {
         ...this.queryParam,
         pageType: 1,
       })
-      axiosExportTabe(requestParameters).then((res) => {
-        console.log(res)
-      })
+      let { title } = this.settingMap.tab
+      let fileName = `${title}`
+      exportAndDownExcel(requestParameters, fileName)
     },
     setQueryParam(param) {
       this.queryParam = param

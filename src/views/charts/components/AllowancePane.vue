@@ -40,6 +40,7 @@
         </a-col>
       </a-row>
     </div>
+    <!-- <iframe :src="urlOfExport"></iframe> -->
   </div>
 </template>
 
@@ -48,7 +49,8 @@ import SearchForm from '@/views/list/modules/SearchForm'
 import MixGetSettings from '@/mixins/MixGetSettings'
 import ChartTable from './ChartTable'
 
-import { axiosOperateTab, axiosExportTabe } from '@/api/manage'
+import { axiosOperateTab } from '@/api/manage'
+import { exportAndDownExcel } from '@/utils/exportExcel'
 import settings from '@/settings'
 const { tabSettings, formSettings } = settings
 
@@ -92,13 +94,15 @@ export default {
   },
   mixins: [MixGetSettings],
   props: {
-    paneKey: {
+    pane: {
       required: true,
     },
   },
   data() {
-    const paneConf = paneConfMap[this.paneKey]
+    const paneKey = this.pane.index
+    const paneConf = paneConfMap[paneKey]
     return {
+      paneKey,
       isShowTable: false,
       // 查询参数
       queryParam: {},
@@ -242,7 +246,7 @@ export default {
           })
           let categ = this.paneConf.columnsOfTable[0]
           if (categ) totalRow[categ.dataIndex] = '总计'
-          row.push(totalRow)
+          rows.push(totalRow)
         } else {
           this.$message.error(res.msg || '获取数据失败')
         }
@@ -254,9 +258,9 @@ export default {
         ...this.queryParam,
         pageType: this.paneConf.typeForExport,
       })
-      axiosExportTabe(requestParameters).then((res) => {
-        console.log(res)
-      })
+      let { title } = this.settingMap.tab
+      let fileName = `${title}-${this.pane.title}`
+      exportAndDownExcel(requestParameters, fileName)
     },
     onChartReady(chartIns) {
       this.colors = [...chartIns.getOption().color]

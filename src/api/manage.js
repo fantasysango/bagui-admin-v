@@ -7,7 +7,9 @@ const api = {
   service: '/service',
   permission: '/permission',
   permissionNoPager: '/permission/no-pager',
-  orgTree: '/org/tree'
+  orgTree: '/org/tree',
+  //-- 本项目新增
+  exportReport: CONSTANTS.HOST + '/epd/file/exportReport'
 }
 
 export default api
@@ -94,9 +96,9 @@ export function axiosExportTabe(parameter, config = {}) {
   })
   return request({
     baseURL: CONSTANTS.HOST,
-    url: '/epd/file/exportReport',  // 待在config中填充
-    method: 'post',
-    data: params,
+    url: api.exportReport,
+    method: 'get',
+    params,
     ...config
   })
 }

@@ -5,7 +5,10 @@
     :pagination="false"
     :data-source="tableData"
     :columns="tableCols"
-  ></a-table>
+    v-bind="tableProp"
+  >
+    <template #serial="text, record, index">{{ index + 1 }}</template>
+  </a-table>
     <!-- :scroll="{ x: true }" -->
     <!-- showPagination="auto" -->
 </template>
@@ -17,6 +20,10 @@ export default {
     tableConf: {
       type: Object,
       default: () => ({ columns: [], rows: [] })
+    },
+    tableProp: {
+      type: Object,
+      default: () => ({})
     }
   },
   data() {

@@ -3,6 +3,10 @@
     <div class="table-page-search-wrapper">
       <search-form ref="search" :settingMap="settingMap" :autoQuery="true" @query="setQueryParam" />
     </div>
+    <div class="chart-total">
+      <span><em>{{ curYearMon }}</em>交通补贴总数</span>
+      <span class="my-total-num">¥ {{ totalCost }}</span>
+    </div>
     <div class="chart-operater">
       <a-button-group style="display: block">
         <a-button :type="isShowTable ? '' : 'primary'" icon="bar-chart" @click="isShowTable = false" />
@@ -104,6 +108,7 @@ export default {
     return {
       paneKey,
       isShowTable: false,
+      totalCost: 0,
       // 查询参数
       queryParam: {},
       chartSettings: {
@@ -180,6 +185,10 @@ export default {
         percent: !sum ? 0 : Math.round((100 * d.VALUE) / sum) / 100,
       }))
     },
+    curYearMon() {
+      let { year, month } = this.queryParam
+      return year + '/' + month
+    }
   },
   watch: {},
   created() {
@@ -187,21 +196,7 @@ export default {
   },
   methods: {
     async init() {
-      let tabSet = tabSettings.find((d) => d.key === this.$route.meta.key)
-      this.settingMap.tab = tabSet
-      let searchSet = []
-      let tmpCols = (tabSet.searchCols || {})[this.paneKey]
-      tmpCols &&
-        tmpCols.forEach((k) => {
-          let cols = formSettings.filter((d) => d.dataIndex === k)
-          let col = cols[0]
-          if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
-          col && searchSet.push(col)
-        })
-      this.settingMap.search = searchSet
-      // PS: 报表管理仅需查询展示，没有增删改
-      this.settingMap.form = searchSet
-      console.log(this.settingMap)
+      this.initSettingsOfChart({ paneKey: this.paneKey })
       this.fetchDynamicOpts()
     },
     fetchData() {
@@ -217,6 +212,7 @@ export default {
         console.log(res)
         let rows = []
         if (res.code > 0) {
+          this.totalCost = res.total
           rows = (res.data || []).map((d) => ({
             name: d.NAME,
             value: d.VALUE,
@@ -301,6 +297,7 @@ export default {
 }
 
 .my-item-value {
+  margin-bottom: 0;
   font-size: 32px;
 }
 
@@ -320,5 +317,19 @@ export default {
   margin-top: 10px;
   font-size: 20px;
   line-height: 1.2;
+}
+
+.chart-total {
+  margin-bottom: 20px;
+  em {
+    font-style: normal;
+    font-size: 1.5em;
+  }
+}
+
+.my-total-num {
+  margin-left: 20px;
+  font-size: 32px;
+  vertical-align: middle;
 }
 </style>

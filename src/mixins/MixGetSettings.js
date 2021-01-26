@@ -1,5 +1,6 @@
-
 import { axiosOperateTab } from '@/api/manage'
+import settings from '@/settings'
+const { tabSettings, formSettings } = settings
 
 export default {
   data() {
@@ -110,10 +111,10 @@ export default {
             return
           } else if (dataIndex === 'month') {
             d.options = []
-            for (let month = 0; month < 12; month++) {
+            for (let month = 1; month <= 12; month++) {
               d.options.push({ label: String(month), value: month })
             }
-            d.default = d.default || new Date().getMonth()
+            d.default = d.default || new Date().getMonth() + 1
             return
           }
           len++
@@ -151,5 +152,28 @@ export default {
       })
       return promise
     },
+    initSettingsOfChart(config) {
+      config = {
+        paneKey: '',
+        ...config
+      }
+      let tabSet = tabSettings.find((d) => d.key === this.$route.meta.key)
+      this.settingMap.tab = tabSet
+      let { searchCols } = tabSet
+      let searchSet = []
+      // PS: 当 searchCols 为对象而非数组时，说明该页有多个 panel 可切换
+      let tmpCols = searchCols instanceof Array ? searchCols : (searchCols || {})[config.paneKey]
+      tmpCols &&
+        tmpCols.forEach((k) => {
+          let cols = formSettings.filter((d) => d.dataIndex === k)
+          let col = cols[0]
+          if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
+          col && searchSet.push(col)
+        })
+      this.settingMap.search = searchSet
+      // PS: 报表管理仅需查询展示，没有增删改
+      this.settingMap.form = searchSet
+      console.log(this.settingMap)
+    }
   }
 }

@@ -501,6 +501,13 @@ export const asyncRouterMap = [
             component: () => import('@/views/charts/Allowance'),
             meta: { title: '交通补贴确认', keepAlive: true, permission: ['table'], key: 'tbReport' }
           },
+          {
+            path: '/charts/Training',
+            name: 'ChartsTraining',
+            hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+            component: () => import('@/views/charts/Training'),
+            meta: { title: '企业负责人培训台账', keepAlive: true, permission: ['table'], key: 'trainingReport' }
+          }, 
         ]
       },
     ]

@@ -14,15 +14,29 @@
           <a-button type="primary" @click="doExport" style="float: right">导出</a-button>
         </a-button-group>
         <br />
-        <chart-table v-if="isShowTable" :tableConf="tableConf" />
-        <ve-histogram
-          v-else
-          theme-name="light"
-          :data="chartData"
-          :settings="chartSettings"
-          :extend="chartExtend"
-          :after-config="fnAfterConfig"
-        ></ve-histogram>
+        <chart-table v-if="isShowTable" :tableConf="tableConf" :tableProp="tableProp" />
+        
+      <a-row v-else>
+        <a-col :xl="12" :lg="12" :md="12" :sm="24" :xs="24">
+          <ve-pie
+            ref="chart"
+            theme-name="light"
+            :data="chartDataOfPie"
+            :settings="chartSettingsOfPie"
+            :extend="chartExtendOfPie"
+            :after-config="fnAfterConfigOfPie"
+          ></ve-pie>
+        </a-col>
+        <a-col :xl="12" :lg="12" :md="12" :sm="24" :xs="24">
+          <ve-histogram
+            theme-name="light"
+            :data="chartData"
+            :settings="chartSettings"
+            :extend="chartExtend"
+            :after-config="fnAfterConfig"
+          ></ve-histogram>
+        </a-col>
+      </a-row>
       </div>
     </a-card>
   </page-header-wrapper>
@@ -35,58 +49,59 @@ import ChartTable from './components/ChartTable'
 
 import { axiosOperateTab } from '@/api/manage'
 import { exportAndDownExcel } from '@/utils/exportExcel'
-import settings from '@/settings'
-const { tabSettings, formSettings } = settings
 
 const seriesCols = [
-  { title: '油料费', dataIndex: 'FUEL' },
-  { title: '修理费', dataIndex: 'MAINTENANCE_COST' },
-  { title: '停车过桥费', dataIndex: 'PARKING_AND_BRIDGE' },
-  { title: '保险费', dataIndex: 'INSURANCE' },
-  { title: '保养费', dataIndex: 'MAINTAIN' },
-  { title: '车船使用税', dataIndex: 'VEHICLE_AND_VESSEL_USE_TAX' },
-  { title: '年检费', dataIndex: 'ANNUAL_INSPECTION' },
-  { title: '其他', dataIndex: 'OTHER' },
-  { title: '行驶里程', dataIndex: 'MILEAGE', series: 'line' },
+  { title: '国资委和有关部门培训', dataIndex: 'listA' },
+  { title: '企业内部培训', dataIndex: 'listB' },
+  { title: '个人培训', dataIndex: 'listC' },
+  { title: '其他', dataIndex: 'listD' },
 ]
-
 const extraCols = [
   { title: '年份', dataIndex: 'YEAR' },
-  { title: '车牌号', dataIndex: 'CAR_NUMBER' },
-  { title: '总费用', dataIndex: 'TOTAL' },
+  { title: '企业负责人', dataIndex: 'LEADER_NAME' },
 ]
 
 const findCol = (v) => [...extraCols, ...seriesCols].find((d) => d.title === v)
 
 export default {
-  name: 'CarUse',
+  name: 'Training',
   components: {
     ChartTable,
     SearchForm,
   },
   mixins: [MixGetSettings],
   data() {
-    const col_bar = seriesCols.filter((d) => !d.series).map((d) => d.title)
-    const col_line = seriesCols.filter((d) => d.series === 'line').map((d) => d.title)
-    const columns_chart = ['月份', ...col_bar, ...col_line]
-    const columns_table = [findCol('年份'), findCol('车牌号'), ...seriesCols, findCol('总费用')]
+    const col_bar = seriesCols.map((d) => d.title)
+    const columns_chart = ['企业负责人', ...col_bar]
+    const columns_table = [
+      {        
+        title: '#',
+        dataIndex: 'serial',
+        fixed: 'left',
+        scopedSlots: { customRender: 'serial' },
+      },
+      { title: '培训项目', dataIndex: 'TRAINING_PROGRAM' },
+      { title: '培训单位', dataIndex: 'TRAINING_UNIT' },
+      { title: '月份', dataIndex: 'MONTH' },
+      { title: '审批依据', dataIndex: 'APPROVAL_BASIS' },
+      { title: '培训类型', dataIndex: 'TRAINING_TYPE' },
+      { title: '培训天数', dataIndex: 'TRAINING_DAYS' },
+      { title: '金额（元）', dataIndex: 'AMOUNT' },
+      findCol('企业负责人'),
+      { title: '是否计划内培训', dataIndex: 'IS_IN_PLAN', customRender: (text) => ({ 0: '否', 1: '是'  })[text] },
+    ]
     return {
       isShowTable: false,
       // 查询参数
       queryParam: {},
       chartSettings: {
-        showLine: ['行驶里程'],
         stack: { '总费用': col_bar },
-        axisSite: { right: ['行驶里程'] },
-        // xAxisName: ['\n\n月'],
-        yAxisType: ['KMB', 'value'],
-        yAxisName: ['元', '公里'],
+        yAxisType: ['KMB'],
+        yAxisName: ['元'],
         barWidth: 30,
       },
       chartExtend: {
-        grid: {
-          right: 20,
-        },
+        grid: {},
         xAxis: {
           axisLine: { show: true },
           nameLocation: 'end',
@@ -102,9 +117,24 @@ export default {
         columns: columns_chart,
         rows: [],
       },
+      chartSettingsOfPie: {
+
+      },
+      chartExtendOfPie:  {
+        legend: {
+          show: false,
+        },
+      },
+      chartDataOfPie: {
+        columns: ['name', 'value'],
+        rows: []
+      },
       tableConf: {
         columns: columns_table,
         rows: [],
+      },
+      tableProp: {
+        scroll: { x: true }
       },
       settingMap: {
         tab: null, // {}
@@ -117,6 +147,9 @@ export default {
             barMaxWidth: '50%',
           })
         })
+        return options
+      },
+      fnAfterConfigOfPie: options => {
         return options
       },
       urlOfExport: '',
@@ -136,18 +169,19 @@ export default {
       const requestParameters = this.getBaseParam(this.queryParam)
       console.log('loadData request parameters:', requestParameters)
       this.fetchChartData(requestParameters)
+      this.fetchChartDataOfPie(requestParameters)
       this.fetchTableData(requestParameters)
     },
     fetchChartData(requestParameters) {
       axiosOperateTab(requestParameters, {
-        url: this.getFullURL('barData'),
+        url: this.getFullURL('bar'),
       }).then((res) => {
         console.log(res)
         let rows = []
         if (res.code > 0) {
           res.xList.forEach((x, i) => {
             let item = {
-              '月份': parseInt(x) + '月',
+              '企业负责人': x,
             }
             seriesCols.forEach((d) => (item[d.title] = (res[d.dataIndex] || [])[i]))
             rows.push(item)
@@ -156,6 +190,27 @@ export default {
           this.$message.error(res.msg || '获取数据失败')
         }
         this.chartData.rows = rows
+      })
+    },
+    fetchChartDataOfPie(requestParameters) {
+      axiosOperateTab(requestParameters, {
+        url: this.getFullURL('pie'),
+      }).then((res) => {
+        console.log(res)
+        let rows = []
+        if (res.code > 0) {
+          rows = (res.pieData || []).map((d) => ({
+            name: d.NAME,
+            value: d.VALUE,
+          }))
+          // rows.forEach((d) => {
+          //   d.value = d.value || Math.round(Math.random() * 100)
+          // })
+        } else {
+          this.$message.error(res.msg || '获取数据失败')
+        }
+        this.chartDataOfPie.rows = rows
+        console.log('-----', this.chartDataOfPie)
       })
     },
     fetchTableData(requestParameters) {

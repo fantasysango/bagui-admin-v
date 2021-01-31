@@ -119,7 +119,6 @@ export default {
         })
         return options
       },
-      urlOfExport: '',
     }
   },
   computed: {},

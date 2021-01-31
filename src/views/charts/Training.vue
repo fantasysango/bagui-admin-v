@@ -152,7 +152,6 @@ export default {
       fnAfterConfigOfPie: options => {
         return options
       },
-      urlOfExport: '',
     }
   },
   computed: {},

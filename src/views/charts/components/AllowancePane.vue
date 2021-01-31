@@ -44,7 +44,6 @@
         </a-col>
       </a-row>
     </div>
-    <!-- <iframe :src="urlOfExport"></iframe> -->
   </div>
 </template>
 
@@ -173,7 +172,6 @@ export default {
         })
         return options
       },
-      urlOfExport: '',
     }
   },
   computed: {

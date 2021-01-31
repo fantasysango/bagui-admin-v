@@ -57,7 +57,7 @@
 
         <!-- <template v-if="advanced">
         </template> -->
-        <a-col :md="!advanced && 4 || 24" :sm="24">
+        <a-col v-if="!noBtns" :md="!advanced && 4 || 24" :sm="24">
           <span class="table-page-search-submitButtons" :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
             <a-button type="primary" @click="doQuery()">查询</a-button>
             <a-button style="margin-left: 8px" @click="doReset()">重置</a-button>
@@ -93,7 +93,11 @@ export default {
     autoQuery: {
       type: Boolean,
       default: () => false
-    }
+    },
+    noBtns: {
+      type: Boolean,
+      default: () => false
+    },
   },
   data () {
     return {
@@ -114,7 +118,7 @@ export default {
   watch: {
     activeSearchSet(v) {
       this.init()
-    }
+    },
   },
   created () {
     this.init()
@@ -139,6 +143,14 @@ export default {
       })
       this.queryForm = obj
       this.autoQuery && this.doQuery()
+      if (this.noBtns) {
+        this.$watch('queryForm', {
+          deep: true,
+          handler() {
+            this.doQuery()
+          }
+        })
+      }
     },
     doQuery() {
       let params = { ...this.queryForm }

@@ -507,7 +507,14 @@ export const asyncRouterMap = [
             hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
             component: () => import('@/views/charts/Training'),
             meta: { title: '企业负责人培训台账', keepAlive: true, permission: ['table'], key: 'trainingReport' }
-          }, 
+          },
+          {
+            path: '/charts/treatment',
+            name: 'ChartsTreatment',
+            hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+            component: () => import('@/views/charts/Treatment'),
+            meta: { title: '履职待遇报表', keepAlive: true, permission: ['table'], key: 'treatmentReport' }
+          },
         ]
       },
     ]

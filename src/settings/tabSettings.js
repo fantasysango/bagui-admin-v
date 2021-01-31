@@ -143,5 +143,12 @@ export default [
         title: '企业负责人培训台账',
         compType: 'chart',
         searchCols: ["year"]
+    },
+    {
+        code: '5.4',
+        key: 'treatmentReport',
+        title: '履职待遇报表',
+        compType: 'chart',
+        searchCols: ["year", "leaderId"]
     }, 
 ]

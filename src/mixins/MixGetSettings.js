@@ -20,7 +20,7 @@ export default {
     getDefaultFormat(item) {
       let { formType, format } = item
       if (format) return format
-      if (formType === 'datepicker') return 'YYYY-MM-DD'
+      if (formType === 'datepicker' || formType === 'rangepicker') return 'YYYY-MM-DD'
       else if (formType === 'timepicker') return 'YYYY-MM-DD HH:mm:ss'
       return undefined
     },

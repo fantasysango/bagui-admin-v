@@ -183,6 +183,8 @@ export default {
               data: []
             }
           }
+        }).catch(e => {
+          console.error(e)
         })
       },
       selectedRowKeys: [],
@@ -215,11 +217,11 @@ export default {
       // form.resetFields()
 
       this.isFormReady = false
-      setTimeout(() => this.isFormReady = true)
       
       this.queryParam = {}
       // this.$refs.search.doReset({ query: false })
       
+      this.tableData = []
       this.selectedRowKeys = []
       this.selectedRows = []
       this.init()
@@ -264,7 +266,7 @@ export default {
         ? null
         : [
             {        
-              title: '#',
+              title: '序号',
               dataIndex: 'serial',
               fixed: 'left',
               scopedSlots: { customRender: 'serial' },
@@ -282,6 +284,7 @@ export default {
       this.notAllowDelete = !!tabSet.notAllowDelete
       await this.fetchDynamicOpts()
       this.refreshTable()
+      this.isFormReady = true
     },
     refreshTable() {
       this.isTableReady = true
@@ -487,8 +490,9 @@ export default {
             let tabSet = this.settingMap.tab
             // let formSet = this.settingMap.form || []
             // let fields = ['id', ...formSet.map(d => d.dataIndex)]
-            let fields = tabSet.cols
+            let fields = [...tabSet.cols]
             if (values.id) {
+              fields = Array.from(new Set(['id', ...tabSet.cols]))
               let res = await axiosOperateTab(
                 getParams(fields), 
                 { url: this.getFullURL('edit') }
@@ -505,7 +509,7 @@ export default {
                     getParams(tabSet.childCols), 
                     { url: this.getFullURL('edit', tabSet.childKey) }
                   )
-                  if (res.isOk) {
+                  if (res.code > 0) {
                     this.$message.info('修改成功')
                   } else {
                     this.$message.error(res.msg || '操作失败')

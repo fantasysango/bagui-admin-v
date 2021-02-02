@@ -12,9 +12,9 @@
   >
     <a-spin :spinning="loading">
       <a-form :form="form" v-bind="formLayout">
-        <a-row>
+        <!-- 检查是否有 id，为空是修改。其他是新增，新增不显示主键ID -->
+        <a-row v-if="isDev">
           <a-col :span="24">
-            <!-- 检查是否有 id，为空是修改。其他是新增，新增不显示主键ID -->
             <a-form-item v-show="model && model.id" label="主键ID" v-bind="formLayoutWide">
               <a-input v-decorator="['id', { initialValue: '' }]" disabled />
             </a-form-item>
@@ -67,7 +67,7 @@
               <!-- :defaultChecked="model ? !model[item.dataIndex] : !getDefaultVal(item)" -->
               <!-- :checked="model ? !model[item.dataIndex] : !form.getFieldValue(item.dataIndex)" -->
             </a-form-item>
-            <!-- 时间选择器 -->
+            <!-- 日期/时间选择器 -->
             <a-form-item 
               v-else-if="checkTypeDate(item)" 
               :label="item.title" 
@@ -86,6 +86,20 @@
                 ]"
               ></a-date-picker>
             </a-form-item>
+            <!-- 日期区间选择器 -->
+            <a-form-item 
+              v-else-if="item.formType === 'rangepicker'" 
+              :label="item.title" 
+              hasFeedback
+            >
+              <a-range-picker
+                v-if="isRegistered"
+                :ranges="{ '今天': [moment(), moment()], '本月': [moment(), moment().endOf('month')] }"
+                :format="getDefaultFormat(item)"
+                :defaultValue="getRangeValue(item)"
+                @change="v => onRangeChange(v, item)"
+              />
+            </a-form-item>
             <!-- 数字输入框 -->
             <a-form-item 
               v-else-if="checkTypeNum(item)" 
@@ -95,7 +109,11 @@
               <a-input-number
                 v-decorator="[
                   item.dataIndex,
-                  { initialValue: getDefaultVal(item), rules: [{ type: 'number', required: item.required === 'y', min: item.min, max: item.max }] },
+                  { 
+                    normalize: v => fnNormalize(v, item),
+                    initialValue: getDefaultVal(item),
+                    rules: [{ type: 'number', required: item.required === 'y', min: item.min, max: item.max }]
+                  },
                 ]"
                 style="width: 100%;"
               />
@@ -110,7 +128,10 @@
               <a-input
                 v-decorator="[
                   item.dataIndex,
-                  { initialValue: getDefaultVal(item), rules: [{ required: item.required === 'y', min: item.min, max: item.max }] },
+                  {
+                    initialValue: getDefaultVal(item),
+                    rules: [{ required: item.required === 'y', min: item.min, max: item.max }] 
+                  },
                 ]"
               />
             </a-form-item>
@@ -177,6 +198,7 @@ export default {
       }
     }
     return {
+      isDev: process.env.NODE_ENV === 'development',
       moment,
       form: this.$form.createForm(this),
       isRegistered: true
@@ -216,12 +238,17 @@ export default {
     // 当 model 发生改变时，为表单设置值
     this.$watch('model', () => {
       this.isRegistered = false
+      this.fields.forEach(v => this.form.getFieldDecorator(v))
       setTimeout(() => {
         this.settingMap.form.forEach(item => {
           if (item.formType === 'switch') {
             let v = this.getDefaultChecked(item)
             this.onSwitchChange(v, item)
-          }
+          } 
+          // else if (item.formType === 'rangepicker') {
+          //   let v = this.getRangeValue(item)
+          //   this.onRangeChange(v, item)
+          // }
         })
         this.isRegistered = true
       })
@@ -239,10 +266,25 @@ export default {
       if (this.model) this.model[k] = v
       this.form.setFieldsValue({ [k]: v })
     },
+    getRangeValue(item) {
+      let v = (this.model || {})[item.dataIndex]
+      if (!v || typeof v !== 'string') return []
+      return v.split('至').map(d => d == '-' ? undefined : moment(d, this.getDefaultFormat(item)))
+    },
+    onRangeChange(v, item) {
+      let fmt = this.getDefaultFormat(item)
+      let start = v[0] && v[0].format(fmt)
+      let end = v[1] && v[1].format(fmt)
+      v = (start || end) ? `${start || '-'}至${end || '-'}` : ''
+      let k = item.dataIndex
+      if (this.model) this.model[k] = v
+      this.form.setFieldsValue({ [k]: v })
+    },
     fnNormalize(v, item) {
       if (this.checkTypeDate(item)){
         if (v && typeof v === 'object') v = v.format(this.getDefaultFormat(item))  // v instanceof moment
       } else if (item.formType === 'switch') v = !v
+      else if (this.checkTypeNum(item)) v = Number(v)
       return v
     },
   }

@@ -75,7 +75,7 @@ export default {
     const columns_chart = ['企业负责人', ...col_bar]
     const columns_table = [
       {        
-        title: '#',
+        title: '序号',
         dataIndex: 'serial',
         fixed: 'left',
         scopedSlots: { customRender: 'serial' },

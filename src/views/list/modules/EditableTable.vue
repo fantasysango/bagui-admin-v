@@ -92,7 +92,7 @@ export default {
       .filter((d) => !!d)
     this.columns = [
       {        
-        title: '#',
+        title: '序号',
         dataIndex: 'serial',
         fixed: 'left',
         scopedSlots: { customRender: 'serial' },

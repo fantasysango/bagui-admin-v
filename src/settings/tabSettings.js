@@ -134,7 +134,7 @@ export default [
         compType: 'chart',
         searchCols: {
             1: ["year", "month"],
-            2: ["year", "driverId"],
+            2: ["year", "leaderId"],
         }
     },
     {

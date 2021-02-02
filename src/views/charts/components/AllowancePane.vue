@@ -4,7 +4,7 @@
       <search-form ref="search" :settingMap="settingMap" :autoQuery="true" @query="setQueryParam" />
     </div>
     <div class="chart-total">
-      <span><em>{{ curYearMon }}</em>交通补贴总数</span>
+      <span><em>{{ curYearMon }}</em> 交通补贴总数</span>
       <span class="my-total-num">¥ {{ totalCost }}</span>
     </div>
     <div class="chart-operater">
@@ -185,7 +185,7 @@ export default {
     },
     curYearMon() {
       let { year, month } = this.queryParam
-      return year + '/' + month
+      return this.paneKey == 1 ? year + '/' + month : year
     }
   },
   watch: {},

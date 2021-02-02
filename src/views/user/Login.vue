@@ -181,7 +181,7 @@ export default {
         loginType: 0,
         smsSendBtn: false
       },
-      defaultUser: process.env.NODE_ENV === 'development' ? 'guoshuai' : '',
+      defaultUser: process.env.NODE_ENV === 'development' ? 'ceshi001' : '',
       defaultPsw: process.env.NODE_ENV === 'development' ? '123456' : ''
     }
   },

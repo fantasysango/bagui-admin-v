@@ -161,20 +161,24 @@ export default {
     },
     loading: {
       type: Boolean,
-      default: () => false
+      default: false
     },
     model: {
       type: Object,
-      default: () => null
+      default: null
     },
     detailModel: {
       type: Object,
-      default: () => null
+      default: null
     },
     settingMap: {
       type: Object,
-      default: { tab: null, form: null, search: null }
+      default: () => ({ tab: null, form: null, search: null })
     },
+    keyOfCols: {
+      type: String,
+      default: 'cols'
+    }
   },
   data () {
     this.formLayout = {
@@ -209,7 +213,8 @@ export default {
       let formSet = this.settingMap.form
       if (!formSet) return []
       let tabSet = this.settingMap.tab
-      return formSet.filter(d => d.displayInAdd !== 'n' && d.dataIndex.toLowerCase() !== 'id' && tabSet.cols.includes(d.dataIndex))
+      let cols = tabSet[this.keyOfCols]
+      return formSet.filter(d => d.displayInAdd !== 'n' && d.dataIndex.toLowerCase() !== 'id' && cols.includes(d.dataIndex))
     },
     fields() {
       return ['id', ...this.activeFormSet.map(d => d.dataIndex)]

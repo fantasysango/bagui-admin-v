@@ -7,16 +7,35 @@
     :footer="null"
     @cancel="() => { $emit('cancel') }"
   >
-    <child-table v-if="childCols.length" :dataSource="childData" :settingMap="settingMap" />
+    <child-table
+      v-if="childCols.length"
+      :dataSource="childData"
+      :settingMap="childSettingMap"
+      @add="handleAdd"
+      @edit="handleEdit"
+      @delete="handleDelete"
+    />
+    <create-form
+      ref="createModal"
+      :visible="visibleOfForm"
+      :loading="confirmLoading"
+      :model="mdl"
+      :settingMap="childSettingMap"
+      :keyOfCols="'childCols'"
+      @cancel="handleCancel"
+      @ok="handleOk"
+    />
   </a-modal>
 </template>
 
 <script>
 import ChildTable from './ChildTable'
+import CreateForm from './CreateForm'
 
 export default {
   components: {
-    ChildTable
+    ChildTable,
+    CreateForm
   },
   props: {
     visible: {
@@ -34,6 +53,9 @@ export default {
   },
   data () {
     return {
+      visibleOfForm: false,
+      confirmLoading: false,
+      mdl: null,
     }
   },
   computed: {
@@ -45,6 +67,10 @@ export default {
       if (!this.model) return []
       let tabSet = this.settingMap.tab || {}
       return tabSet.childKey ? this.model[tabSet.childKey] || [] : []
+    },
+    childSettingMap() {
+      let { tab, search } = this.settingMap
+      return { tab, search, form: null }
     }
   },
   watch: {
@@ -52,7 +78,22 @@ export default {
   created () {
   },
   methods: {
-    
+    handleAdd() {
+      this.mdl = null
+      this.visibleOfForm = true
+    },
+    handleEdit() {
+
+    },
+    handleDelete() {
+
+    },
+    handleOk() {
+      this.visibleOfForm = false
+    },
+    handleCancel() {
+      this.visibleOfForm = false
+    },
   }
 }
 </script>

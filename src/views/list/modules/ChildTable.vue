@@ -2,11 +2,12 @@
   <div class="gb-tablewrap-nowrap">
     <a-button class="editable-add-btn" @click="handleAdd"> 添加 </a-button>
     <a-table bordered :data-source="dataSource" :columns="columns" :scroll="{ x: true }" showPagination="auto">
-      <template v-for="(col, index) in columns" :slot="col.dataIndex" slot-scope="text, record">
+      <!-- <template v-for="(col, index) in columns" :slot="col.dataIndex" slot-scope="text, record">
         <editable-cell :text="text" @change="onCellChange(record.key, 'name', $event)" :key="index" />
-      </template>
+      </template> -->
       <template slot="action" slot-scope="text, record">
-        <a-popconfirm v-if="dataSource.length" title="确定删除此项吗？" @confirm="() => onDelete(record)">
+        <a href="javascript:;" @click="handleEdit(record)">编辑</a>
+        <a-popconfirm v-if="dataSource.length" title="确定删除此项吗？" @confirm="() => handleDelete(record)">
           <a href="javascript:;">删除</a>
         </a-popconfirm>
       </template>
@@ -111,6 +112,9 @@ export default {
   },
   computed: {
   },
+  created() {
+    this.settingMap.form = this.formSet
+  },
   methods: {
     onCellChange(key, dataIndex, value) {
       const dataSource = [...this.dataSource]
@@ -120,18 +124,25 @@ export default {
         this.dataSource = dataSource
       }
     },
-    onDelete(record) {
-      let key = record.key
-      const dataSource = [...this.dataSource]
-      this.dataSource = dataSource.filter((item) => item.key !== key)
-    },
     handleAdd() {
-      const { dataSource } = this  
-      const newData = {}
-      let tabSet = this.settingMap.tab
-      tabSet.childCols.forEach(d => newData[d] = '')
-      this.dataSource = [...dataSource, newData]
+      // const { dataSource } = this  
+      // const newData = {}
+      // let tabSet = this.settingMap.tab
+      // tabSet.childCols.forEach(d => newData[d] = '')
+      // this.dataSource = [...dataSource, newData]
+
+      this.$emit('add')
     },
+    handleEdit(record) {
+      this.$emit('edit', record)
+    },
+    handleDelete(record) {
+      // let key = record.key
+      // const dataSource = [...this.dataSource]
+      // this.dataSource = dataSource.filter((item) => item.key !== key)
+      
+      this.$emit('delete', record)
+    }
   },
 }
 </script>

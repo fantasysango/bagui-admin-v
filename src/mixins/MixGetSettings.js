@@ -5,7 +5,7 @@ const { tabSettings, formSettings } = settings
 export default {
   data() {
     return {
-      // settingMap: { tab: null, form: null, search: null }, // PS: 也可能在props中传递
+      // settingMap: { tab: null, form: null, search: null }, // PS: 也可能在组件的 props 中传递
     }
   },
   methods: {

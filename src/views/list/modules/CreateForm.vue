@@ -15,7 +15,7 @@
         <!-- 检查是否有 id，为空是修改。其他是新增，新增不显示主键ID -->
         <a-row v-if="isDev">
           <a-col :span="24">
-            <a-form-item v-show="model && model.id" label="主键ID" v-bind="formLayoutWide">
+            <a-form-item v-show="model && model.id" label="主键ID（仅开发显示）" v-bind="formLayoutWide">
               <a-input v-decorator="['id', { initialValue: '' }]" disabled />
             </a-form-item>
           </a-col>

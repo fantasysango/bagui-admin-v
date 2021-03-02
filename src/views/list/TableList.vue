@@ -65,7 +65,8 @@
         v-if="visibleOfChild"
         :visible="visibleOfChild"
         :settingMap="settingMap"
-        :model="mdl"
+        :model="childMdl"
+        :fetchData="fetchChildData"
         @cancel="() => this.visibleOfChild = false"
       />
     </a-card>
@@ -195,7 +196,7 @@ export default {
         form: null, // []
         search: null, // []
       },
-      childData: [],
+      childMdl: null,
       notAllowDelete: false,
     }
   },
@@ -236,7 +237,7 @@ export default {
       tabSet.searchCols && tabSet.searchCols.forEach(k => {
         let cols = formSettings.filter((d) => d.dataIndex === k)
         let col = cols[0]
-        if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
+        if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || cols.find((d) => !d.group) || col
         col && searchSet.push(col)
       })
       this.settingMap.search = searchSet
@@ -249,7 +250,7 @@ export default {
       tabCols = tabCols.map((k) => {
           let cols = formSettings.filter((d) => d.dataIndex === k)
           let col = cols[0]
-          if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || col
+          if (cols.length > 1) col = cols.find((d) => d.group === tabSet.key) || cols.find((d) => !d.group) || col
           col && formSet.push(col)
           return col && col.displayInTab !== 'n'
             ? {
@@ -370,7 +371,7 @@ export default {
     //   })
     //   return promise
     // },
-    async fetchChildData(record) {
+    async fetchChildData(record = this.mdl) {
       let { key, childKey } = this.settingMap.tab
       if (childKey) {
         let params = this.getBaseParam({
@@ -380,11 +381,7 @@ export default {
           url: this.getFullURL('detail'),
         })
         if (res.code > 0) {
-          this.childData = res[key] || {}
-          record = {
-            ...record,
-            ...this.childData,
-          }
+          this.childMdl = res[key]
         } else {
           this.$message.error(res.msg || '获取详情失败')
           return Promise.resolve(false)
@@ -503,20 +500,7 @@ export default {
                 form.resetFields()
                 // 刷新表格
                 this.refreshTable()
-
-                if (tabSet.childKey) {
-                  res = await axiosOperateTab(
-                    getParams(tabSet.childCols), 
-                    { url: this.getFullURL('edit', tabSet.childKey) }
-                  )
-                  if (res.code > 0) {
-                    this.$message.info('修改成功')
-                  } else {
-                    this.$message.error(res.msg || '操作失败')
-                  }
-                } else {
-                  this.$message.info('修改成功')
-                }
+                this.$message.info('修改成功')
               } else {
                 this.$message.error(res.msg || '操作失败')
               }
@@ -540,6 +524,7 @@ export default {
             }
           } catch(e) {
             console.error(e)
+            this.$message.error('网络连接失败')
           }
         }
         this.confirmLoading = false

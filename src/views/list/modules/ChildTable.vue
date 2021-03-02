@@ -1,13 +1,22 @@
 <template>
   <div class="gb-tablewrap-nowrap">
     <a-button class="editable-add-btn" @click="handleAdd"> 添加 </a-button>
-    <a-table bordered :data-source="dataSource" :columns="columns" :scroll="{ x: true }" showPagination="auto">
+    <a-table
+      ref="table"
+      bordered
+      rowKey="id"
+      :data-source="dataSource"
+      :columns="columns"
+      :scroll="{ x: true }"
+    >
+      <!-- :pagination="false" -->
       <!-- <template v-for="(col, index) in columns" :slot="col.dataIndex" slot-scope="text, record">
         <editable-cell :text="text" @change="onCellChange(record.key, 'name', $event)" :key="index" />
       </template> -->
+      <template #serial="text, record, index">{{ index + 1 }}</template>
       <template slot="action" slot-scope="text, record">
         <a href="javascript:;" @click="handleEdit(record)">编辑</a>
-        <a-popconfirm v-if="dataSource.length" title="确定删除此项吗？" @confirm="() => handleDelete(record)">
+        <a-popconfirm v-if="!notAllowDelete" title="确定删除此项吗？" @confirm="() => handleDelete(record)">
           <a href="javascript:;">删除</a>
         </a-popconfirm>
       </template>
@@ -15,6 +24,7 @@
   </div>
 </template>
 <script>
+import MixGetSettings from '@/mixins/MixGetSettings'
 import settings from '@/settings'
 const { formSettings } = settings
 
@@ -61,6 +71,7 @@ export default {
   components: {
     EditableCell,
   },
+  mixins: [MixGetSettings],
   props: {
     dataSource: {
       type: Array,
@@ -106,16 +117,26 @@ export default {
         scopedSlots: { customRender: 'action' },
       }
     ]
-    this.formSet = formSet
+    this.settingMap.form = formSet
     return {
+      formSet,
+      notAllowDelete: !!tabSet.notAllowDelete
     }
   },
   computed: {
   },
   created() {
-    this.settingMap.form = this.formSet
+    setTimeout(() => this.init())
   },
   methods: {
+    async init() {
+      await this.fetchDynamicOpts()
+      this.$emit('ready')
+      this.refresh()
+    },
+    refresh() {
+      // this.$refs.table && this.$refs.table.refresh()
+    },
     onCellChange(key, dataIndex, value) {
       const dataSource = [...this.dataSource]
       const target = dataSource.find((item) => item.key === key)

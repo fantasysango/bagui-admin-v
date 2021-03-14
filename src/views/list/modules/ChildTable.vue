@@ -5,6 +5,7 @@
       ref="table"
       bordered
       rowKey="id"
+      :pagination="pagination"
       :data-source="dataSource"
       :columns="columns"
       :scroll="{ x: true }"
@@ -79,8 +80,12 @@ export default {
     },
     settingMap: {
       type: Object,
-      default: { tab: null, form: null, search: null }
+      default: () => ({ tab: null, form: null, search: null })
     },
+    pagination: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     let tabSet = this.settingMap.tab
@@ -208,6 +213,6 @@ export default {
 }
 
 .editable-add-btn {
-  margin-bottom: 8px;
+  margin-bottom: 18px;
 }
 </style>

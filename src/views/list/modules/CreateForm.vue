@@ -140,6 +140,11 @@
       </a-form>
       <!-- <child-table v-if="childCols.length" :dataSource="childData" :settingMap="settingMap" /> -->
     </a-spin>
+    <template #footer>
+      <a-button @click="() => { $emit('cancel') }">取消</a-button>
+      <a-button type="primary" @click="() => { $emit('ok') }">确定</a-button>
+      <a-button v-if="(settingMap.tab || {}).childKey" type="primary" style="float: left;" @click="() => { $emit('more', model) }">配置</a-button>
+    </template>
   </a-modal>
 </template>
 

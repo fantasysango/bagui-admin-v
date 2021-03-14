@@ -52,6 +52,10 @@ export function JSONToExcelConvertor(title, data, fileName) {
 }
 
 export function createDownHref(blob, fileName) {
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) { // for IE
+        window.navigator.msSaveOrOpenBlob(blob, fileName);
+        return
+    }
     const a = document.createElement('a')
     a.href = URL.createObjectURL(blob)
     a.download = fileName || '未命名文件'

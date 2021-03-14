@@ -87,7 +87,7 @@ export default {
       { title: '培训类型', dataIndex: 'TRAINING_TYPE' },
       { title: '培训天数', dataIndex: 'TRAINING_DAYS' },
       { title: '金额（元）', dataIndex: 'AMOUNT' },
-      findCol('企业负责人'),
+      // findCol('企业负责人'),
       { title: '是否计划内培训', dataIndex: 'IS_IN_PLAN', customRender: (text) => ({ 0: '否', 1: '是'  })[text] },
     ]
     return {

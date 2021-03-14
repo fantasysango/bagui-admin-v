@@ -162,7 +162,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.ant-table-body {
-  overflow: auto !important;
-}
+// /deep/ .ant-modal-body {
+//   padding-top: 12px;
+// }
 </style>

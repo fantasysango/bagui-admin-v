@@ -29,14 +29,14 @@
         :columns="columns"
         :data="loadData"
         :scroll="{ x: true }"
-        :alert="!notAllowDelete"
-        :rowSelection="notAllowDelete ? null : rowSelection"
-        showPagination="auto"
+        :showPagination="true"
       >
+      <!-- :alert="!notAllowDelete" -->
+      <!-- :rowSelection="notAllowDelete ? null : rowSelection" -->
         <template #serial="text, record, index">{{ index + 1 }}</template>
         <template #action="text, record">
           <a href="javascript:;" @click="handleEdit(record)">编辑</a>
-          <a v-if="(settingMap.tab || {}).childKey" href="javascript:;" @click="handleEdit(record, { type: 'child' })" style="margin-left: .5em;">配置</a>
+          <!-- <a v-if="(settingMap.tab || {}).childKey" href="javascript:;" @click="handleEdit(record, { type: 'child' })" style="margin-left: .5em;">配置</a> -->
           <a-popconfirm
             v-if="!notAllowDelete"
             placement="topRight"
@@ -59,6 +59,7 @@
         :settingMap="settingMap"
         @cancel="handleCancel"
         @ok="handleOk"
+        @more="record => handleEdit(record, { type: 'child' })"
       />
 
       <child-modal
@@ -223,8 +224,12 @@ export default {
       // this.$refs.search.doReset({ query: false })
       
       this.tableData = []
-      this.selectedRowKeys = []
-      this.selectedRows = []
+      
+      // PS: 不能重新赋值，否则“已选择”数等不更新
+      // this.selectedRowKeys = []
+      // this.selectedRows = []
+      this.selectedRowKeys.splice(0)
+      this.selectedRows.splice(0)
       this.init()
     }
   },

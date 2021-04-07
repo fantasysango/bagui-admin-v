@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { SettingDrawer, updateTheme } from '@ant-design-vue/pro-layout'
+import { SettingDrawer, updateTheme, themeColor } from '@ant-design-vue/pro-layout'
 import { i18nRender } from '@/locales'
 import { mapState } from 'vuex'
 import { CONTENT_WIDTH_TYPE, SIDEBAR_TYPE, TOGGLE_MOBILE_TYPE } from '@/store/mutation-types'
@@ -127,7 +127,8 @@ export default {
     // first update color
     // TIPS: THEME COLOR HANDLER!! PLEASE CHECK THAT!!
     if (process.env.NODE_ENV !== 'production' || process.env.VUE_APP_PREVIEW === 'true') {
-      updateTheme(this.settings.primaryColor)
+      // updateTheme(this.settings.primaryColor)  // PS:打包后IE11会一直显示“正在切换主题”提示，故改用下面的方法来切换
+      themeColor.changeColor(this.settings.primaryColor)
     }
   },
   methods: {
